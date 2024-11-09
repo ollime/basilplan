@@ -1,0 +1,28 @@
+{
+  "name": "adv-cs-topics",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ollime/adv-cs-topics.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ollime/adv-cs-topics/issues"
+  },
+  "homepage": "https://github.com/ollime/adv-cs-topics#readme",
+  "description": "",
+  "dependencies": {
+    "chart.js": "^4.4.6",
+    "express": "^4.21.1",
+    "nodemon": "^3.1.7",
+    "prettier": "^3.3.3",
+    "sqlite3": "^5.1.7",
+    "tailwindcss": "^3.4.14"
+  }
+}
