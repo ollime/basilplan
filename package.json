@@ -4,7 +4,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon src/app.js"
+    "server": "nodemon src/app.js",
+    "css": "lessc src/public/styles/style.less src/public/styles/style.css"
   },
   "repository": {
     "type": "git",
@@ -20,9 +21,9 @@
   "dependencies": {
     "chart.js": "^4.4.6",
     "express": "^4.21.1",
+    "less": "^4.2.0",
     "nodemon": "^3.1.7",
     "prettier": "^3.3.3",
-    "sqlite3": "^5.1.7",
-    "tailwindcss": "^3.4.14"
+    "sqlite3": "^5.1.7"
   }
 }
