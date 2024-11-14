@@ -5,6 +5,14 @@ body {
   margin: 0;
   padding: 0;
 }
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button {
+  all: unset;
+}
 .small-btn {
   background-color: #47b6ed;
   height: 50px;
@@ -18,11 +26,10 @@ body {
   height: 150px;
   width: 150px;
 }
-.flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+nav * > li {
+  all: unset;
+  margin: 20px;
 }
-button {
+nav * > li a {
   all: unset;
 }

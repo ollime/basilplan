@@ -2,28 +2,16 @@
 @secondaryColor: #c7ebfc;
 @large-font-size: 24px;
 @small-font-size: 18px;
+@margin-large: 20px;
+@margin-small: 5px;
 
+// basic styles and utility classes
 body {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-style: normal;
     margin: 0;
     padding: 0;
-}
-
-.small-btn {
-    background-color: @primaryColor;
-    height: 50px;
-    width: 150px;
-    font-size: @small-font-size;
-}
-
-#clock {
-    background-color: @secondaryColor;
-    font-size: @large-font-size;
-    padding: auto;
-    height: 150px;
-    width: 150px;
 }
 
 .flex-center {
@@ -34,4 +22,31 @@ body {
 
 button {
     all: unset;
+}
+
+.small-btn {
+    background-color: @primaryColor;
+    height: 50px;
+    width: 150px;
+    font-size: @small-font-size;
+}
+
+// specific css
+
+#clock {
+    background-color: @secondaryColor;
+    font-size: @large-font-size;
+    padding: auto;
+    height: 150px;
+    width: 150px;
+}
+
+nav {
+    * > li {
+        all: unset;
+        margin: @margin-large;
+        a {
+            all: unset;
+        }
+    }
 }
