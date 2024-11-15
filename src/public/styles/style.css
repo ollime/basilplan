@@ -5,13 +5,15 @@ body {
   margin: 0;
   padding: 0;
 }
-.flex-center {
+.flex-center,
+nav {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 button {
   all: unset;
+  border-radius: 5px;
 }
 .small-btn {
   background-color: #47b6ed;
@@ -19,8 +21,18 @@ button {
   width: 150px;
   font-size: 18px;
 }
+.list-item {
+  background-color: #e0f5ff;
+  height: 50px;
+  width: 100%;
+}
+.label {
+  font-size: 24px;
+  text-align: center;
+  padding: 5px;
+}
 #clock {
-  background-color: #c7ebfc;
+  background-color: #a8dbf5;
   font-size: 24px;
   padding: auto;
   height: 150px;
@@ -32,4 +44,17 @@ nav * > li {
 }
 nav * > li a {
   all: unset;
+}
+#task {
+  width: 500px;
+}
+#task ul {
+  list-style-type: none;
+  margin: 0px;
+}
+#task .task-label {
+  font-size: 18px;
+}
+.add-btn {
+  width: 500px;
 }

@@ -6,12 +6,21 @@
     <link href="./styles/style.css" rel="stylesheet">
     <link href="./styles/test.css" rel="stylesheet">
     <script src="./js/clock.js" defer></script>
+    <script src="./js/task.js" defer></script>
     <title>Document</title>
 </head>
 <body>
     <div class="container">
-        <div id="clock" class="flex-center"><span id="seconds">10</span></div>
+        <div id="clock" class="flex-center"><span id="seconds" data-value="650">10:50</span></div>
         <button id="timer-btn" class="small-btn flex-center">Start</button>
+    </div>
+
+    <div>
+        <div id="task">
+            <div id="task-label" class="label">List</div>
+            <div class="list-item flex-center">sample</div>
+        </div>
+        <button class="add-btn list-item">+</button>
     </div>
 
     <nav>

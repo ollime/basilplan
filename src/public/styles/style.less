@@ -1,9 +1,19 @@
-@primaryColor: #47b6ed;
-@secondaryColor: #c7ebfc;
-@large-font-size: 24px;
-@small-font-size: 18px;
+// color palette
+@primary-color-heavy: #47b6ed;
+@primary-color-medium: #a8dbf5;
+@primary-color-light: #e0f5ff;
+
+// font sizes
+@font-size-large: 24px;
+@font-size-small: 18px;
+
+// margin sizes
 @margin-large: 20px;
 @margin-small: 5px;
+@margin-rounded: 5px;
+@button-height: 50px;
+
+// TODO: fix css size values
 
 // basic styles and utility classes
 body {
@@ -22,26 +32,40 @@ body {
 
 button {
     all: unset;
+    border-radius: @margin-rounded;
 }
 
 .small-btn {
-    background-color: @primaryColor;
-    height: 50px;
+    background-color: @primary-color-heavy;
+    height: @button-height;
     width: 150px;
-    font-size: @small-font-size;
+    font-size: @font-size-small;;
 }
 
-// specific css
+.list-item {
+    background-color: @primary-color-light;
+    height: @button-height;
+    width: 100%;
+}
 
+.label {
+    font-size: @font-size-large;
+    text-align: center;
+    padding: @margin-small;
+}
+
+
+// specific css
 #clock {
-    background-color: @secondaryColor;
-    font-size: @large-font-size;
+    background-color: @primary-color-medium;
+    font-size: @font-size-large;
     padding: auto;
     height: 150px;
     width: 150px;
 }
 
 nav {
+    &:extend(.flex-center);
     * > li {
         all: unset;
         margin: @margin-large;
@@ -49,4 +73,20 @@ nav {
             all: unset;
         }
     }
+}
+
+#task {
+    width: 500px;
+    ul {
+        list-style-type: none;
+        margin: 0px;
+    }
+    .task-label {
+        font-size: @font-size-small;
+    }
+}
+
+// delete this later after figuring out the flex/grid stuff
+.add-btn {
+    width: 500px;
 }
