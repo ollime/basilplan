@@ -4,6 +4,7 @@
     addBtn = document.querySelector(".add-btn");
     taskList = document.querySelector("#task")
 
+    addTask()
     addBtn.addEventListener("click", addTask)
 
     function addTask() {
@@ -18,10 +19,22 @@
         })
         .then((text) => {
             taskList.innerHTML += text;
+
+            // adds new event listener to delete button
+            // TODO: this feels inefficient but idk how to fix it
+            let allDeleteBtn = document.querySelectorAll(".delete-btn")
+            allDeleteBtn.forEach((deleteBtn) => {
+                deleteBtn.addEventListener("click", (evt) => deleteTask(evt));            
+            })
         })
         .catch((err) => {
             console.log(err)
         })
+    }
+
+    function deleteTask(evt) {
+        parentListItem = evt.target.parentElement;
+        parentListItem.remove()
     }
 
 })();

@@ -54,7 +54,6 @@ button {
     padding: @margin-small;
 }
 
-
 // specific css
 #clock {
     background-color: @primary-color-medium;
@@ -76,7 +75,7 @@ nav {
 }
 
 #task {
-    width: 500px;
+    width: 300px;
     ul {
         list-style-type: none;
         margin: 0px;
@@ -86,7 +85,19 @@ nav {
     }
 }
 
+.delete-btn {
+    &:extend(.flex-center);
+    margin-left: auto;
+    padding: 0px 20px;
+    background-color: @primary-color-medium;
+    height: 100%;
+}
+
+.item-label {
+    padding: @margin-small;
+}
+
 // delete this later after figuring out the flex/grid stuff
 .add-btn {
-    width: 500px;
+    width: 300px;
 }
