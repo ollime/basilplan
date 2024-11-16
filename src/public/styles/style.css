@@ -6,8 +6,7 @@ body {
   padding: 0;
 }
 .flex-center,
-nav,
-.delete-btn {
+nav {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,10 +21,15 @@ button {
   width: 150px;
   font-size: 18px;
 }
-.list-item {
-  background-color: #e0f5ff;
+.small-square-btn,
+.list-item .delete-btn,
+.list-item .edit-btn,
+.list-item .confirm-btn {
   height: 50px;
-  width: 100%;
+  line-height: 50px;
+  padding: 0px 20px;
+  background-color: #a8dbf5;
+  display: inline-block;
 }
 .label {
   font-size: 24px;
@@ -41,7 +45,7 @@ button {
 }
 nav * > li {
   all: unset;
-  margin: 20px;
+  padding: 20px;
 }
 nav * > li a {
   all: unset;
@@ -56,14 +60,28 @@ nav * > li a {
 #task .task-label {
   font-size: 18px;
 }
-.delete-btn {
-  margin-left: auto;
-  padding: 0px 20px;
-  background-color: #a8dbf5;
-  height: 100%;
+.list-item {
+  background-color: #e0f5ff;
+  height: 50px;
+  width: 100%;
 }
-.item-label {
-  padding: 5px;
+.list-item .display-panel,
+.list-item .edit-panel {
+  overflow: none;
+  height: 50px;
+  width: 100%;
+}
+.list-item .item-label,
+.list-item .edit-item-label {
+  padding: 0px 5px;
+  line-height: 50px;
+  width: 10px;
+  flex-grow: 1;
+}
+.list-item .delete-btn,
+.list-item .edit-btn,
+.list-item .confirm-btn {
+  justify-content: flex-end;
 }
 .add-btn {
   width: 300px;

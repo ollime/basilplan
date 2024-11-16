@@ -6,7 +6,6 @@ app.set('view engine', 'ejs')
 app.set("views", "views")
 let ejs = require('ejs');
 
-// TODO: try app.use(express.static("public"))
 const path = require("path")
 function getPath(url) {
     let endUrl = "public/" + url;

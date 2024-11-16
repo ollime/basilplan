@@ -8,9 +8,14 @@
 @font-size-small: 18px;
 
 // margin sizes
-@margin-large: 20px;
+@margin-large: 10px;
 @margin-small: 5px;
 @margin-rounded: 5px;
+
+// padding sizes
+@padding-large: 20px;
+
+// other
 @button-height: 50px;
 
 // TODO: fix css size values
@@ -42,10 +47,12 @@ button {
     font-size: @font-size-small;;
 }
 
-.list-item {
-    background-color: @primary-color-light;
+.small-square-btn {
     height: @button-height;
-    width: 100%;
+    line-height: @button-height;
+    padding: 0px @padding-large;
+    background-color: @primary-color-medium;
+    display: inline-block;
 }
 
 .label {
@@ -67,7 +74,7 @@ nav {
     &:extend(.flex-center);
     * > li {
         all: unset;
-        margin: @margin-large;
+        padding: @padding-large;
         a {
             all: unset;
         }
@@ -85,16 +92,28 @@ nav {
     }
 }
 
-.delete-btn {
-    &:extend(.flex-center);
-    margin-left: auto;
-    padding: 0px 20px;
-    background-color: @primary-color-medium;
-    height: 100%;
-}
+.list-item {
+    background-color: @primary-color-light;
+    height: @button-height;
+    width: 100%;
 
-.item-label {
-    padding: @margin-small;
+    .display-panel, .edit-panel {
+        overflow: none;
+        height: @button-height;
+        width: 100%;
+    }
+
+    .item-label, .edit-item-label {
+        padding: 0px @margin-small;
+        line-height: @button-height;
+        width: 10px;
+        flex-grow: 1;
+    }
+
+    .delete-btn, .edit-btn, .confirm-btn {
+        &:extend(.small-square-btn);
+        justify-content: flex-end;
+    }
 }
 
 // delete this later after figuring out the flex/grid stuff

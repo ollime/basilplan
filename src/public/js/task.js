@@ -1,10 +1,12 @@
 (function() {
     // TODO: add a delete button
     // TODO: add in text field and edit button
-    addBtn = document.querySelector(".add-btn");
-    taskList = document.querySelector("#task")
+    let addBtn = document.querySelector(".add-btn");
+    let taskList = document.querySelector("#task")
 
+    // initial task added for testing
     addTask()
+
     addBtn.addEventListener("click", addTask)
 
     function addTask() {
@@ -26,6 +28,14 @@
             allDeleteBtn.forEach((deleteBtn) => {
                 deleteBtn.addEventListener("click", (evt) => deleteTask(evt));            
             })
+            let allEditBtn = document.querySelectorAll(".edit-btn")
+            allEditBtn.forEach((editBtn) => {
+                editBtn.addEventListener("click", (evt) => openEditPanel(evt))
+            })
+            let allConfirmBtn = document.querySelectorAll(".confirm-btn")
+            allConfirmBtn.forEach((confirmBtn) => {
+                confirmBtn.addEventListener("click", (evt) => confirmedEditPanel(evt))
+            })
         })
         .catch((err) => {
             console.log(err)
@@ -33,8 +43,36 @@
     }
 
     function deleteTask(evt) {
-        parentListItem = evt.target.parentElement;
+        let parentListItem = evt.target.parentElement.parentElement;
         parentListItem.remove()
     }
 
+    function openEditPanel(evt) {
+        let parentListItem = evt.target.parentElement.parentElement
+        let editPanel = parentListItem.querySelector(".edit-panel")
+        let displayPanel = parentListItem.querySelector(".display-panel")
+        
+        if (editPanel.style.display == "none") {
+            editPanel.style.display = "flex";
+            displayPanel.style.display = "none";    
+        }
+        else {
+            editPanel.style.display = "none";
+            displayPanel.style.display = "flex";    
+        }
+    }
+
+    function confirmedEditPanel(evt) {
+        let parentListItem = evt.target.parentElement.parentElement;
+
+        let label1 = parentListItem.querySelector(".display-panel > .item-label")
+        let label2 = parentListItem.querySelector(".edit-panel > .item-label")
+
+        let newLabel = label2.value;
+
+        label1.innerHTML = newLabel;
+        label2.value = newLabel;
+
+        openEditPanel(evt)
+    }
 })();
