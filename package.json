@@ -1,24 +1,20 @@
 {
   "name": "adv-cs-topics",
-  "version": "1.0.0",
-  "main": "app.js",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon src/app.js",
-    "css": "lessc src/public/styles/style.less src/public/styles/style.css"
+    "server": "nodemon src/app.cjs",
+    "css": "lessc src/public/styles/style.less src/public/styles/style.css",
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ollime/adv-cs-topics.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ollime/adv-cs-topics/issues"
-  },
-  "homepage": "https://github.com/ollime/adv-cs-topics#readme",
-  "description": "",
   "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "chart.js": "^4.4.6",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
@@ -26,5 +22,17 @@
     "nodemon": "^3.1.7",
     "prettier": "^3.3.3",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "eslint": "^9.13.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
+    "globals": "^15.11.0",
+    "vite": "^5.4.10"
   }
 }

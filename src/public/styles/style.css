@@ -36,6 +36,12 @@ button {
   text-align: center;
   padding: 5px;
 }
+.hidden {
+  display: none;
+}
+.flex {
+  display: flex;
+}
 #clock {
   background-color: #a8dbf5;
   font-size: 24px;
