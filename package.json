@@ -5,22 +5,20 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon src/app.cjs",
     "css": "lessc src/public/styles/style.less src/public/styles/style.css",
-    "dev": "vite",
+    "server": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "chart.js": "^4.4.6",
-    "ejs": "^3.1.10",
-    "express": "^4.21.1",
     "less": "^4.2.0",
     "nodemon": "^3.1.7",
     "prettier": "^3.3.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
