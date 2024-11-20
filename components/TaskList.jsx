@@ -7,9 +7,10 @@ function TaskList() {
     const taskList = tasks?.map((task, index) => (
         <TaskItem
             count={index}
-            text={index + " " + task.text}
+            text={task.text}
             key={task.text + index}
-            deleteTask={deleteTask} />
+            deleteTask={deleteTask}
+            updateTask={updateTask} />
     ))
 
     function deleteTask(index) {
@@ -18,8 +19,13 @@ function TaskList() {
 
     function addTask() {
         setCount(taskList.length + 1)
-        const newTask = {text: "test"}
+        const newTask = {text: "new task"}
         setTasks([...tasks, newTask])
+    }
+
+    function updateTask(index, text) {
+        tasks[index].text = text;
+        setTasks([...tasks])
     }
 
     return (
