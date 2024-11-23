@@ -3,43 +3,57 @@ import TaskItem from "./TaskItem.jsx";
 
 function TaskList() {
     const [tasks, setTasks] = useState([]);
-    const [totalCount, setTotalCount] = useState(0);
-    const taskList = tasks?.map((task, index) => (
+    const [totalCount, setTotalCount] = useState(0)
+    const taskList = tasks.map((task, index) => (
         <TaskItem
             count={index}
-            text={task.text}
-            key={task.text + index}
+            text={task}
+            key={task + index}
             deleteTask={deleteTask}
             editTask={editTask} />
     ))
 
     // TODO: initial task load
-    // TODO: error in db when index changes after deletion
-    function deleteTask(index) {
-        fetch(`/api/deleteTask/${index}`)
+    function deleteTask(text) {
+        let txt = encodeURIComponent(text)
+        fetch(`/api/deleteTask/${txt}`)
         .catch((err) => {
             console.log(err)
         })
-        setTotalCount(totalCount-1)
-        setTasks(tasks.filter((item, i) => i != index))
+        setTasks(tasks.filter((item) => item != text))
     }
 
     function addTask() {
-        const newTask = {text: "new task"}
-        setTotalCount(totalCount+1)
-        updateTask(totalCount, newTask.text)
-        setTasks([...tasks, newTask])
+        let text = "new task"
+        text = checkExistingTask(text);
+        updateTask(text)
+        setTasks([...tasks, text])
     }
 
     function editTask(index, text) {
-        updateTask(index, text)
-        tasks[index].text = text;
+        text = checkExistingTask(text)
+        updateTask(text)
+        tasks[index] = text;
         setTasks([...tasks])
     }
 
-    function updateTask(index, text) {
+    // all task names must be unique
+    function checkExistingTask(text) {
+        while (tasks.includes(text)) {
+            let lastChar = parseInt(text.slice(-1))
+            if (!isNaN(lastChar)) {
+                text = text.slice(0, -1) + (lastChar + 1);
+            }
+            else {
+                text += " 1";
+            }
+        }
+        return text;
+    }
+
+    function updateTask(text) {
         let txt = encodeURIComponent(text)
-        fetch(`/api/sendTask/${index}/${txt}`)
+        fetch(`/api/sendTask/${txt}`)
         .catch((err) => {
             console.log(err)
         })

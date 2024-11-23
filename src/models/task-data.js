@@ -2,18 +2,19 @@ import sqlite3 from "sqlite3"
 import path from "path"
 
 const __dirname = import.meta.dirname;
-const dbPath = path.join(__dirname, "/../../databases/test31.sqlite3")
+const dbPath = path.join(__dirname, "/../../databases/test46.sqlite3")
 
 let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
-    console.log(err)
     if (err && err.code == "SQLITE_CANTOPEN") {
-        console.log('eep')
+        console.log("Creating new database at " + dbPath)
         createDatabase();
+    }
+    else {
+        console.log(err)
     }
 })
 
 function createDatabase() {
-    console.log("eep")
     db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
         if (err) {
             console.log(err);
@@ -25,28 +26,27 @@ function createDatabase() {
 
 function createTables() {
     db.exec(`
-        CREATE TABLE tasks (
-        id INTEGER NOT NULL PRIMARY KEY,
-        task_name TEXT NOT NULL
+        CREATE TABLE IF NOT EXISTS tasks (
+        task_name TEXT NOT NULL PRIMARY KEY
         );`)
-    console.log(db)
     return db
 }
 
-function sendTask(id, task) {
+function sendTask(task) {
     db.exec(`
         INSERT OR REPLACE INTO tasks
-        (id, task_name)
-        VALUES (${id}, "${task}")
+        (task_name)
+        VALUES ("${task}");
         `)
     return task;
 }
 
-function deleteTask(id) {
+function deleteTask(task) {
     db.exec(`
         DELETE FROM tasks
-        WHERE rowid = ${id}
+        WHERE task_name = "${task}";
     `)
+    return task;
 }
 
 function test() {

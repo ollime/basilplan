@@ -15,17 +15,17 @@ app.get("/api", (req, res) => {
 
 // note to self: make sure you're actually sending responses
 
-app.get("/api/sendTask/:id/:task", (req, res) => {
-    let [id, task] = [req.params.id, req.params.task]
-    sendTask(id, task)
-    console.log("Task added: " + id, task)
+app.get("/api/sendTask/:task", (req, res) => {
+    let task = req.params.task
+    sendTask(task)
+    console.log("Task added: " + task)
     res.end()
 })
 
-app.get("/api/deleteTask/:id", (req, res) => {
-    let id = req.params.id;
-    deleteTask(id)
-    console.log("Task deleted: " + id)
+app.get("/api/deleteTask/:task", (req, res) => {
+    let task = req.params.task;
+    deleteTask(task)
+    console.log("Task deleted: " + task)
     res.end()
 })
 

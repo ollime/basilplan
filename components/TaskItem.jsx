@@ -13,13 +13,16 @@ function TaskItem(props) {
 
     function confirmTask() {
         let txt = textRef.current.value;
-        props.editTask(count, txt)
-        setText(txt)
+        if (txt != text) {
+            props.editTask(count, txt)
+            setText(txt)    
+        }
         openEdit();
     }
 
     function deleteTask() {
-        props.deleteTask(count)
+        let txt = textRef.current.value;
+        props.deleteTask(txt)
         openEdit();
     }
 
