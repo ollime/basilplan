@@ -27,7 +27,7 @@ const router = createBrowserRouter([
   {
     path: "/settings",
     element: <Settings />
-  }
+  },
 ], {future: getRidOfConsoleMessages})
 
 createRoot(document.getElementById('root')).render(

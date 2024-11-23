@@ -1,9 +1,9 @@
 function Clock() {
     return(
         <>
-            <div class="container">
-                <div id="clock" class="flex-center"><span id="seconds" data-value="650">10:50</span></div>
-                <button id="timer-btn" class="small-btn flex-center">Start</button>
+            <div>
+                <div id="clock" className="flex-center"><span id="seconds" data-value="650">10:50</span></div>
+                <button id="timer-btn" className="small-btn flex-center">Start</button>
             </div>
         </>
     )

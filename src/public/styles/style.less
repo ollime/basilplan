@@ -78,14 +78,12 @@ button {
     width: 150px;
 }
 
-nav {
+#footer {
     &:extend(.flex-center);
-    * > li {
+    margin: @margin-small 0px;
+    ul > * {
         all: unset;
         padding: @padding-large;
-        a {
-            all: unset;
-        }
     }
 }
 

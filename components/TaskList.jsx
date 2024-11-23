@@ -2,7 +2,6 @@ import { useState } from "react";
 import TaskItem from "./TaskItem.jsx";
 
 function TaskList() {
-    const [count, setCount] = useState(0)
     const [tasks, setTasks] = useState([]);
     const taskList = tasks?.map((task, index) => (
         <TaskItem
@@ -18,7 +17,6 @@ function TaskList() {
     }
 
     function addTask() {
-        setCount(taskList.length + 1)
         const newTask = {text: "new task"}
         setTasks([...tasks, newTask])
     }

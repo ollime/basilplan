@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom"
+
 function Footer() {
     return (
         <>
-            <nav>
+            <nav id="footer">
                 <ul>
-                    <li><a href="/">timer</a></li>
-                    <li><a href="stats">stats</a></li>
-                    <li><a href="settings">settings</a></li>
-                </ul>
+                    <Link to={"/"}>timer</Link>
+                    <Link to={"/stats"}>stats</Link>
+                    <Link to={"/settings"}>settings</Link>                </ul>
             </nav>
         </>
     )

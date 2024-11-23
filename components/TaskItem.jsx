@@ -6,8 +6,18 @@ function TaskItem(props) {
     const [text, setText] = useState(props.text)
     const count = props.count;
     const textRef = useRef(null);
-
+    
     function openEdit() {
+        fetch("/api")
+        .then((response) => {
+            return response.text();
+        })
+        .then((text) => {
+            console.log(text)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
         setEdit(!edit)
     }
 

@@ -6,7 +6,7 @@ body {
   padding: 0;
 }
 .flex-center,
-nav {
+#footer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,12 +49,12 @@ button {
   height: 150px;
   width: 150px;
 }
-nav * > li {
+#footer {
+  margin: 5px 0px;
+}
+#footer ul > * {
   all: unset;
   padding: 20px;
-}
-nav * > li a {
-  all: unset;
 }
 #task {
   width: 300px;
