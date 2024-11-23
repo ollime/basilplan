@@ -1,30 +1,35 @@
-const sqlite3 = require("sqlite3").verbose()
-const path = require("path")
+import sqlite3 from "sqlite3"
+import path from "path"
 
-const dbPath = path.join(__dirname, "/../../databases/test.sqlite3")
+const __dirname = import.meta.dirname;
+const dbPath = path.join(__dirname, "/../../databases/test31.sqlite3")
 
-let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
+let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
+    console.log(err)
     if (err && err.code == "SQLITE_CANTOPEN") {
+        console.log('eep')
         createDatabase();
     }
 })
 
 function createDatabase() {
-    var newdb = new sqlite3.Database(dbPath, (err) => {
+    console.log("eep")
+    db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
         if (err) {
             console.log(err);
         }
-        createTables()
-    });
-    return newdb;
+    })
+    createTables()
+    return db;
 }
 
 function createTables() {
     db.exec(`
-        CREATE TABLE IF NOT EXISTS tasks (
+        CREATE TABLE tasks (
         id INTEGER NOT NULL PRIMARY KEY,
         task_name TEXT NOT NULL
         );`)
+    console.log(db)
     return db
 }
 
@@ -37,17 +42,18 @@ function sendTask(id, task) {
     return task;
 }
 
+function deleteTask(id) {
+    db.exec(`
+        DELETE FROM tasks
+        WHERE rowid = ${id}
+    `)
+}
+
 function test() {
-    // db.run(` INSERT INTO tasks VALUES ("djfkslf")`);
-
-    let string = db.all("SELECT * FROM tasks", [], (err, rows) => {
-        console.log(rows)
-    })
-    return string;
+    // let string = db.all("SELECT * FROM tasks", [], (err, rows) => {
+    //     console.log(rows)
+    // })
+    // return string;
 }
 
-module.exports = {
-    test: test(),
-    createDatabase: createDatabase(),
-    sendTask: (id, task) => {sendTask(id, task)}
-}
+export { sendTask, deleteTask, test }

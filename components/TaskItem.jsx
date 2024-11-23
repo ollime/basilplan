@@ -8,22 +8,12 @@ function TaskItem(props) {
     const textRef = useRef(null);
     
     function openEdit() {
-        fetch("/api")
-        .then((response) => {
-            return response.text();
-        })
-        .then((text) => {
-            console.log(text)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
         setEdit(!edit)
     }
 
-    function editText() {
+    function confirmTask() {
         let txt = textRef.current.value;
-        props.updateTask(count, txt)
+        props.editTask(count, txt)
         setText(txt)
         openEdit();
     }
@@ -44,7 +34,7 @@ function TaskItem(props) {
 
                 <div className={`edit-panel ${edit ? "flex" : "hidden"}`}>
                     <input type="text" className="item-label" defaultValue={text} ref={textRef} />
-                    <span className="confirm-btn" onClick={editText}>O</span>
+                    <span className="confirm-btn" onClick={confirmTask}>O</span>
                     <span className="delete-btn" onClick={deleteTask}>X</span>
                     <span className="edit-btn" onClick={openEdit}>C</span>
                 </div>

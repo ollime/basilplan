@@ -7,7 +7,8 @@ function Footer() {
                 <ul>
                     <Link to={"/"}>timer</Link>
                     <Link to={"/stats"}>stats</Link>
-                    <Link to={"/settings"}>settings</Link>                </ul>
+                    <Link to={"/settings"}>settings</Link>
+                </ul>
             </nav>
         </>
     )

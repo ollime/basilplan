@@ -1,1 +1,6 @@
 /* quick tests for css */
+
+.item-label {
+    word-break: break-all;
+    overflow-y: hidden;
+}
