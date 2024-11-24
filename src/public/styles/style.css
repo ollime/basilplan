@@ -12,6 +12,14 @@ body {
   justify-content: center;
   align-items: center;
 }
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  margin: 0px;
+}
+.btn-size {
+  height: 50px;
+}
 button {
   all: unset;
 }
@@ -34,6 +42,9 @@ button {
 .align-center > * {
   align-items: center;
   vertical-align: middle;
+}
+.inline-block {
+  display: inline-block;
 }
 .label {
   font-size: 24px;
@@ -73,7 +84,7 @@ button {
   padding: 20px;
 }
 #task {
-  width: 300px;
+  width: fit-content;
 }
 #task ul {
   list-style-type: none;
@@ -81,11 +92,12 @@ button {
 }
 #task .task-label {
   font-size: 18px;
+  width: 300px;
 }
 .list-item {
   background-color: #e0f5ff;
   height: 50px;
-  width: 100%;
+  width: 300px;
 }
 .list-item .display-panel,
 .list-item .edit-panel {
@@ -129,6 +141,28 @@ button {
 }
 #settings input {
   margin: 5px;
+}
+.task-marker .unset {
+  fill: #cccccc;
+  color: #cccccc;
+}
+.task-marker .success {
+  fill: #28a745;
+  color: #28a745;
+}
+.task-marker .highlight {
+  fill: #ffc107;
+  color: #ffc107;
+}
+.task-marker .danger {
+  fill: #dc3545;
+  color: #dc3545;
+}
+.task-marker .star {
+  margin-left: 5px;
+  font-size: 30px;
+  padding: 10px;
+  padding-right: 20px;
 }
 .add-btn {
   width: 300px;

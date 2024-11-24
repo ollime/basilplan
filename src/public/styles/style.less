@@ -2,6 +2,11 @@
 @primary-color-heavy: #47b6ed;
 @primary-color-medium: #a8dbf5;
 @primary-color-light: #e0f5ff;
+@gray-light: #cccccc;
+@gray-medium: #6a6a6a;
+@success: #28a745;
+@danger: #dc3545;
+@highlight: #ffc107;
 
 // font sizes
 @font-size-large: 24px;
@@ -36,6 +41,16 @@ body {
     align-items: center;
 }
 
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    margin: 0px;
+}
+
+.btn-size {
+    height: @button-height;
+}
+
 button {
     all: unset;
 }
@@ -58,6 +73,10 @@ button {
 .align-center > * {
     align-items: center;
     vertical-align: middle;
+}
+
+.inline-block {
+    display: inline-block;
 }
 
 .label {
@@ -106,20 +125,21 @@ button {
 }
 
 #task {
-    width: 300px;
+    width: fit-content;
     ul {
         list-style-type: none;
         margin: 0px;
     }
     .task-label {
         font-size: @font-size-small;
+        width: 300px;
     }
 }
 
 .list-item {
     background-color: @primary-color-light;
     height: @button-height;
-    width: 100%;
+    width: 300px;
 
     .display-panel, .edit-panel {
         overflow: none;
@@ -165,6 +185,31 @@ button {
     }
     input {
         margin: @margin-small;
+    }
+}
+
+.task-marker {
+    .unset {
+        fill: @gray-light;
+        color: @gray-light;
+    }
+    .success {
+        fill: @success;
+        color: @success;
+    }
+    .highlight {
+        fill: @highlight;
+        color: @highlight;
+    }
+    .danger {
+        fill: @danger;
+        color: @danger;
+    }
+    .star {
+        margin-left: @margin-small;
+        font-size: 30px;
+        padding: 10px;
+        padding-right: 20px;
     }
 }
 

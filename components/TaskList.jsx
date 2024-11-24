@@ -6,6 +6,11 @@ import TaskItem from "./TaskItem.jsx";
 // TODO: move api calls to another file
 
 function TaskList() {
+    const [currentTask, setCurrentTask] = useState(false);
+    function setCurrent() {
+        setCurrentTask(!currentTask)
+    }
+
     const [tasks, setTasks] = useState([]);
     const taskList = tasks.map((task, index) => (
         <TaskItem
@@ -13,7 +18,9 @@ function TaskList() {
             text={task}
             key={task + index}
             deleteTask={deleteTask}
-            editTask={editTask} />
+            editTask={editTask}
+            currentTask={currentTask}
+            setCurrent={setCurrent} />
     ))
 
     // initial task load
