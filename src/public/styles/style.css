@@ -42,7 +42,7 @@ button {
 .flex {
   display: flex;
 }
-#clock {
+#timer {
   background-color: #a8dbf5;
   font-size: 24px;
   padding: auto;
