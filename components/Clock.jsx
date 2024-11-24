@@ -8,7 +8,7 @@ function Clock() {
     useEffect(() => {
         let timerID;
         
-        // TODO: put the default timer value somewhere
+        // TODO: put the default timer value somewhere. ctrl + f for 650
         // TODO: Add in automatic or manual start option
         /**
          * Starts the timer and changes the timer button.
@@ -46,24 +46,34 @@ function Clock() {
         }
     }, [timer, seconds])
 
-    function handleStartTimer() {
-        setTimer(!timer)
-    }
-
     /**
      * Converts integer to time format m:ss.
      * 
      * @param {number} value - Value
      * @example Converts 120 to 2:00
-     */
-    function convertToTime(value) {
-        let timeValue = parseInt(value)
-        let minutes = Math.floor(timeValue / 60)
-        let seconds = timeValue - (minutes * 60)
+    */
+   function convertToTime(value) {
+       let timeValue = parseInt(value)
+       let minutes = Math.floor(timeValue / 60)
+       let seconds = timeValue - (minutes * 60)
+       
+       if (seconds < 10) {seconds = "0"+seconds}
+       
+       return minutes + ":" + seconds;
+    }
+    
+    function handleStartTimer() {
+        setTimer(!timer)
+    }
 
-        if (seconds < 10) {seconds = "0"+seconds}
+    function handleRestartTimer() {
+        setTimer(false)
+        setSeconds(650)
+    }
 
-        return minutes + ":" + seconds;
+    function handleSkipTimer() {
+        // TODO: implement different timer types
+        // TODO: implement skip timer
     }
 
     return(
@@ -72,8 +82,12 @@ function Clock() {
                 <div id="timer" className="flex-center">
                     <span id="seconds">{convertToTime(seconds)}</span>
                 </div>
-                <button id="timer-btn" className="small-btn flex-center"
-                    onClick={handleStartTimer}>{timer ? "Pause" : "Start"}</button>
+                <span className="timer-btns">
+                    <button className="small-square-btn"
+                        onClick={handleStartTimer}>{timer ? "Pause" : "Start"}</button>
+                    <button className="small-square-btn" onClick={handleRestartTimer}>Reset</button>
+                    <button className="small-square-btn" onClick={handleSkipTimer}>Skip</button>
+                </span>
             </div>
         </>
     )

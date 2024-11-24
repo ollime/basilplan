@@ -30,16 +30,16 @@ function TaskItem(props) {
         <>
             <div className={"list-item flex-center"}>
                 <div className={`display-panel ${edit ? "hidden" : "flex"}`}>
-                    <span className="small-square-btn">{count}</span>
-                    <span className="item-label">{text}</span>
-                    <span className="edit-btn" onClick={openEdit}>E</span>
+                    <button className="small-square-btn">{count}</button>
+                    <button className="item-label">{text}</button>
+                    <button className="edit-btn" onClick={openEdit}>E</button>
                 </div>
 
                 <div className={`edit-panel ${edit ? "flex" : "hidden"}`}>
                     <input type="text" id={text + count} className="item-label" defaultValue={text} ref={textRef} />
-                    <span className="confirm-btn" onClick={confirmTask}>O</span>
-                    <span className="delete-btn" onClick={deleteTask}>X</span>
-                    <span className="edit-btn" onClick={openEdit}>C</span>
+                    <button className="confirm-btn" onClick={confirmTask}>O</button>
+                    <button className="delete-btn" onClick={deleteTask}>X</button>
+                    <button className="edit-btn" onClick={openEdit}>C</button>
                 </div>
             </div>
         </>

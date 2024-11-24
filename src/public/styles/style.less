@@ -8,7 +8,8 @@
 @font-size-small: 18px;
 
 // margin sizes
-@margin-large: 10px;
+@margin-large: 40px;
+@margin-medium: 10px;
 @margin-small: 5px;
 @margin-rounded: 5px;
 
@@ -37,7 +38,6 @@ body {
 
 button {
     all: unset;
-    border-radius: @margin-rounded;
 }
 
 .small-btn {
@@ -55,6 +55,11 @@ button {
     display: inline-block;
 }
 
+.align-center > * {
+    align-items: center;
+    vertical-align: middle;
+}
+
 .label {
     font-size: @font-size-large;
     text-align: center;
@@ -70,12 +75,25 @@ button {
 }
 
 // specific css
-#timer {
-    background-color: @primary-color-medium;
-    font-size: @font-size-large;
-    padding: auto;
-    height: 150px;
-    width: 150px;
+#clock {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    #timer {
+        background-color: @primary-color-medium;
+        font-size: @font-size-large;
+        padding: auto;
+        height: 150px;
+    }
+    .timer-btns {
+        width: inherit;
+        display: flex;
+    }
+    .small-square-btn {
+        &:extend(.flex-center);
+        background-color: @primary-color-heavy;
+        flex-grow: 1;
+    }
 }
 
 #footer {
@@ -119,6 +137,34 @@ button {
     .delete-btn, .edit-btn, .confirm-btn {
         &:extend(.small-square-btn);
         justify-content: flex-end;
+    }
+}
+
+// settings tab
+#settings {
+    margin: @margin-medium;
+    h1 {
+        font-size: @font-size-large;
+    }
+    h2 {
+        font-size: @font-size-small;
+        margin-top: @margin-large;
+    }
+    input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+    }
+    input[type="text"] {
+        width: 50px;
+        padding: @margin-small;
+        text-align: center;
+    }
+    // may want to delete this later?
+    .small-square-btn {
+        margin-top: @margin-small;
+    }
+    input {
+        margin: @margin-small;
     }
 }
 

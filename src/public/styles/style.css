@@ -6,6 +6,7 @@ body {
   padding: 0;
 }
 .flex-center,
+#clock .small-square-btn,
 #footer {
   display: flex;
   justify-content: center;
@@ -13,7 +14,6 @@ body {
 }
 button {
   all: unset;
-  border-radius: 5px;
 }
 .small-btn {
   background-color: #47b6ed;
@@ -31,6 +31,10 @@ button {
   background-color: #a8dbf5;
   display: inline-block;
 }
+.align-center > * {
+  align-items: center;
+  vertical-align: middle;
+}
 .label {
   font-size: 24px;
   text-align: center;
@@ -42,12 +46,24 @@ button {
 .flex {
   display: flex;
 }
-#timer {
+#clock {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+#clock #timer {
   background-color: #a8dbf5;
   font-size: 24px;
   padding: auto;
   height: 150px;
-  width: 150px;
+}
+#clock .timer-btns {
+  width: inherit;
+  display: flex;
+}
+#clock .small-square-btn {
+  background-color: #47b6ed;
+  flex-grow: 1;
 }
 #footer {
   margin: 5px 0px;
@@ -88,6 +104,31 @@ button {
 .list-item .edit-btn,
 .list-item .confirm-btn {
   justify-content: flex-end;
+}
+#settings {
+  margin: 10px;
+}
+#settings h1 {
+  font-size: 24px;
+}
+#settings h2 {
+  font-size: 18px;
+  margin-top: 40px;
+}
+#settings input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+#settings input[type="text"] {
+  width: 50px;
+  padding: 5px;
+  text-align: center;
+}
+#settings .small-square-btn {
+  margin-top: 5px;
+}
+#settings input {
+  margin: 5px;
 }
 .add-btn {
   width: 300px;
