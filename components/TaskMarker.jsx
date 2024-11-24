@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import AppContext from "./../components/AppContext.jsx"
 
 function TaskMarker(props) {
     // width should be > 50
@@ -14,18 +15,23 @@ function TaskMarker(props) {
         //{color: "danger", text: "test flag"}
     ]
 
+    const {
+        selectedTask,
+        setSelectedTask
+    } = useContext(AppContext)
+
     function handleChangeMarker() {
         setIndex(index + 1)
         if (index == 0) {
-            if (props.currentTask) {
+            if (selectedTask != null) {
                 setIndex(index + 2);
             }
             else {
-                props.setCurrent();
+                props.updateSelectedTask(false);
             }
         }
         if (index == 1) {
-            props.setCurrent();
+            props.updateSelectedTask(true);
         }
         if (index == colors.length - 1) {
             setIndex(0)

@@ -1,12 +1,16 @@
-import { useState } from "react";
-import { useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import TaskMarker from "./TaskMarker.jsx";
+import AppContext from "./../components/AppContext.jsx"
 
 function TaskItem(props) {
     const [edit, setEdit] = useState(false);
     const [text, setText] = useState(props.text)
     const count = props.count;
     const textRef = useRef(null);
+    const {
+        selectedTask,
+        setSelectedTask
+    } = useContext(AppContext)
     
     function openEdit() {
         setEdit(!edit)
@@ -27,6 +31,15 @@ function TaskItem(props) {
         openEdit();
     }
 
+    function updateSelectedTask(reset) {
+        if (!reset) {
+            setSelectedTask(text)
+        }
+        else {
+            setSelectedTask(null)
+        }
+    }
+
     return (
         <>
             <div className="flex-row">
@@ -44,7 +57,7 @@ function TaskItem(props) {
                         <button className="edit-btn" onClick={openEdit}>C</button>
                     </div>
                 </span>
-                <TaskMarker currentTask={props.currentTask} setCurrent={props.setCurrent}/>
+                <TaskMarker currentTask={props.currentTask} updateSelectedTask={updateSelectedTask}/>
             </div>
         </>
     )

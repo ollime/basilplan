@@ -1,10 +1,14 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import AppContext from "./../components/AppContext.jsx"
 
 function Clock() {
     const [timer, setTimer] = useState(false)
     const [seconds, setSeconds] = useState(650)
-    
+    const {
+        selectedTask,
+        setSelectedTask
+    } = useContext(AppContext)
+
     useEffect(() => {
         let timerID;
         
@@ -79,6 +83,7 @@ function Clock() {
     return(
         <>
             <div id="clock">
+                <span>current task: {selectedTask}</span>
                 <div id="timer" className="flex-center">
                     <span id="seconds">{convertToTime(seconds)}</span>
                 </div>
