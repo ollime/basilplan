@@ -36,7 +36,7 @@ function TaskItem(props) {
                 </div>
 
                 <div className={`edit-panel ${edit ? "flex" : "hidden"}`}>
-                    <input type="text" className="item-label" defaultValue={text} ref={textRef} />
+                    <input type="text" id={text + count} className="item-label" defaultValue={text} ref={textRef} />
                     <span className="confirm-btn" onClick={confirmTask}>O</span>
                     <span className="delete-btn" onClick={deleteTask}>X</span>
                     <span className="edit-btn" onClick={openEdit}>C</span>

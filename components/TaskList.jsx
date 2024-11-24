@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import TaskItem from "./TaskItem.jsx";
+
+// TODO: new update task function (bug)
+// TODO: move api calls to another file
 
 function TaskList() {
     const [tasks, setTasks] = useState([]);
-    const [totalCount, setTotalCount] = useState(0)
     const taskList = tasks.map((task, index) => (
         <TaskItem
             count={index}
@@ -13,7 +16,37 @@ function TaskList() {
             editTask={editTask} />
     ))
 
-    // TODO: initial task load
+    // initial task load
+    useEffect(() => {
+        let ignore = false;
+
+        function formatTasks(tasks) {
+            let newTasks = []
+            for (let i of tasks) {
+                newTasks.push(i.task_name)
+            }
+            return newTasks;
+        }
+
+        fetch(`/api/getAllTasks`)
+        .then((response) => {
+            return response.text()
+        })
+        .then((text) => {
+            if (!ignore) {
+                let tasks = JSON.parse(text)
+                setTasks(formatTasks(tasks))
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+
+        return() => {
+            ignore = true;
+        }
+    }, [])
+
     function deleteTask(text) {
         let txt = encodeURIComponent(text)
         fetch(`/api/deleteTask/${txt}`)
@@ -23,7 +56,8 @@ function TaskList() {
         setTasks(tasks.filter((item) => item != text))
     }
 
-    function addTask() {
+    // TODO: make this more efficient by updating text variable based on existing new tasks
+    function addNewTask() {
         let text = "new task"
         text = checkExistingTask(text);
         updateTask(text)
@@ -40,9 +74,10 @@ function TaskList() {
     // all task names must be unique
     function checkExistingTask(text) {
         while (tasks.includes(text)) {
-            let lastChar = parseInt(text.slice(-1))
+            let lastChar = text.split(" ").slice(-1)
             if (!isNaN(lastChar)) {
-                text = text.slice(0, -1) + (lastChar + 1);
+                let originalText = text.slice(0, text.length - lastChar[0].length)
+                text = originalText + (parseInt(lastChar) + 1);
             }
             else {
                 text += " 1";
@@ -66,7 +101,7 @@ function TaskList() {
                     <div id="task-label" className="label">List</div>
                     {taskList}
                 </div>
-                <button className="add-btn list-item" onClick={addTask}>+</button>
+                <button className="add-btn list-item" onClick={addNewTask}>+</button>
             </div>
         </>
     )

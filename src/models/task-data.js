@@ -49,6 +49,19 @@ function deleteTask(task) {
     return task;
 }
 
+async function getAllTasks() {
+    return new Promise((resolve) => {
+        db.serialize(function() {
+            db.all("SELECT * FROM tasks;", (err, rows) => {
+                if (err) {
+                    resolve(err)
+                }
+                resolve(rows)
+            })
+        })    
+    })
+}
+
 function test() {
     // let string = db.all("SELECT * FROM tasks", [], (err, rows) => {
     //     console.log(rows)
@@ -56,4 +69,4 @@ function test() {
     // return string;
 }
 
-export { sendTask, deleteTask, test }
+export { sendTask, deleteTask, getAllTasks, test }

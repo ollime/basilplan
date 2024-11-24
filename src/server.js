@@ -1,7 +1,7 @@
 import express from "express"
 import cors from "cors"
 
-import { sendTask, deleteTask, test } from "./models/task-data.js"
+import { sendTask, deleteTask, getAllTasks, test } from "./models/task-data.js"
 
 const app = express()
 const port = 5000;
@@ -27,6 +27,12 @@ app.get("/api/deleteTask/:task", (req, res) => {
     deleteTask(task)
     console.log("Task deleted: " + task)
     res.end()
+})
+
+app.get("/api/getAllTasks", async (req, res) => {
+    console.log("Loading all tasks")
+    let tasks = await getAllTasks()
+    res.send(tasks)
 })
 
 app.listen(port, () => {
