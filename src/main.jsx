@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import "./public/styles/style.css"
 import "./public/styles/test.css"
 
-import App from './App.jsx'
+import App from './pages/App.jsx'
 import Stats from "./pages/Stats.jsx"
 import Settings from "./pages/Settings.jsx"
 

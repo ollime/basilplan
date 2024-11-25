@@ -1,6 +1,7 @@
 import Footer from "../../components/Footer.jsx";
 import Checkbox from "../../components/Checkbox.jsx";
 import TextField from "../../components/TextField.jsx";
+import RadioSelect from "../../components/RadioSelect.jsx";
 
 function Settings() {
     return (
@@ -13,7 +14,12 @@ function Settings() {
                     <TextField label="Long Break (minutes)" />
                     <Checkbox label="Automatically start breaks" />
                     <Checkbox label="Enable long break" />
-                <h2>Theme</h2>
+                <h2>Style</h2>
+                    <RadioSelect label={"Theme"} options={[
+                        "Light",
+                        "Dark",
+                        "Contrast"
+                    ]}/>
             </div>
             <Footer />
         </>

@@ -65,7 +65,7 @@ function FlagMarker(props) {
 function StarMarker(props) {
     return(
         <>
-            <svg xmlns="http://www.w3.org/2000/svg" className={props.color + " margin"} height="30px" width="30px" viewBox="0 -960 960 960" fill="#e8eaed"><path d="m233-120 65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" className={props.color + " margin-left"} height="30px" width="30px" viewBox="0 -960 960 960" fill="#e8eaed"><path d="m233-120 65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z"/></svg>
         </>
     )
 }

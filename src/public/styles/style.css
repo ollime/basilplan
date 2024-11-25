@@ -56,6 +56,9 @@ button {
 .flex {
   display: flex;
 }
+.margin-left {
+  margin-left: 5px;
+}
 #clock {
   width: 300px;
   display: flex;
@@ -141,6 +144,9 @@ button {
 #settings input {
   margin: 5px;
 }
+#settings .settings-label {
+  margin-right: 10px;
+}
 .task-marker {
   height: 50px;
 }
@@ -163,9 +169,6 @@ button {
 .task-marker .task-marker-label {
   margin-left: 5px;
   padding-right: 20px;
-}
-.task-marker .margin {
-  margin-left: 5px;
 }
 .add-btn {
   width: 300px;
