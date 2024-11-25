@@ -2,12 +2,14 @@ import { useState, useContext } from "react";
 import AppContext from "./../components/AppContext.jsx"
 
 function TaskMarker(props) {
-    // width should be > 50
+    /** Task marker width. Should be > 50 @type {number} */
     const width = 60;
-    // keep height as even number
+    /** Task marker height. Should be an even number @type {number} */
     const height = 46;
 
+    /** Determines the color of the marker. @type {number} */
     const [index, setIndex] = useState(0)
+    /** Flag settings. Contains color and text values. @type {Object} */
     const colors = [
         {color: "unset", text: ""},
         {color: "success", text: "current task"},
@@ -15,24 +17,31 @@ function TaskMarker(props) {
         //{color: "danger", text: "test flag"}
     ]
 
+    /** Current selected task. @type {text} */
     const {
         selectedTask,
         setSelectedTask
     } = useContext(AppContext)
 
+    /** Updates color and text of the task marker when it is pressed on. */
     function handleChangeMarker() {
         setIndex(index + 1)
+        // If there is already a selected task, do not allow a second selected task
         if (index == 0) {
+            // Skips color for current task
             if (selectedTask != null) {
                 setIndex(index + 2);
             }
+            // Sets current task
             else {
                 props.updateSelectedTask(false);
             }
         }
+        // Removes current task
         if (index == 1) {
             props.updateSelectedTask(true);
         }
+        // Cycles through colors. Resets index if it is the last color
         if (index == colors.length - 1) {
             setIndex(0)
         }

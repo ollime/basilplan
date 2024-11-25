@@ -10,13 +10,19 @@ import SkipIcon from "./../src/public/icons/skip.svg";
 function Clock() {
     const defaultTimerValue = 1;
 
+    /** Determines if the timer is currently running. @type {boolean} */
     const [timer, setTimer] = useState(false)
+
+    /** Current timer value. @type {number} */
     const [seconds, setSeconds] = useState(defaultTimerValue)
+
+    /** Current selected task. @type {text} */
     const {
         selectedTask,
         setSelectedTask
     } = useContext(AppContext)
 
+    /** Applies timer interval. Updates timer value. */
     useEffect(() => {
         let timerID;
         
@@ -25,7 +31,7 @@ function Clock() {
         /**
          * Starts the timer and changes the timer button.
          * 
-         * Stops timer when timer value is less than 0.
+         * Stops when timer value is less than 0.
          */
         function startTimer() {
             if (!timerID) {
@@ -70,20 +76,24 @@ function Clock() {
        let minutes = Math.floor(timeValue / 60)
        let seconds = timeValue - (minutes * 60)
        
+       // applies leading zero
        if (seconds < 10) {seconds = "0"+seconds}
        
        return minutes + ":" + seconds;
     }
-    
+
+    /** Starts the timer. */
     function handleStartTimer() {
         setTimer(!timer)
     }
 
+    /** Stops the timer and resets values. */
     function handleRestartTimer() {
         setTimer(false)
         setSeconds(defaultTimerValue)
     }
 
+    /** Stops the timer, resets values, and changes timer type. */
     function handleSkipTimer() {
         // TODO: implement different timer types
         // TODO: implement skip timer

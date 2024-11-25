@@ -8,40 +8,56 @@ import DeleteIcon from "./../src/public/icons/delete.svg";
 import CancelIcon from "./../src/public/icons/cancel.svg";
 
 function TaskItem(props) {
+    /** Determines if the edit panel is currently open. @type {boolean} */
     const [edit, setEdit] = useState(false);
+
+    /** Task name. Used for updating element. @type {text} */
     const [text, setText] = useState(props.text)
-    const count = props.count;
+
+    /** Reference to element containing the task name. Used for sending data. @type {*} */
     const textRef = useRef(null);
+
+    /** Index. Current position in the list. @type {number} */
+    const count = props.count;
+
+    /** Current selected task. @type {text} */
     const {
         selectedTask,
         setSelectedTask
     } = useContext(AppContext)
     
-    function openEdit() {
+    /** Opens the edit panel. */
+    function handleOpenEdit() {
         setEdit(!edit)
     }
 
-    function confirmTask() {
+    function handleConfirmTask() {
         let txt = textRef.current.value;
         if (txt != text) {
+            // sends current text to database
             props.editTask(count, txt)
-            setText(txt)    
+            // updates element
+            setText(txt)
         }
-        openEdit();
+        handleOpenEdit();
     }
 
-    function deleteTask() {
+    function handleDeleteTask() {
         let txt = textRef.current.value;
         props.deleteTask(txt)
-        openEdit();
+        handleOpenEdit();
     }
 
+    /** Changes currently selected task, based on the task marker.
+     * 
+     * @param {boolean} reset Determines if task should be set (true) or unset (false).
+     */
     function updateSelectedTask(reset) {
-        if (!reset) {
-            setSelectedTask(text)
+        if (reset) {
+            setSelectedTask(null)
         }
         else {
-            setSelectedTask(null)
+            setSelectedTask(text)
         }
     }
 
@@ -52,20 +68,20 @@ function TaskItem(props) {
                     <div className={`display-panel ${edit ? "hidden" : "flex"}`}>
                         <button className="small-square-btn">{count}</button>
                         <button className="item-label">{text}</button>
-                        <button className="edit-btn" onClick={openEdit}>
+                        <button className="edit-btn" onClick={handleOpenEdit}>
                             <img src={EditIcon}></img>
                         </button>
                     </div>
 
                     <div className={`edit-panel ${edit ? "flex" : "hidden"}`}>
                         <input type="text" id={text + count} className="item-label" defaultValue={text} ref={textRef} />
-                        <button className="confirm-btn" onClick={confirmTask}>
+                        <button className="confirm-btn" onClick={handleConfirmTask}>
                             <img src={ConfirmIcon}></img>
                         </button>
-                        <button className="delete-btn" onClick={deleteTask}>
+                        <button className="delete-btn" onClick={handleDeleteTask}>
                             <img src={DeleteIcon}></img>
                         </button>
-                        <button className="edit-btn" onClick={openEdit}>
+                        <button className="edit-btn" onClick={handleOpenEdit}>
                             <img src={CancelIcon}></img>
                         </button>
                     </div>
