@@ -1,7 +1,9 @@
 import express from "express"
 import cors from "cors"
 
-import { sendTask, deleteTask, getAllTasks, test } from "./models/task-data.js"
+import { sendTask, deleteTask, getAllTasks } from "./models/task-data.js";
+import { sendLogData } from "./models/log-data.js";
+import { test } from "./models/database.js";
 
 const app = express()
 const port = 5000;
@@ -30,9 +32,18 @@ app.get("/api/deleteTask/:task", (req, res) => {
 })
 
 app.get("/api/getAllTasks", async (req, res) => {
-    console.log("Loading all tasks")
     let tasks = await getAllTasks()
+    console.log("Loading all tasks")
     res.send(tasks)
+})
+
+app.get("/api/sendLogData/:dateTime/:task/:minutes", (req, res) => {
+    let dateTime = req.params.dateTime;
+    let task = req.params.task;
+    let minutes = req.params.minutes;
+    console.log("Task logged: " + task + " for " + minutes + " minutes")
+    sendLogData(dateTime, task, minutes)
+    res.end()
 })
 
 app.listen(port, () => {

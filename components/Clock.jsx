@@ -1,9 +1,12 @@
 import { useState, useEffect, useContext } from "react";
-import AppContext from "./../components/AppContext.jsx"
+import AppContext from "./AppContext.jsx"
+import { sendLogData } from "../src/api/log-api.js"
 
 function Clock() {
+    const defaultTimerValue = 1;
+
     const [timer, setTimer] = useState(false)
-    const [seconds, setSeconds] = useState(650)
+    const [seconds, setSeconds] = useState(defaultTimerValue)
     const {
         selectedTask,
         setSelectedTask
@@ -12,7 +15,7 @@ function Clock() {
     useEffect(() => {
         let timerID;
         
-        // TODO: put the default timer value somewhere. ctrl + f for 650
+        // TODO: put the default timer value somewhere
         // TODO: Add in automatic or manual start option
         /**
          * Starts the timer and changes the timer button.
@@ -37,7 +40,8 @@ function Clock() {
             timerID = null;
             // automatically resets timer
             if (seconds < 0) {
-                setSeconds(650)
+                sendLogData(selectedTask, defaultTimerValue / 60)
+                setSeconds(defaultTimerValue)
             }
         }
         
@@ -72,7 +76,7 @@ function Clock() {
 
     function handleRestartTimer() {
         setTimer(false)
-        setSeconds(650)
+        setSeconds(defaultTimerValue)
     }
 
     function handleSkipTimer() {
