@@ -59,15 +59,14 @@ button {
     background-color: @primary-color-heavy;
     height: @button-height;
     width: 150px;
-    font-size: @font-size-small;;
+    font-size: @font-size-small;
 }
 
 .small-square-btn {
+    text-align: center;
     height: @button-height;
-    line-height: @button-height;
-    padding: 0px @padding-large;
+    width: @button-height;
     background-color: @primary-color-medium;
-    display: inline-block;
 }
 
 .align-center > * {
@@ -189,6 +188,7 @@ button {
 }
 
 .task-marker {
+    height: @button-height;
     .unset {
         fill: @gray-light;
         color: @gray-light;
@@ -205,11 +205,12 @@ button {
         fill: @danger;
         color: @danger;
     }
-    .star {
+    .task-marker-label {
         margin-left: @margin-small;
-        font-size: 30px;
-        padding: 10px;
         padding-right: 20px;
+    }
+    .margin {
+        margin-left: @margin-small;
     }
 }
 

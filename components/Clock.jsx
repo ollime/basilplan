@@ -2,6 +2,11 @@ import { useState, useEffect, useContext } from "react";
 import AppContext from "./AppContext.jsx"
 import { sendLogData } from "../src/api/log-api.js"
 
+import StartIcon from "./../src/public/icons/play.svg";
+import PauseIcon from "./../src/public/icons/pause.svg";
+import ResetIcon from "./../src/public/icons/restart.svg";
+import SkipIcon from "./../src/public/icons/skip.svg";
+
 function Clock() {
     const defaultTimerValue = 1;
 
@@ -92,10 +97,16 @@ function Clock() {
                     <span id="seconds">{convertToTime(seconds)}</span>
                 </div>
                 <span className="timer-btns">
+                    <button className="small-square-btn" onClick={handleRestartTimer}>
+                        <img src={ResetIcon}></img>
+                    </button>
                     <button className="small-square-btn"
-                        onClick={handleStartTimer}>{timer ? "Pause" : "Start"}</button>
-                    <button className="small-square-btn" onClick={handleRestartTimer}>Reset</button>
-                    <button className="small-square-btn" onClick={handleSkipTimer}>Skip</button>
+                        onClick={handleStartTimer}>
+                            <img src={timer ? PauseIcon : StartIcon}></img>
+                    </button>
+                    <button className="small-square-btn" onClick={handleSkipTimer}>
+                        <img src={SkipIcon}></img>
+                    </button>
                 </span>
             </div>
         </>

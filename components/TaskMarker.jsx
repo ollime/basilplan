@@ -40,14 +40,32 @@ function TaskMarker(props) {
     
     return (
         <>
-            <span className="btn-size task-marker align-center">
-                <svg width={width} height={height} viewBox={"0 0 " + width + " " + height}>
-                <polygon points={`0,0 ${width},0 ${width - 20},${height / 2} ${width},${height} 0,${height}`}
-                    className={colors[index].color} onClick={handleChangeMarker}/>
-                </svg>
-                {/* <span className={`star ${colors[index].color}`} onClick={handleChangeMarker}>★</span> */}
-                <span>{colors[index].text}</span>
+            <span className="btn-size task-marker flex-center" onClick={handleChangeMarker}>
+                <FlagMarker width={width} height={height} color={colors[index].color}/>
+                {/* <StarMarker color={colors[index].color}/> */}
+                <span className="task-marker-label">{colors[index].text}</span>
             </span>
+        </>
+    )
+}
+
+function FlagMarker(props) {
+    const width = props.width;
+    const height = props.height;
+    return(
+        <>
+            <svg width={width} height="50" viewBox={"0 0 " + width + " 50"}>
+                <polygon points={`0,0 ${width},0 ${width - 20},${height / 2} ${width},${height} 0,${height}`}
+                    className={props.color}/>
+            </svg>
+        </>
+    )
+}
+
+function StarMarker(props) {
+    return(
+        <>
+            <svg xmlns="http://www.w3.org/2000/svg" className={props.color + " margin"} height="30px" width="30px" viewBox="0 -960 960 960" fill="#e8eaed"><path d="m233-120 65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z"/></svg>
         </>
     )
 }

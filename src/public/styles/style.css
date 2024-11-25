@@ -33,11 +33,10 @@ button {
 .list-item .delete-btn,
 .list-item .edit-btn,
 .list-item .confirm-btn {
+  text-align: center;
   height: 50px;
-  line-height: 50px;
-  padding: 0px 20px;
+  width: 50px;
   background-color: #a8dbf5;
-  display: inline-block;
 }
 .align-center > * {
   align-items: center;
@@ -142,6 +141,9 @@ button {
 #settings input {
   margin: 5px;
 }
+.task-marker {
+  height: 50px;
+}
 .task-marker .unset {
   fill: #cccccc;
   color: #cccccc;
@@ -158,11 +160,12 @@ button {
   fill: #dc3545;
   color: #dc3545;
 }
-.task-marker .star {
+.task-marker .task-marker-label {
   margin-left: 5px;
-  font-size: 30px;
-  padding: 10px;
   padding-right: 20px;
+}
+.task-marker .margin {
+  margin-left: 5px;
 }
 .add-btn {
   width: 300px;
