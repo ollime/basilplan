@@ -2,7 +2,7 @@ import sqlite3 from "sqlite3"
 import path from "path"
 
 const __dirname = import.meta.dirname;
-const dbPath = path.join(__dirname, "/../../databases/test54.sqlite3")
+const dbPath = path.join(__dirname, "/../../databases/test55.sqlite3")
 
 let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
     if (err && err.code == "SQLITE_CANTOPEN") {
@@ -42,9 +42,42 @@ function createTables() {
     return db
 }
 
-function test() {
-    // generate test data
-    // TODO: write this function
+function generateTestData() {
+    let now = 17326;
+    let max = 10000;
+    let tasks = ["a", "a", "b", "b", "c", "d", "e"]
+    
+    function getRandomDate() {
+        return Number(`${now}${Math.floor(Math.random() * max)}`);
+    }
+    function getRandomTask() {
+        return tasks[Math.floor(Math.random() * 7)]
+    }
+    
+    const testData = []
+    for (let i = 0; i < 15; i++) {
+        testData.push({ date: getRandomDate(), task_name: getRandomTask(), minutes: 5 })
+    }
+    for (let i = 0; i < 30; i++) {
+        testData.push({ date: getRandomDate(), task_name: getRandomTask(), minutes: 15 })
+    }
+    for (let i = 0; i < 30; i++) {
+        testData.push({ date: getRandomDate(), task_name: getRandomTask(), minutes: 25 })
+    }
+
+    db.serialize(() => {
+        const stmt = db.prepare(`
+            INSERT INTO log
+            (date, task_name, minutes)
+            VALUES (?, ?, ?)
+        `)
+
+        testData.forEach((data) => stmt.run(data.date, data.task_name, data.minutes))
+
+        stmt.finalize();
+    })
+
+    return "done";
 }
 
-export { db, test }
+export { db, generateTestData }

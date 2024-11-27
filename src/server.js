@@ -3,7 +3,7 @@ import cors from "cors"
 
 import { sendTask, deleteTask, getAllTasks } from "./models/task-data.js";
 import { sendLogData, getLogData } from "./models/log-data.js";
-import { test } from "./models/database.js";
+import { generateTestData } from "./models/database.js";
 
 const app = express()
 const port = 5000;
@@ -14,6 +14,8 @@ app.options('*', cors())
 app.get("/api", (req, res) => {
     res.send("this works")
 })
+
+// console.log(generateTestData())
 
 // note to self: make sure you're actually sending responses
 
