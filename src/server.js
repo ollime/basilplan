@@ -2,7 +2,7 @@ import express from "express"
 import cors from "cors"
 
 import { sendTask, deleteTask, getAllTasks } from "./models/task-data.js";
-import { sendLogData } from "./models/log-data.js";
+import { sendLogData, getLogData } from "./models/log-data.js";
 import { test } from "./models/database.js";
 
 const app = express()
@@ -44,6 +44,12 @@ app.get("/api/sendLogData/:dateTime/:task/:minutes", (req, res) => {
     console.log("Task logged: " + task + " for " + minutes + " minutes")
     sendLogData(dateTime, task, minutes)
     res.end()
+})
+
+app.get("/api/getLogData", async (req, res) => {
+    let log = await getLogData()
+    console.log("Loading log data")
+    res.send(log)
 })
 
 app.listen(port, () => {
