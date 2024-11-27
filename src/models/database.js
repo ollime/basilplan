@@ -2,7 +2,7 @@ import sqlite3 from "sqlite3"
 import path from "path"
 
 const __dirname = import.meta.dirname;
-const dbPath = path.join(__dirname, "/../../databases/test55.sqlite3")
+const dbPath = path.join(__dirname, "/../../databases/test58.sqlite3")
 
 let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
     if (err && err.code == "SQLITE_CANTOPEN") {
@@ -43,12 +43,12 @@ function createTables() {
 }
 
 function generateTestData() {
-    let now = 17326;
-    let max = 10000;
+    let now = 1732;
+    let max = 900000;
     let tasks = ["a", "a", "b", "b", "c", "d", "e"]
     
     function getRandomDate() {
-        return Number(`${now}${Math.floor(Math.random() * max)}`);
+        return Number(`${now}${Math.floor(Math.random() * max) + 1000}`);
     }
     function getRandomTask() {
         return tasks[Math.floor(Math.random() * 7)]

@@ -1,33 +1,49 @@
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import { useState, useEffect } from "react";
-import { groupBy } from "../src/api/chart-api";
-import { Bar } from "react-chartjs-2";
+import { groupByTask, groupByDate } from "../src/api/data-formatting";
+import { Bar, Line } from "react-chartjs-2";
 import { getAllLogData } from "./../src/api/log-api";
-
 
 Chart.register(CategoryScale);
 
 function ChartApp() {
-    const [logData, setLogData] = useState(null)
+    const [taskData, setTaskData] = useState(null)
+    const [dateData, setDateData] = useState(null)
+
     useEffect(() => {
       let ignore = false;
-      async function getLogData() {
+      async function getTaskData() {
         await getAllLogData()
         .then((response) => {
-          return groupBy(response)
+          return groupByTask(response);
         })
         .then((i) => {
-          console.log(i)
           return formatChartData(i);
         })
         .then((data) => {
           if (!ignore) {
-            setLogData(data)
+            setTaskData(data)
           }
         })
       }
-      getLogData()
+      getTaskData()
+
+      async function getDateData() {
+        await getAllLogData()
+        .then((response) => {
+          return groupByDate(response);
+        })
+        .then((i) => {
+          return formatChartData(i);
+        })
+        .then((data) => {
+          if (!ignore) {
+            setDateData(data)
+          }
+        })
+      }
+      getDateData()
         
         return () => {
           ignore = true;
@@ -36,7 +52,8 @@ function ChartApp() {
 
     return (
         <div className="App">
-            { logData ? <BarChart chartData={logData} /> : null}
+            { taskData ? <BarChart chartData={taskData} /> : null}
+            { dateData ? <LineChart chartData={dateData} /> : null}
         </div>
     )
 }
@@ -46,37 +63,96 @@ function formatChartData(logData) {
       labels: logData.map((item) => item.task_name),
       // datasets is an array of objects where each object represents a set of data to display corresponding to the labels above. for brevity, we'll keep it at one object
       datasets: [{
-          label: 'Popularity of colours',
+          label: "hours",
           data: logData.map((item) => item.minutes),
           // you can set indiviual colors for each bar
-          backgroundColor: [
-            "#FFA400",
-            "#009FFD",
-            "#2A2A72",
-            "#232528",
-          ],
-          borderWidth: 1,
+          // backgroundColor: [
+          //   "#DE3C4B",
+          //   "#FFA400",
+          //   "#009FFD",
+          //   "#2A2A72",
+          //   "#232528",
+          // ],
+          borderWidth: 2,
+          pointStyle: false
         }]
   }
   return data;
 }
 
 function BarChart({chartData}) {
+  const options = {
+    plugins: {
+      title: {
+        display: true,
+        text: "Bar chart",
+        align: "end"
+      },
+      legend: {
+        display: false
+      },
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: "Hours"
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: "Task"
+        }
+      }
+    },
+    indexAxis: "y"
+  }
+
   return (
     <div className="chart-container">
       <Bar
         data={chartData}
-        options={{
-          plugins: {
-            title: {
-              display: true,
-              text: "Users Gained between 2016-2020"
-            },
-            legend: {
-              display: false
-            }
-          }
-        }}
+        options={options}
+      />
+    </div>
+  );
+};
+
+function LineChart({chartData}) {
+  const options = {
+    plugins: {
+      title: {
+        display: true,
+        text: "Line Chart",
+        align: "end"
+      },
+      legend: {
+        display: false
+      },
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: "Date"
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: "Hours"
+        }
+      }
+    },
+    indexAxis: "x"
+  }
+
+  return (
+    <div className="chart-container">
+      <Line
+        data={chartData}
+        options={options}
       />
     </div>
   );
