@@ -1,5 +1,5 @@
 import Footer from "../../components/Footer.jsx";
-import ChartApp from "../../components/ChartApp.jsx"
+import ChartApp from "../../components/charts/ChartApp.jsx"
 
 function Stats() {
     return(

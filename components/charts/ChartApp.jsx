@@ -1,8 +1,8 @@
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import { useState, useEffect } from "react";
-import { groupByTask, groupByDate } from "../src/api/data-formatting";
-import { getAllLogData } from "./../src/api/log-api";
+import { groupByTask, groupByDate } from "../../src/api/data-formatting.js";
+import { getAllLogData } from "../../src/api/log-api.js";
 import BarChart from "./BarChart.jsx";
 import LineChart from "./LineChart.jsx";
 import DataTable from "./DataTable.jsx";
