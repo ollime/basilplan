@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import EditIcon from "./../src/public/icons/edit.svg";
 import ConfirmIcon from "./../src/public/icons/check.svg";
@@ -8,8 +7,20 @@ function TextField(props) {
     const [editText, setEditText] = useState(false);
     const textInput = useRef(null)
 
-    // TODO: update with already set values
-    const [text, setText] = useState("25")
+    const [text, setText] = useState()
+
+    useEffect(() => {
+        getStorage()
+    }, [])
+
+    function getStorage() {
+        let value = localStorage.getItem(props.label);
+        setText(value);
+    }
+
+    function sendToStorage(value) {
+        localStorage.setItem(props.label, value)
+    }
 
     // TODO: autofocus on text input
     function handleOpenEdit() {
@@ -18,6 +29,7 @@ function TextField(props) {
 
     function handleConfirm() {
         setText(textInput.current.value)
+        sendToStorage(textInput.current.value)
         handleOpenEdit()
     }
 
