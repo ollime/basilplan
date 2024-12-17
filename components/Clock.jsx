@@ -8,13 +8,20 @@ import ResetIcon from "./../src/public/icons/restart.svg";
 import SkipIcon from "./../src/public/icons/skip.svg";
 
 function Clock() {
-    const defaultTimerValue = 1;
-
     /** Determines if the timer is currently running. @type {boolean} */
     const [timer, setTimer] = useState(false)
 
+    const timerTypes = [
+        {type: "main", value: 1},
+        {type: "break", value: 2},
+        {type: "long-break", value: 3},
+        {type: "main", value: 1},
+    ]
+    /** Index for timer type. @type {number} */
+    const [type, setType] = useState(0);
+
     /** Current timer value. @type {number} */
-    const [seconds, setSeconds] = useState(defaultTimerValue)
+    const [seconds, setSeconds] = useState(timerTypes[type].value)
 
     /** Current selected task. @type {text} */
     const {
@@ -25,8 +32,6 @@ function Clock() {
     /** Applies timer interval. Updates timer value. */
     useEffect(() => {
         let timerID;
-        
-        // TODO: put the default timer value somewhere
         // TODO: Add in automatic or manual start option
         /**
          * Starts the timer and changes the timer button.
@@ -41,21 +46,24 @@ function Clock() {
             }
             if (seconds < 0) {
                 stopTimer()
-                setTimer(false)
             }
         }
-
+    
         /** Stops the timer. If automatic breaks, resets to default timer value. */
         function stopTimer() {
             clearInterval(timerID);
             timerID = null;
             // automatically resets timer
             if (seconds < 0) {
-                sendLogData(selectedTask, defaultTimerValue / 60)
-                setSeconds(defaultTimerValue)
+                if (type == 0) {
+                    // send data if timer type is main
+                    sendLogData(selectedTask, timerTypes[type].value / 60)
+                }
+                
+                handleSkipTimer();
             }
         }
-        
+
         if (timer) {
             startTimer()
         }
@@ -63,7 +71,7 @@ function Clock() {
         return() => {
             stopTimer()
         }
-    }, [timer, seconds])
+    }, [timer, seconds])    
 
     /**
      * Converts integer to time format m:ss.
@@ -90,19 +98,28 @@ function Clock() {
     /** Stops the timer and resets values. */
     function handleRestartTimer() {
         setTimer(false)
-        setSeconds(defaultTimerValue)
+        setSeconds(timerTypes[type].value)
     }
 
     /** Stops the timer, resets values, and changes timer type. */
     function handleSkipTimer() {
-        // TODO: implement different timer types
-        // TODO: implement skip timer
+        setTimer(false)
+        // updates type. resets to 0 if at last timer type
+        if (type == 2) {
+            setType(0)
+        }
+        else {
+            setType(type + 1)
+        }
+        // updates seconds with new type value
+        setSeconds(timerTypes[type + 1].value)
     }
 
     return(
         <>
             <div id="clock">
                 <span>current task: {selectedTask}</span>
+                <span>current timer type: {timerTypes[type].type}</span>
                 <div id="timer" className="flex-center">
                     <span id="seconds">{convertToTime(seconds)}</span>
                 </div>
