@@ -12,13 +12,26 @@ function Clock() {
     const [timer, setTimer] = useState(false)
 
     const timerTypes = [
-        {type: "main", value: 1},
-        {type: "break", value: 2},
-        {type: "long-break", value: 3},
-        {type: "main", value: 1},
+        {type: "Main Timer", value: 1},
+        {type: "Short Break", value: 2},
+        {type: "Long Break", value: 3},
+        {type: "Main Timer", value: 1},
     ]
     /** Index for timer type. @type {number} */
     const [type, setType] = useState(0);
+
+    /** Determines whether timer automatically runs when reset @type {boolean} */
+    let startAutomatically = false;
+
+    /** Updates timer settings from local storage. */
+    function getTimerSettings() {
+        for (let i in timerTypes) {
+            let value = localStorage.getItem(timerTypes[i].type + " (minutes)");
+            timerTypes[i].value = value;
+        }
+        startAutomatically = localStorage.getItem("Automatically start breaks");
+    }
+    getTimerSettings()
 
     /** Current timer value. @type {number} */
     const [seconds, setSeconds] = useState(timerTypes[type].value)
@@ -32,7 +45,6 @@ function Clock() {
     /** Applies timer interval. Updates timer value. */
     useEffect(() => {
         let timerID;
-        // TODO: Add in automatic or manual start option
         /**
          * Starts the timer and changes the timer button.
          * 
@@ -61,6 +73,11 @@ function Clock() {
                 }
                 
                 handleSkipTimer();
+
+                // automatic timer start - optional setting
+                if (startAutomatically) {
+                    setTimer(true)
+                }
             }
         }
 
@@ -71,7 +88,7 @@ function Clock() {
         return() => {
             stopTimer()
         }
-    }, [timer, seconds])    
+    }, [timer, seconds])
 
     /**
      * Converts integer to time format m:ss.

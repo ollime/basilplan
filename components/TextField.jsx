@@ -15,10 +15,13 @@ function TextField(props) {
 
     function getStorage() {
         let value = localStorage.getItem(props.label);
+        value = value / 60;
         setText(value);
     }
 
+    /** Sets values to local storage. Converts minutes to seconds. */
     function sendToStorage(value) {
+        value = value * 60;
         localStorage.setItem(props.label, value)
     }
 
