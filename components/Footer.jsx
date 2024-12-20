@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 function Footer() {
     return (
         <>
             <nav id="footer">
                 <ul>
-                    <Link to={"/"}>timer</Link>
-                    <Link to={"/stats"}>stats</Link>
-                    <Link to={"/settings"}>settings</Link>
+                    <NavLink to={"/"}>timer</NavLink>
+                    <NavLink to={"/stats"}>stats</NavLink>
+                    <NavLink to={"/settings"}>settings</NavLink>
                 </ul>
             </nav>
         </>

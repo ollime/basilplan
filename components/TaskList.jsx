@@ -98,7 +98,7 @@ function TaskList() {
         <>
             <div>
                 <div id="task">
-                    <div id="task-label" className="label">List</div>
+                    <div id="task-label" className="label">Task List</div>
                     {taskList}
                 </div>
                 <button className="add-btn list-item" onClick={addNewTask}>+</button>

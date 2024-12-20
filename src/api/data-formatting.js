@@ -6,22 +6,34 @@ function groupByTask(data) {
     for (let i in grouped) {
         newData.push({
             task_name: grouped[i][0].task_name,
-            minutes: grouped[i].reduce((a,b) => a + b.minutes / 60, 0),
+            minutes: formatToHours(grouped[i])
         })
     }
     return newData;
 }
 
 function groupByDate(data) {
-    let grouped = Object.groupBy(data, ({date}) => formatMMDDYY(date))
+    let grouped = Object.groupBy(data, ({date}) => date)
     let newData = []
     for (let i in grouped) {
         newData.push({
-            task_name: formatMMDDYY(grouped[i][0].date),
-            minutes: grouped[i].reduce((a,b) => a + b.minutes / 60, 0),
+            task_name: grouped[i][0].date,
+            minutes: formatToHours(grouped[i])
         })
     }
     return newData;   
+}
+
+function formatDates(data) {
+    let newData = []
+    for (let i in data) {
+        newData.push({
+            date: formatMMDDYY(data[i].date),
+            minutes: data[i].minutes,
+            task_name: data[i].task_name
+        })
+    }
+    return newData;
 }
 
 function formatMMDDYY(date) {
@@ -34,7 +46,12 @@ function formatMMDDYY(date) {
     return formattedDate;
 }
 
+function formatToHours(data) {
+    return data.reduce((a,b) => a + b.minutes / 60, 0);
+}
+
 export {
     groupByTask,
-    groupByDate
+    groupByDate,
+    formatDates
 }

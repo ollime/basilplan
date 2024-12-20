@@ -1,7 +1,7 @@
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import { useState, useEffect } from "react";
-import { groupByTask, groupByDate } from "../../src/api/data-formatting.js";
+import { groupByTask, groupByDate, formatDates } from "../../src/api/data-formatting.js";
 import { getAllLogData } from "../../src/api/log-api.js";
 import BarChart from "./BarChart.jsx";
 import LineChart from "./LineChart.jsx";
@@ -16,44 +16,34 @@ function ChartApp() {
 
     useEffect(() => {
       let ignore = false;
-      async function getTaskData() {
-        await getAllLogData()
-        .then((response) => {
-          if (!allData) {
-            setAllData(response)
-          }
-          return groupByTask(response);
-        })
-        .then((i) => {
-          return formatChartData(i);
-        })
-        .then((data) => {
-          if (!ignore) {
-            setTaskData(data)
-          }
-        })
-      }
-      getTaskData()
 
-      async function getDateData() {
+      async function getData() {
         await getAllLogData()
         .then((response) => {
-          return groupByDate(response);
-        })
-        .then((i) => {
-          return formatChartData(i);
+          return formatDates(response)
         })
         .then((data) => {
           if (!ignore) {
-            setDateData(data)
+            setAllData(data)
+            formatTaskData(data)
+            formatDateData(data)
           }
         })
       }
-      getDateData()
+
+      getData()
+      
+      async function formatTaskData(response) {
+        setTaskData(formatChartData(groupByTask(response)))
+      }
+
+      async function formatDateData(response) {
+        setDateData(formatChartData(groupByDate(response)))
+      }
         
-        return () => {
-          ignore = true;
-        }
+      return () => {
+        ignore = true;
+      }
     }, [])
 
     return (

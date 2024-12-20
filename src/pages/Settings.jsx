@@ -13,7 +13,6 @@ function Settings() {
                     <TextField label="Short Break (minutes)" />
                     <TextField label="Long Break (minutes)" />
                     <Checkbox label="Automatically start breaks" />
-                    <Checkbox label="Enable long break" />
                 <h2>Style</h2>
                     <RadioSelect label={"Theme"} options={[
                         "Light",

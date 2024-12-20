@@ -46,6 +46,9 @@ function TaskItem(props) {
         let txt = textRef.current.value;
         props.deleteTask(txt)
         handleOpenEdit();
+        if (selectedTask == txt) {
+            setSelectedTask(null)
+        }
     }
 
     /** Changes currently selected task, based on the task marker.

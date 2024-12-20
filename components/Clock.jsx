@@ -14,6 +14,12 @@ function Clock() {
     const timerTypes = [
         {type: "Main Timer", value: 1},
         {type: "Short Break", value: 2},
+        {type: "Main Timer", value: 1},
+        {type: "Short Break", value: 2},
+        {type: "Main Timer", value: 1},
+        {type: "Short Break", value: 2},
+        {type: "Main Timer", value: 1},
+        {type: "Short Break", value: 2},
         {type: "Long Break", value: 3},
         {type: "Main Timer", value: 1},
     ]
@@ -122,7 +128,7 @@ function Clock() {
     function handleSkipTimer() {
         setTimer(false)
         // updates type. resets to 0 if at last timer type
-        if (type == 2) {
+        if (type == timerTypes.length - 2) {
             setType(0)
         }
         else {
