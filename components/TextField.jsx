@@ -13,6 +13,12 @@ function TextField(props) {
         getStorage()
     }, [])
 
+    useEffect(() => {
+        let textLength = textInput.current.value.length
+        textInput.current.focus()
+        textInput.current.setSelectionRange(textLength, textLength);
+    }, [editText])
+
     function getStorage() {
         let value = localStorage.getItem(props.label);
         value = value / 60;
@@ -25,7 +31,6 @@ function TextField(props) {
         localStorage.setItem(props.label, value)
     }
 
-    // TODO: autofocus on text input
     function handleOpenEdit() {
         setEditText(!editText)
     }
@@ -40,7 +45,7 @@ function TextField(props) {
         <>
             <div>
                 <label id={props.label}>{props.label}</label>
-                <input id={props.label + "1"} type="text" defaultValue={text}
+                <input id={props.label + "-text"} type="text" defaultValue={text}
                 disabled={editText ? false : true} ref={textInput}/>
                 <button className={`small-square-btn ${editText ? "hidden" : ""}`}
                     onClick={handleOpenEdit}>
