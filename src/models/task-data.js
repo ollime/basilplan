@@ -4,16 +4,16 @@ function sendTask(task) {
     db.exec(`
         INSERT OR REPLACE INTO tasks
         (task_name)
-        VALUES ("${task}");
-        `)
+        VALUES (?);
+        `, [task])
     return task;
 }
 
 function deleteTask(task) {
     db.exec(`
         DELETE FROM tasks
-        WHERE task_name = "${task}";
-    `)
+        WHERE task_name = ?;
+    `, [task])
     return task;
 }
 

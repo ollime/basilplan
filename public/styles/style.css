@@ -96,9 +96,6 @@ button {
   font-size: 24px;
   width: 300px;
 }
-#task .add-btn {
-  width: 300px;
-}
 .list-item {
   background-color: #e0f5ff;
   height: 50px;
@@ -121,11 +118,6 @@ button {
 .list-item .edit-btn,
 .list-item .confirm-btn {
   justify-content: flex-end;
-}
-.accordion {
-  background-color: white;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
 }
 #settings {
   margin: 10px;
@@ -185,4 +177,7 @@ button {
   max-height: 700px;
   max-width: 800px;
   margin: auto;
+}
+.add-btn {
+  width: 300px;
 }
