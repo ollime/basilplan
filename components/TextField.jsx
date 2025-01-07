@@ -3,10 +3,13 @@ import { useState, useEffect, useRef } from "react";
 import EditIcon from "./../src/public/icons/edit.svg";
 import ConfirmIcon from "./../src/public/icons/check.svg";
 
+/** Text input on the settings page.
+ * 
+ * @param {String} props.label
+ */
 function TextField(props) {
     const [editText, setEditText] = useState(false);
     const textInput = useRef(null)
-
     const [text, setText] = useState()
 
     useEffect(() => {
@@ -19,6 +22,7 @@ function TextField(props) {
         textInput.current.setSelectionRange(textLength, textLength);
     }, [editText])
 
+    /** Retrieves text from local storage. */
     function getStorage() {
         let value = localStorage.getItem(props.label);
         value = value / 60;
@@ -31,10 +35,12 @@ function TextField(props) {
         localStorage.setItem(props.label, value)
     }
 
+    /** Enables editing in the text field. */
     function handleOpenEdit() {
         setEditText(!editText)
     }
 
+    /** Confirms new edits and updates the text field. */
     function handleConfirm() {
         setText(textInput.current.value)
         sendToStorage(textInput.current.value)

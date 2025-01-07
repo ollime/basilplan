@@ -7,6 +7,14 @@ import ConfirmIcon from "./../src/public/icons/check.svg";
 import DeleteIcon from "./../src/public/icons/delete.svg";
 import CancelIcon from "./../src/public/icons/cancel.svg";
 
+/** One task for the task list.
+ * 
+ * @param {String} props.text The task name.
+ * @param {Number} props.count Current position in the list.
+ * @param {function} props.editTask Modify an existing task.
+ * @param {function} props.deleteTask Delete an existing task.
+ * @param {String} props.currentTask
+ */
 function TaskItem(props) {
     /** Determines if the edit panel is currently open. @type {boolean} */
     const [edit, setEdit] = useState(false);
@@ -31,6 +39,7 @@ function TaskItem(props) {
         setEdit(!edit)
     }
 
+    /** Confirms the task and sends it to the database. */
     function handleConfirmTask() {
         let txt = textRef.current.value;
         if (txt != text) {
@@ -42,6 +51,7 @@ function TaskItem(props) {
         handleOpenEdit();
     }
 
+    /** Deletes the task, including in the database. */
     function handleDeleteTask() {
         let txt = textRef.current.value;
         props.deleteTask(txt)
@@ -89,7 +99,7 @@ function TaskItem(props) {
                         </button>
                     </div>
                 </span>
-                <TaskMarker currentTask={props.currentTask} updateSelectedTask={updateSelectedTask}/>
+                <TaskMarker updateSelectedTask={updateSelectedTask}/>
             </div>
         </>
     )

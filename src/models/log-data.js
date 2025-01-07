@@ -1,12 +1,13 @@
 import { db } from "./database.js"
 
 function sendLogData(dateTime, task, minutes) {
-    db.exec(`
-        INSERT OR REPLACE INTO log
+    console.log(dateTime, task, minutes)
+    db.run(`
+        INSERT INTO log
         (date, task_name, minutes)
         VALUES (?, ?, ?);
     `, 
-    (`${dateTime}, "${task}", ${minutes}`))
+    [dateTime, task, minutes])
 }
 
 async function getLogData() {

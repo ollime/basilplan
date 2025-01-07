@@ -2,7 +2,7 @@ import sqlite3 from "sqlite3"
 import path from "path"
 
 const __dirname = import.meta.dirname;
-const dbPath = path.join(__dirname, "/../../databases/test59.sqlite3")
+const dbPath = path.join(__dirname, "/../../databases/test60.sqlite3")
 
 let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
     if (err && err.code == "SQLITE_CANTOPEN") {
@@ -35,7 +35,7 @@ function createTables() {
             CREATE TABLE IF NOT EXISTS log (
             date INTEGER NOT NULL PRIMARY KEY,
             task_name TEXT NOT NULL,
-            minutes INTEGER NOT NULL
+            minutes TEXT NOT NULL
             );
         `)
     })

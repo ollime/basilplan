@@ -1,8 +1,8 @@
 import { db } from "./database.js";
 
 function sendTask(task) {
-    db.exec(`
-        INSERT OR REPLACE INTO tasks
+    db.run(`
+        INSERT INTO tasks
         (task_name)
         VALUES (?);
         `, [task])
@@ -10,7 +10,7 @@ function sendTask(task) {
 }
 
 function deleteTask(task) {
-    db.exec(`
+    db.run(`
         DELETE FROM tasks
         WHERE task_name = ?;
     `, [task])

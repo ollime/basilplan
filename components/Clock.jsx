@@ -7,10 +7,17 @@ import PauseIcon from "./../src/public/icons/pause.svg";
 import ResetIcon from "./../src/public/icons/restart.svg";
 import SkipIcon from "./../src/public/icons/skip.svg";
 
+/** Pomodoro timer. */
 function Clock() {
     /** Determines if the timer is currently running. @type {boolean} */
     const [timer, setTimer] = useState(false)
 
+    /** Stores timer types and minutes for each type.
+     * 
+     * Updates minute values based on settings stored in local storage.
+     * 
+     * @type {Object}
+     */
     const timerTypes = [
         {type: "Main Timer", value: 1},
         {type: "Short Break", value: 2},
@@ -115,7 +122,12 @@ function Clock() {
 
     /** Starts the timer. */
     function handleStartTimer() {
-        setTimer(!timer)
+        if (selectedTask) {
+            setTimer(!timer)
+        }
+        else {
+            alert("Select a task first")
+        }
     }
 
     /** Stops the timer and resets values. */

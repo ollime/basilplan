@@ -1,7 +1,7 @@
 import {useState, useEffect, useRef} from "react";
 
 /**
- * Radio input and label for settings page.
+ * Radio input group for settings page.
  * 
  * @param {Object} props
  * @param {Object} props.options Info for each radio option,
@@ -9,11 +9,10 @@ import {useState, useEffect, useRef} from "react";
  * 
  *      Example: {label: "option1", change: "primaryColor", newVal: "#000000"}
  * 
- * @param {string} props.label Radio id and label
+ * @param {String} props.label Radio id and label
  * 
- * @returns React component for radio buttons
+ * @returns {JSX} React component for radio buttons
  */
-
 function RadioSelect(props) {
     const [selected, setSelected] = useState("")
 
@@ -21,6 +20,7 @@ function RadioSelect(props) {
         getStorage()
     }, [])
 
+    /** Retrieves selected option from local storage. */
     function getStorage() {
         let value = localStorage.getItem(props.label);
         setSelected(value);
@@ -43,7 +43,9 @@ function RadioSelect(props) {
     )
 }
 
+/** Individual radio input. */
 function RadioInput(props) {
+    /** Stores selected option in local storage. */
     function handleSelection(evt) {
         let value = evt.target.id.toLowerCase();
         localStorage.setItem(props.label, value)

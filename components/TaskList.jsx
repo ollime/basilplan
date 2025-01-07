@@ -4,8 +4,11 @@ import { useEffect } from "react";
 import { getAllTasks, deleteTask, sendTask } from "./../src/api/task-api.js"
 import TaskItem from "./TaskItem.jsx";
 
+/** List of all tasks. */
 function TaskList() {
+    /** List of task labels. @type {String} */
     const [tasks, setTasks] = useState([]);
+    /** List of task JSX. @type {JSX} */
     const taskList = tasks.map((task, index) => (
         <TaskItem
             count={index}
@@ -19,6 +22,7 @@ function TaskList() {
     useEffect(() => {
         let ignore = false;
 
+        /** Unpacks array of task names. */
         function formatTasks(tasks) {
             let newTasks = []
             for (let i of tasks) {
@@ -27,6 +31,7 @@ function TaskList() {
             return newTasks;
         }
 
+        /** Intital task load. Retrieves task data and updates TaskList tasks. */
         async function getTaskData() {
             await getAllTasks()
             .then((response) => {
@@ -43,6 +48,7 @@ function TaskList() {
         }
     }, [])
 
+    /** Adds a new task and updates task list. */
     function handleAddTask() {
         let text = "new task"
         text = checkExistingTask(text);
@@ -50,35 +56,44 @@ function TaskList() {
         setTasks([...tasks, text])
     }
 
-    async function deleteUpdateTask(text) {
-        deleteTask(encodeURIComponent(text))
-        setTasks(tasks.filter((item) => item != text))
+    /** Deletes an existing task. */
+    async function deleteUpdateTask(taskName) {
+        deleteTask(encodeURIComponent(taskName))
+        setTasks(tasks.filter((item) => item != taskName))
     }
 
-    function editTask(index, text) {
-        text = checkExistingTask(text)
-        updateTask(text)
-        tasks[index] = text;
+    /** Modifies an existing task. */
+    function editTask(index, taskName) {
+        taskName = checkExistingTask(taskName)
+        updateTask(taskName)
+        tasks[index] = taskName;
         setTasks([...tasks])
     }
 
-    // all task names must be unique
-    function checkExistingTask(text) {
-        while (tasks.includes(text)) {
-            let lastChar = text.split(" ").slice(-1)
+    /** All task names must be unique.
+     * 
+     * If a duplicate task name exists, adds a number to it,
+     * beginning with 1 and incrementing with each duplicate name.
+     * 
+     * @param {String} taskName Task name.
+     */
+    function checkExistingTask(taskName) {
+        while (tasks.includes(taskName)) {
+            let lastChar = taskName.split(" ").slice(-1)
             if (!isNaN(lastChar)) {
-                let originalText = text.slice(0, text.length - lastChar[0].length)
-                text = originalText + (parseInt(lastChar) + 1);
+                let originalText = taskName.slice(0, taskName.length - lastChar[0].length)
+                taskName = originalText + (parseInt(lastChar) + 1);
             }
             else {
-                text += " 1";
+                taskName += " 1";
             }
         }
-        return text;
+        return taskName;
     }
 
-    function updateTask(text) {
-        sendTask(encodeURIComponent(text))
+    /** Sends the task to the database. */
+    function updateTask(taskName) {
+        sendTask(encodeURIComponent(taskName))
     }
 
     return (

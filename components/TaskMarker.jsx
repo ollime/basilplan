@@ -1,6 +1,13 @@
 import { useState, useContext } from "react";
 import AppContext from "./../components/AppContext.jsx"
 
+/** Base template for the indicator on the side of the task list.
+ * 
+ * The purpose of this marker is to highlight the current task,
+ * as well as visually marking any other important tasks.
+ * 
+ * @param {function} updateSelectedTask
+ */
 function TaskMarker(props) {
     /** Task marker width. Should be > 50 @type {number} */
     const width = 60;
@@ -58,6 +65,14 @@ function TaskMarker(props) {
     )
 }
 
+/** An SVG element with a 5-sided shape.
+ * 
+ * Shaped like a rectangle with a triangle cut out of it.
+ * 
+ * @param {Number} props.width
+ * @param {Number} props.height
+ * @param {String} props.color
+ * */
 function FlagMarker(props) {
     const width = props.width;
     const height = props.height;
@@ -71,6 +86,10 @@ function FlagMarker(props) {
     )
 }
 
+/** An SVG element shaped like a 5-pointed star.
+ * 
+ * @param {String} props.color
+ */
 function StarMarker(props) {
     return(
         <>
