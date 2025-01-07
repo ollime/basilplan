@@ -1,4 +1,7 @@
-/** Data formatting for charts. */
+/** 
+ * @module data-formatting
+ * @description Formats data for charts.
+ */
 
 function groupByTask(data) {
     let grouped = Object.groupBy(data, ({task_name}) => task_name)

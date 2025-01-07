@@ -1,3 +1,8 @@
+/** 
+ * @module task-api
+ * @description Fetch functions related to the task table.
+ */
+
 async function getAllTasks() {
     return fetch(`/api/getAllTasks`)
     .then((response) => {

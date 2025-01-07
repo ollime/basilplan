@@ -9,7 +9,7 @@ import {useState, useEffect, useRef} from "react";
  * 
  *      Example: {label: "option1", change: "primaryColor", newVal: "#000000"}
  * 
- * @param {String} props.label Radio id and label
+ * @param {string} props.label Radio id and label
  * 
  * @returns {JSX} React component for radio buttons
  */

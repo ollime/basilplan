@@ -3,6 +3,7 @@ import Checkbox from "../../components/Checkbox.jsx";
 import TextField from "../../components/TextField.jsx";
 import RadioSelect from "../../components/RadioSelect.jsx";
 
+/** Settings page. */
 function Settings() {
     return (
         <>

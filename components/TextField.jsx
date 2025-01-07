@@ -5,7 +5,7 @@ import ConfirmIcon from "./../src/public/icons/check.svg";
 
 /** Text input on the settings page.
  * 
- * @param {String} props.label
+ * @param {string} props.label
  */
 function TextField(props) {
     const [editText, setEditText] = useState(false);

@@ -6,7 +6,7 @@ import TaskItem from "./TaskItem.jsx";
 
 /** List of all tasks. */
 function TaskList() {
-    /** List of task labels. @type {String} */
+    /** List of task labels. @type {string} */
     const [tasks, setTasks] = useState([]);
     /** List of task JSX. @type {JSX} */
     const taskList = tasks.map((task, index) => (
@@ -75,7 +75,7 @@ function TaskList() {
      * If a duplicate task name exists, adds a number to it,
      * beginning with 1 and incrementing with each duplicate name.
      * 
-     * @param {String} taskName Task name.
+     * @param {string} taskName Task name.
      */
     function checkExistingTask(taskName) {
         while (tasks.includes(taskName)) {

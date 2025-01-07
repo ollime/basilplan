@@ -1,9 +1,17 @@
+/** 
+ * @module database
+ * @description General database creation and management.
+ */
+
 import sqlite3 from "sqlite3"
 import path from "path"
 
+/* Gets the database path
+Changing the path provided in dbPath will create a new database if needed */
 const __dirname = import.meta.dirname;
 const dbPath = path.join(__dirname, "/../../databases/test60.sqlite3")
 
+// defines the db variable. creates database if it doesn't already exist
 let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
     if (err && err.code == "SQLITE_CANTOPEN") {
         console.log("Creating new database at " + dbPath)
@@ -14,6 +22,7 @@ let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
     }
 })
 
+/** Creates database file. */
 function createDatabase() {
     db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
         if (err) {
@@ -24,6 +33,7 @@ function createDatabase() {
     return db;
 }
 
+/** Adds tables to database file. */
 function createTables() {
     db.serialize(() => {
         db.exec(`
@@ -42,6 +52,7 @@ function createTables() {
     return db
 }
 
+/** Test data generation. */
 function generateTestData() {
     let now = 1732;
     let max = 900000;

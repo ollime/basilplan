@@ -1,3 +1,8 @@
+/** 
+ * @module log-api
+ * @description Fetch functions related to the log table.
+ */
+
 function sendLogData(task, minutes) {
     let dateTime = Date.now()
     fetch(`/api/sendLogData/${dateTime}/${task}/${minutes}`)

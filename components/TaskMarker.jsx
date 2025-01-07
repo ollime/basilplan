@@ -69,9 +69,9 @@ function TaskMarker(props) {
  * 
  * Shaped like a rectangle with a triangle cut out of it.
  * 
- * @param {Number} props.width
- * @param {Number} props.height
- * @param {String} props.color
+ * @param {number} props.width
+ * @param {number} props.height
+ * @param {string} props.color
  * */
 function FlagMarker(props) {
     const width = props.width;
@@ -88,7 +88,7 @@ function FlagMarker(props) {
 
 /** An SVG element shaped like a 5-pointed star.
  * 
- * @param {String} props.color
+ * @param {string} props.color
  */
 function StarMarker(props) {
     return(

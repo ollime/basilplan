@@ -1,3 +1,5 @@
+/** @file Express server for managing app routes. */
+
 import express from "express"
 import cors from "cors"
 
