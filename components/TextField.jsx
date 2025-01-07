@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
-import EditIcon from "./../src/public/icons/edit.svg";
-import ConfirmIcon from "./../src/public/icons/check.svg";
+import EditIcon from "/icons/edit.svg";
+import ConfirmIcon from "/icons/check.svg";
 
 /** Text input on the settings page.
  * 

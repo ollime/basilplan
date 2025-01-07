@@ -2,10 +2,10 @@ import { useState, useEffect, useContext } from "react";
 import AppContext from "./AppContext.jsx"
 import { sendLogData } from "../src/api/log-api.js"
 
-import StartIcon from "./../src/public/icons/play.svg";
-import PauseIcon from "./../src/public/icons/pause.svg";
-import ResetIcon from "./../src/public/icons/restart.svg";
-import SkipIcon from "./../src/public/icons/skip.svg";
+import StartIcon from "/icons/play.svg";
+import PauseIcon from "/icons/pause.svg";
+import ResetIcon from "/icons/restart.svg";
+import SkipIcon from "/icons/skip.svg";
 
 /** Pomodoro timer. */
 function Clock() {

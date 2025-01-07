@@ -2,10 +2,10 @@ import { useState, useRef, useContext } from "react";
 import TaskMarker from "./TaskMarker.jsx";
 import AppContext from "./../components/AppContext.jsx"
 
-import EditIcon from "./../src/public/icons/edit.svg";
-import ConfirmIcon from "./../src/public/icons/check.svg";
-import DeleteIcon from "./../src/public/icons/delete.svg";
-import CancelIcon from "./../src/public/icons/cancel.svg";
+import EditIcon from "/icons/edit.svg";
+import ConfirmIcon from "/icons/check.svg";
+import DeleteIcon from "/icons/delete.svg";
+import CancelIcon from "/icons/cancel.svg";
 
 /** One task for the task list.
  * 
