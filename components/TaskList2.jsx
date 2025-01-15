@@ -61,7 +61,7 @@ function TaskList2() {
         const currentIndex = tasks.findIndex((task) => task == currentTask)
         let newIndex;
 
-        if (tasks.length > 0) {
+        if (destination.element.children.length > 0) {
             const newTask = destination.element.children[0].innerHTML
             newIndex = tasks.findIndex((task) => task == newTask)
         } 
