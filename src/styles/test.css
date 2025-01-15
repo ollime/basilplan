@@ -44,3 +44,19 @@ tr:nth-child(1) {
 caption {
 padding: 10px;
 }
+
+#task {
+    width: 400px;
+    background-color: gray;
+    height: 500px;
+}
+
+.task-item {
+    height: 50px;
+    width: 100px;
+}
+
+.drop-location {
+    height: 50px;
+    width: 100px;
+}

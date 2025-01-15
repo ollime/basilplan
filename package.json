@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "css": "lessc src/public/styles/style.less src/public/styles/style.css",
+    "css": "lessc src/styles/style.less src/styles/style.css",
     "server": "concurrently -n vite,api \"npm run vite\" \"npm run api\"",
     "vite": "vite",
     "api": "node src/server.js",
@@ -14,6 +14,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@atlaskit/pragmatic-drag-and-drop": "^1.4.0",
     "ag-grid-react": "^32.3.3",
     "chart.js": "^4.4.6",
     "concurrently": "^9.1.0",
@@ -27,7 +28,8 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0",
     "react-table": "^7.8.0",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "tiny-invariant": "^1.3.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

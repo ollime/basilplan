@@ -24,7 +24,7 @@
 // other
 @button-height: 50px;
 
-// basic styles and utility classes
+// basic styles
 body {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
@@ -33,6 +33,11 @@ body {
     padding: 0;
 }
 
+button {
+    all: unset;
+}
+
+// utility classes
 .flex-center {
     display: flex;
     justify-content: center;
@@ -47,24 +52,6 @@ body {
 
 .btn-size {
     height: @button-height;
-}
-
-button {
-    all: unset;
-}
-
-.small-btn {
-    background-color: @primary-color-heavy;
-    height: @button-height;
-    width: 150px;
-    font-size: @font-size-small;
-}
-
-.small-square-btn {
-    text-align: center;
-    height: @button-height;
-    width: @button-height;
-    background-color: @primary-color-medium;
 }
 
 .align-center > * {
@@ -94,7 +81,32 @@ button {
     margin-left: @margin-small;
 }
 
-// specific css
+// button utility classes
+.small-btn {
+    background-color: @primary-color-heavy;
+    height: @button-height;
+    width: 150px;
+    font-size: @font-size-small;
+}
+
+.small-square-btn {
+    text-align: center;
+    height: @button-height;
+    width: @button-height;
+    background-color: @primary-color-medium;
+}
+
+// footer css
+#footer {
+    &:extend(.flex-center);
+    margin: @margin-small 0px;
+    ul > * {
+        all: unset;
+        padding: @padding-large;
+    }
+}
+
+// main tab
 #clock {
     width: 300px;
     display: flex;
@@ -113,15 +125,6 @@ button {
         &:extend(.flex-center);
         background-color: @primary-color-heavy;
         flex-grow: 1;
-    }
-}
-
-#footer {
-    &:extend(.flex-center);
-    margin: @margin-small 0px;
-    ul > * {
-        all: unset;
-        padding: @padding-large;
     }
 }
 
@@ -161,6 +164,40 @@ button {
     }
 }
 
+.task-marker {
+    height: @button-height;
+    .unset {
+        fill: @gray-light;
+        color: @gray-light;
+    }
+    .success {
+        fill: @success;
+        color: @success;
+    }
+    .highlight {
+        fill: @highlight;
+        color: @highlight;
+    }
+    .danger {
+        fill: @danger;
+        color: @danger;
+    }
+    .task-marker-label {
+        margin-left: @margin-small;
+        padding-right: 20px;
+    }
+}
+
+// charts tab
+.chart-container,
+.table-container {
+    min-height: 300px;
+    min-width: 400px;
+    max-height: 700px;
+    max-width: 800px;
+    margin: auto;
+}
+
 // settings tab
 #settings {
     margin: @margin-medium;
@@ -190,41 +227,4 @@ button {
     .settings-label {
         margin-right: @margin-medium;
     }
-}
-
-.task-marker {
-    height: @button-height;
-    .unset {
-        fill: @gray-light;
-        color: @gray-light;
-    }
-    .success {
-        fill: @success;
-        color: @success;
-    }
-    .highlight {
-        fill: @highlight;
-        color: @highlight;
-    }
-    .danger {
-        fill: @danger;
-        color: @danger;
-    }
-    .task-marker-label {
-        margin-left: @margin-small;
-        padding-right: 20px;
-    }
-}
-
-.chart-container, .table-container {
-    min-height: 300px;
-    min-width: 400px;
-    max-height: 700px;
-    max-width: 800px;
-    margin: auto;
-}
-
-// delete this later after figuring out the flex/grid stuff
-.add-btn {
-    width: 300px;
 }

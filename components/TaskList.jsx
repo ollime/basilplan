@@ -6,7 +6,7 @@ import TaskItem from "./TaskItem.jsx";
 
 /** List of all tasks. */
 function TaskList() {
-    /** List of task labels. @type {string} */
+    /** List of task labels. @type {Array<string>} */
     const [tasks, setTasks] = useState([]);
     /** List of task JSX. @type {JSX} */
     const taskList = tasks.map((task, index) => (
