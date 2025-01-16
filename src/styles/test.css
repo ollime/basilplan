@@ -48,15 +48,11 @@ padding: 10px;
 #task {
     width: 400px;
     background-color: gray;
-    height: 500px;
 }
 
+.drop-location,
 .task-item {
-    height: 50px;
-    width: 100px;
-}
-
-.drop-location {
+    background-color: white;;
     height: 50px;
     width: 100px;
 }

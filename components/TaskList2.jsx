@@ -3,7 +3,13 @@ import { getAllTasks } from "./../src/api/task-api.js"
 
 import invariant from "tiny-invariant";
 import { draggable, dropTargetForElements, monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
+import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
 import { reorder } from '@atlaskit/pragmatic-drag-and-drop/reorder';
+import { DropIndicator } from '@atlaskit/pragmatic-drag-and-drop-react-drop-indicator/box';
+import {
+    attachClosestEdge,
+    extractClosestEdge,
+} from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge';
 
 function TaskList2() {
     /** List of task labels. @type {Array<string>} */
@@ -52,27 +58,37 @@ function TaskList2() {
 
     /** Callback function when a task is dropped on the list. */
     const handleDrop = useCallback(({ source, location }) => {
+        // checks if new location is a valid drop target
         const destination = location.current.dropTargets[0];
         if (!destination) {
             return;
         }
 
+        // finds the current task location
         const currentTask = source.data.taskName;
         const currentIndex = tasks.findIndex((task) => task == currentTask)
         let newIndex;
 
-        if (destination.element.children.length > 0) {
-            const newTask = destination.element.children[0].innerHTML
+        if (destination.element.innerHTML) {
+            // finds the new location to drop the task
+            const newTask = destination.element.innerHTML
             newIndex = tasks.findIndex((task) => task == newTask)
         } 
         else {
+            // if empty task, adds to end of the list
             newIndex = tasks.length;
         }
 
+        /* account for the fact that the current task
+        is a part of the list - index should change based
+        on whether it is above or below the new task */
+        const positionModifier = newIndex < currentIndex ? 0 : -1
+
+        // reorder the tasks
         setTasks(reorder({
             list: tasks,
             startIndex: currentIndex,
-            finishIndex: newIndex,
+            finishIndex: newIndex + positionModifier,
         }))
     }, [tasks])
 
@@ -112,7 +128,6 @@ function DropLocation(props) {
         return(
             dropTargetForElements({
                 element: el,
-                getData: () =>({ location }),
                 onDragEnter: () => setIsDraggedOver(true),
                 onDragLeave: () => setIsDraggedOver(false),
                 onDrop: () => setIsDraggedOver(false)
@@ -121,16 +136,17 @@ function DropLocation(props) {
     })
 
     /** Color of the drop location when an element is dragged over it. */
-    function getColor(isDraggedOver) {
-        if (isDraggedOver) {
-            return "skyblue"
-        }
-        return "white";
-    }
+    // function getColor(isDraggedOver) {
+    //     if (isDraggedOver) {
+    //         return "skyblue"
+    //     }
+    //     return "white";
+    // }
+    //style={{backgroundColor: getColor(isDraggedOver)}}
 
     return (
         <>
-            <div className="drop-location" style={{backgroundColor: getColor(isDraggedOver)}} ref={ref}>
+            <div className="drop-location" ref={ref}>
                 {props.child}
             </div>
         </>
@@ -141,30 +157,95 @@ function Card(props) {
     const taskName = props.label;
     const task = useRef(null)
     const [dragging, setDragging] = useState(false);
+    const [closestEdge, setClosestEdge] = useState(null)
+    const dropTargetStyles = {
+        position: "relative",
+        display: "inline-block",
+    };
 
     useEffect(() => {
         /* Makes element draggable. */
         const el = task.current;
         invariant(el)
 
-        return draggable({
+        return combine(
+            draggable({
             element: el,
             getInitialData: () => ({location, taskName}),
             onDragStart: () => setDragging(true),
-            onDrop: () => setDragging(false),
-        })
-    }, [])
+            onDrop: () => setDragging(false)
+            }),
+            // adds a drop target to allow other cards to drop here
+            dropTargetForElements({
+                element: el,
+                getData: ({input, element}) => {
+                    const data = {
+                        location: location,
+                        taskName: taskName
+                    }
+                    return attachClosestEdge(data, {
+                        input,
+                        element,
+                        allowedEdges: ["top", "bottom"]
+                    })
+                },
+                getIsSticky: () => true,
+                onDragEnter: (args) => {
+                    if (args.source.data.taskName != taskName) {
+                        setClosestEdge(extractClosestEdge(args.self.data))
+                    }
+                },
+                onDrag: (args) => {
+                    if (args.source.data.taskName !== taskName) {
+                        setClosestEdge(extractClosestEdge(args.self.data))
+                    }
+                },
+                onDragLeave: () => {
+                    setClosestEdge(null)
+                },
+                onDrop() {
+                    setClosestEdge(null)
+                }
+            })
+            // onDrop: (args) => {
+            //     setIsDraggedOver(false)
+            //     const closestEdgeOfTarget = extractClosestEdge(arguments.self.data);
+            // }    
+        )
+        
+    }, [taskName])
 
     return(
         <>
-            <div
-                id={taskName + props.index}
-                ref={task}
-                className="task-item">
-                {taskName}
+            <div style={dropTargetStyles}>
+                <div
+                    id={taskName + props.index}
+                    ref={task}
+                    className="task-item">
+                    {taskName}
+                </div>
+                {/* displays DropIndicator if closest edge */}
+
+                {closestEdge ? <DropIndicator edge="top" /> : ""}
             </div>
         </>
     )
 }
+
+// function DropIndicator(props) {
+//     const edgeClassMap = {
+//         top: "edge-top",
+//         bottom: "edge-bottom"
+//     }
+
+//     const edgeClass = edgeClassMap[props.edge]
+//     const style = {
+//         "--gap" : props.gap,
+//     }
+
+//     console.log("jdsklfjdfksdjkfs")
+
+//     return <div className={`drop-indicator ${edgeClass}`} style={style}>dfsdklf</div>
+// }
 
 export default TaskList2;
