@@ -39,6 +39,8 @@ function createTables() {
         db.exec(`
             CREATE TABLE IF NOT EXISTS tasks (
             task_name TEXT NOT NULL PRIMARY KEY
+            list TEXT NOT NULL,
+            index TEXT NOT NULL
             );
         `)
         db.exec(`

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
-import { getAllTasks, deleteTask, sendTask } from "./../src/api/task-api.js"
+import { getAllTasks, deleteTask, sendTask } from "../../src/api/task-api.js"
 import TaskItem from "./TaskItem.jsx";
 
 /** List of all tasks. */

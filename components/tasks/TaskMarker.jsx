@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import AppContext from "./../components/AppContext.jsx"
+import AppContext from "../AppContext.jsx"
 
 /** Base template for the indicator on the side of the task list.
  * 

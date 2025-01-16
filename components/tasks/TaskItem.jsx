@@ -1,6 +1,6 @@
 import { useState, useRef, useContext } from "react";
 import TaskMarker from "./TaskMarker.jsx";
-import AppContext from "./../components/AppContext.jsx"
+import AppContext from "./../../components/AppContext.jsx"
 
 import EditIcon from "/icons/edit.svg";
 import ConfirmIcon from "/icons/check.svg";
