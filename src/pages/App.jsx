@@ -16,9 +16,8 @@ function App() {
           selectedTask,
           setSelectedTask
         }}>
-        {/* <Clock />
-        <TaskList /> */}
-        <TaskList2 />
+        <Clock />
+        <TaskList />
         <Footer />
       </AppContext.Provider>
     </>

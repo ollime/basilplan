@@ -71,7 +71,7 @@ function TaskCard(props) {
         <>
             <div style={dropTargetStyles}>
                 <div
-                    id={taskName + props.index}
+                    id={"drop-target" + taskName}
                     ref={task}
                     className="task-item">
                     {taskName}
