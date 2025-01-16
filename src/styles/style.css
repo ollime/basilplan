@@ -5,9 +5,12 @@ body {
   margin: 0;
   padding: 0;
 }
+button {
+  all: unset;
+}
 .flex-center,
-#clock .small-square-btn,
-#footer {
+#footer,
+#clock .small-square-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,24 +22,6 @@ body {
 }
 .btn-size {
   height: 50px;
-}
-button {
-  all: unset;
-}
-.small-btn {
-  background-color: #47b6ed;
-  height: 50px;
-  width: 150px;
-  font-size: 18px;
-}
-.small-square-btn,
-.list-item .delete-btn,
-.list-item .edit-btn,
-.list-item .confirm-btn {
-  text-align: center;
-  height: 50px;
-  width: 50px;
-  background-color: #a8dbf5;
 }
 .align-center > * {
   align-items: center;
@@ -59,6 +44,28 @@ button {
 .margin-left {
   margin-left: 5px;
 }
+.small-btn {
+  background-color: #47b6ed;
+  height: 50px;
+  width: 150px;
+  font-size: 18px;
+}
+.small-square-btn,
+.list-item .delete-btn,
+.list-item .edit-btn,
+.list-item .confirm-btn {
+  text-align: center;
+  height: 50px;
+  width: 50px;
+  background-color: #a8dbf5;
+}
+#footer {
+  margin: 5px 0px;
+}
+#footer ul > * {
+  all: unset;
+  padding: 20px;
+}
 #clock {
   width: 300px;
   display: flex;
@@ -77,13 +84,6 @@ button {
 #clock .small-square-btn {
   background-color: #47b6ed;
   flex-grow: 1;
-}
-#footer {
-  margin: 5px 0px;
-}
-#footer ul > * {
-  all: unset;
-  padding: 20px;
 }
 #task {
   width: fit-content;
@@ -113,39 +113,13 @@ button {
   line-height: 50px;
   width: 10px;
   flex-grow: 1;
+  word-break: break-all;
+  overflow-y: hidden;
 }
 .list-item .delete-btn,
 .list-item .edit-btn,
 .list-item .confirm-btn {
   justify-content: flex-end;
-}
-#settings {
-  margin: 10px;
-}
-#settings h1 {
-  font-size: 24px;
-}
-#settings h2 {
-  font-size: 18px;
-  margin-top: 40px;
-}
-#settings input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-}
-#settings input[type="text"] {
-  width: 50px;
-  padding: 5px;
-  text-align: center;
-}
-#settings .small-square-btn {
-  margin-top: 5px;
-}
-#settings input {
-  margin: 5px;
-}
-#settings .settings-label {
-  margin-right: 10px;
 }
 .task-marker {
   height: 50px;
@@ -177,4 +151,32 @@ button {
   max-height: 700px;
   max-width: 800px;
   margin: auto;
+}
+#settings {
+  margin: 10px;
+}
+#settings h1 {
+  font-size: 24px;
+}
+#settings h2 {
+  font-size: 18px;
+  margin-top: 40px;
+}
+#settings input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+#settings input[type="text"] {
+  width: 50px;
+  padding: 5px;
+  text-align: center;
+}
+#settings .small-square-btn {
+  margin-top: 5px;
+}
+#settings input {
+  margin: 5px;
+}
+#settings .settings-label {
+  margin-right: 10px;
 }
