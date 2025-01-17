@@ -34,6 +34,7 @@ function TaskManager() {
             if (!ignore) {
                 setColumnData([formatTasks(response)])
             }
+            console.log(response)
         })
     }
 

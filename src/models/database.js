@@ -9,7 +9,7 @@ import path from "path"
 /* Gets the database path
 Changing the path provided in dbPath will create a new database if needed */
 const __dirname = import.meta.dirname;
-const dbPath = path.join(__dirname, "/../../databases/test60.sqlite3")
+const dbPath = path.join(__dirname, "/../../databases/test66.sqlite3")
 
 // defines the db variable. creates database if it doesn't already exist
 let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
@@ -38,9 +38,9 @@ function createTables() {
     db.serialize(() => {
         db.exec(`
             CREATE TABLE IF NOT EXISTS tasks (
-            task_name TEXT NOT NULL PRIMARY KEY
-            list TEXT NOT NULL,
-            index TEXT NOT NULL
+            task_name TEXT NOT NULL PRIMARY KEY,
+            list TEXT,
+            position TEXT
             );
         `)
         db.exec(`
