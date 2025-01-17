@@ -9,6 +9,10 @@ import {
     extractClosestEdge,
 } from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge';
 
+/** A card to display (but not modify) a task.
+ * 
+ * @param {string} props.label
+ */
 function TaskCard(props) {
     const taskName = props.label;
     const task = useRef(null)

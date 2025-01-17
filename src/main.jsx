@@ -10,6 +10,7 @@ import "./styles/test.css"
 import App from './pages/App.jsx'
 import Stats from "./pages/Stats.jsx"
 import Settings from "./pages/Settings.jsx"
+import TaskManager from "./pages/TaskManager.jsx"
 
 // removes error message
 const getRidOfConsoleMessages = {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />
+  },
+  {
+    path: "/tasks",
+    element: <TaskManager />
   },
   {
     path: "/stats",

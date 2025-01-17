@@ -1,5 +1,4 @@
 import {useState, useEffect, useCallback} from "react";
-import { getAllTasks } from "./../../src/api/task-api.js"
 
 import DropLocation from "./DropLocation.jsx"
 import TaskCard from "./TaskCard.jsx"
@@ -7,7 +6,7 @@ import TaskCard from "./TaskCard.jsx"
 import { monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
 import { reorder } from '@atlaskit/pragmatic-drag-and-drop/reorder';
 
-function TaskList2() {
+function TaskDisplay(props) {
     /** List of task labels. @type {Array<string>} */
     const [tasks, setTasks] = useState([]);
     const taskList = tasks.map((task, index) => (
@@ -24,33 +23,44 @@ function TaskList2() {
     ))
 
     useEffect(() => {
-        let ignore = false;
+        let ignore = false; 
 
-        /** Unpacks array of task names. */
-        function formatTasks(tasks) {
-            let newTasks = []
-            for (let i of tasks) {
-                newTasks.push(i.task_name)
-            }
-            return newTasks;
-        }
-
-        /** Intital task load. Retrieves task data and updates TaskList tasks. */
-        async function getTaskData() {
-            await getAllTasks()
-            .then((response) => {
-                if (!ignore) {
-                    setTasks(formatTasks(response))
-                }
-            })
-        }
-
-        getTaskData()
+        setTasks(props.data)
 
         return() => {
             ignore = true;
         }
+
     }, [])
+
+    // useEffect(() => {
+    //     let ignore = false;
+
+    //     /** Unpacks array of task names. */
+    //     function formatTasks(tasks) {
+    //         let newTasks = []
+    //         for (let i of tasks) {
+    //             newTasks.push(i.task_name)
+    //         }
+    //         return newTasks;
+    //     }
+
+    //     /** Intital task load. Retrieves task data and updates TaskList tasks. */
+    //     async function getTaskData() {
+    //         await getAllTasks()
+    //         .then((response) => {
+    //             if (!ignore) {
+    //                 setTasks(formatTasks(response))
+    //             }
+    //         })
+    //     }
+
+    //     getTaskData()
+
+    //     return() => {
+    //         ignore = true;
+    //     }
+    // }, [])
 
     /** Callback function when a task is dropped on the list. */
     const handleDrop = useCallback(({ source, location }) => {
@@ -116,4 +126,4 @@ function TaskList2() {
     )
 }
 
-export default TaskList2;
+export default TaskDisplay;

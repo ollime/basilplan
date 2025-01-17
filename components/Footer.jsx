@@ -11,6 +11,7 @@ function Footer() {
             <nav id="footer">
                 <ul>
                     <NavLink to={"/"}>timer</NavLink>
+                    <NavLink to={"/tasks"}>settings</NavLink>
                     <NavLink to={"/stats"}>stats</NavLink>
                     <NavLink to={"/settings"}>settings</NavLink>
                 </ul>
