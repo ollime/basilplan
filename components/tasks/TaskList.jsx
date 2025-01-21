@@ -22,7 +22,10 @@ function TaskList() {
     useEffect(() => {
         let ignore = false;
 
-        /** Unpacks array of task names. */
+        /** Unpacks array of task names.
+         * @param {object} tasks all task data provided
+         * @returns {Array<string>} array of task names
+         */
         function formatTasks(tasks) {
             let newTasks = []
             for (let i of tasks) {
@@ -76,6 +79,9 @@ function TaskList() {
      * beginning with 1 and incrementing with each duplicate name.
      * 
      * @param {string} taskName Task name.
+     * @returns {string} If the task already exists, adds a number.
+     *      Otherwise, return the new task name.
+     * @example "taskName" returns "taskName 1"
      */
     function checkExistingTask(taskName) {
         while (tasks.includes(taskName)) {

@@ -6,6 +6,12 @@ import TaskCard from "./TaskCard.jsx"
 import { monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
 import { reorder } from '@atlaskit/pragmatic-drag-and-drop/reorder';
 
+/** A column of task cards.
+ * 
+ * Uses DropLocation to create drop targets for cards to move
+ * between and within columns.
+ * 
+ * @param  */
 function TaskDisplay(props) {
     /** List of task labels. @type {Array<string>} */
     const [tasks, setTasks] = useState([]);
@@ -14,7 +20,6 @@ function TaskDisplay(props) {
             child={
                 <TaskCard
                     label={task}
-                    index={index}
                     columnId={props.label}
                     key={task + index}
                 />
@@ -26,7 +31,10 @@ function TaskDisplay(props) {
     useEffect(() => {
         let ignore = false;
 
-        /** Unpacks array of task names. */
+        /** Unpacks array of task names.
+         * @param {object} tasks all task data provided
+         * @returns {Array<string>} array of task names
+         */
         function formatTasks(tasks) {
             let newTasks = []
             for (let i of tasks) {
@@ -44,7 +52,7 @@ function TaskDisplay(props) {
     }, [])
 
     
-    /** Callback function when a task is dropped on the list. */
+    /** Moving a card to the same column. */
     const handleReorder = useCallback(({ source, location, destination }) => {
         // finds the current task location
         const currentTask = source.data.taskName;
@@ -75,6 +83,7 @@ function TaskDisplay(props) {
     }, [tasks])
     
 
+    /** Moving a card to a different column. */
     const handleMove = useCallback(
         ({
             originalIndex,
@@ -123,7 +132,7 @@ function TaskDisplay(props) {
         return monitorForElements({
             onDrop: handleDrop,
         })
-    }, [handleDrop, tasks])
+    }, [tasks, handleDrop])
     
     return(
         <>

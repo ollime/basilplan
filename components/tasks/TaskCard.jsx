@@ -11,7 +11,8 @@ import {
 
 /** A card to display (but not modify) a task.
  * 
- * @param {string} props.label
+ * @param {string} props.label The name of the task.
+ * @param {number} props.columnId Index of the column the task is currently in.
  */
 function TaskCard(props) {
     const taskName = props.label;
@@ -51,6 +52,8 @@ function TaskCard(props) {
                     })
                 },
                 getIsSticky: () => true,
+                /* The following values set the closestEdge variable
+                depending on the action being performed. */
                 onDragEnter: (args) => {
                     if (args.source.data.taskName != taskName) {
                         setClosestEdge(extractClosestEdge(args.self.data))
