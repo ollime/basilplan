@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
-import { getAllTasks, deleteTask, sendTask } from "../../src/api/task-api.js"
+import { getTaskNames, deleteTask, sendTask } from "../../src/api/task-api.js"
 import TaskItem from "./TaskItem.jsx";
 
 /** List of all tasks. */
@@ -33,7 +33,7 @@ function TaskList() {
 
         /** Intital task load. Retrieves task data and updates TaskList tasks. */
         async function getTaskData() {
-            await getAllTasks()
+            await getTaskNames()
             .then((response) => {
                 if (!ignore) {
                     setTasks(formatTasks(response))
@@ -93,7 +93,7 @@ function TaskList() {
 
     /** Sends the task to the database. */
     function updateTask(taskName) {
-        sendTask(encodeURIComponent(taskName))
+        sendTask(encodeURIComponent(taskName), 0, 0)
     }
 
     return (

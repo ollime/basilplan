@@ -3,9 +3,10 @@
 import express from "express"
 import cors from "cors"
 
-import { sendTask, deleteTask, getAllTasks } from "./models/task-data.js";
+import { sendTask, deleteTask, getTaskNames } from "./models/task-data.js";
 import { sendLogData, getLogData } from "./models/log-data.js";
 import { generateTestData } from "./models/database.js";
+import { listenArrayEvents } from "chart.js/helpers";
 
 const app = express()
 const port = 5000;
@@ -21,9 +22,14 @@ app.get("/api", (req, res) => {
 
 // note to self: make sure you're actually sending responses
 
-app.get("/api/sendTask/:task", (req, res) => {
+app.get("/api/sendTask/:task/:list/:position", (req, res) => {
     let task = req.params.task
-    sendTask(task)
+    let list = req.params.list
+    let position = req.params.position
+
+    console.log(list, position)
+
+    sendTask(task, list, position)
     console.log("Task added: " + task)
     res.end()
 })
@@ -35,8 +41,8 @@ app.get("/api/deleteTask/:task", (req, res) => {
     res.end()
 })
 
-app.get("/api/getAllTasks", async (req, res) => {
-    let tasks = await getAllTasks()
+app.get("/api/getTaskNames", async (req, res) => {
+    let tasks = await getTaskNames()
     console.log("Loading all tasks")
     res.send(tasks)
 })

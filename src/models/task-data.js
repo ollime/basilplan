@@ -6,12 +6,12 @@
 import { db } from "./database.js";
 
 /** Stores a task in the database. */
-function sendTask(task) {
+function sendTask(task, list, position) {
     db.run(`
-        INSERT INTO tasks
-        (task_name)
-        VALUES (?);
-        `, [task])
+        INSERT OR REPLACE INTO tasks
+        (task_name, list, position)
+        VALUES (?, ?, ?);
+        `, [task, list, position])
     return task;
 }
 
@@ -25,10 +25,11 @@ function deleteTask(task) {
 }
 
 /** Retrieve all tasks from the database. */
-async function getAllTasks() {
+async function getTaskNames() {
     return new Promise((resolve) => {
         db.serialize(function() {
-            db.all("SELECT * FROM tasks;", (err, rows) => {
+            db.all(`SELECT * FROM tasks
+                    ORDER BY list DESC;`, (err, rows) => {
                 if (err) {
                     resolve(err)
                 }
@@ -38,4 +39,4 @@ async function getAllTasks() {
     })
 }
 
-export { sendTask, deleteTask, getAllTasks }
+export { sendTask, deleteTask, getTaskNames }

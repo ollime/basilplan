@@ -3,8 +3,8 @@
  * @description Fetch functions related to the task table.
  */
 
-async function getAllTasks() {
-    return fetch(`/api/getAllTasks`)
+async function getTaskNames() {
+    return fetch(`/api/getTaskNames`)
     .then((response) => {
         return response.text()
     })
@@ -23,15 +23,15 @@ async function deleteTask(txt) {
     })
 }
 
-async function sendTask(txt) {
-    fetch(`/api/sendTask/${txt}`)
+async function sendTask(txt, list, position) {
+    fetch(`/api/sendTask/${txt}/${list}/${position}`)
     .catch((err) => {
         console.log(err)
     })
 }
 
 export {
-    getAllTasks,
+    getTaskNames,
     deleteTask,
     sendTask
 }

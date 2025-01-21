@@ -23,44 +23,24 @@ function TaskDisplay(props) {
     ))
 
     useEffect(() => {
-        let ignore = false; 
+        let ignore = false;
 
-        setTasks(props.data)
+        /** Unpacks array of task names. */
+        function formatTasks(tasks) {
+            let newTasks = []
+            for (let i of tasks) {
+                newTasks.push(i.task_name)
+            }
+            return newTasks;
+        }
+
+        setTasks(formatTasks(props.data))
 
         return() => {
             ignore = true;
         }
 
     }, [])
-
-    // useEffect(() => {
-    //     let ignore = false;
-
-    //     /** Unpacks array of task names. */
-    //     function formatTasks(tasks) {
-    //         let newTasks = []
-    //         for (let i of tasks) {
-    //             newTasks.push(i.task_name)
-    //         }
-    //         return newTasks;
-    //     }
-
-    //     /** Intital task load. Retrieves task data and updates TaskList tasks. */
-    //     async function getTaskData() {
-    //         await getAllTasks()
-    //         .then((response) => {
-    //             if (!ignore) {
-    //                 setTasks(formatTasks(response))
-    //             }
-    //         })
-    //     }
-
-    //     getTaskData()
-
-    //     return() => {
-    //         ignore = true;
-    //     }
-    // }, [])
 
     /** Callback function when a task is dropped on the list. */
     const handleDrop = useCallback(({ source, location }) => {
@@ -108,7 +88,9 @@ function TaskDisplay(props) {
         <>
             <div>
                 <div id="task">
-                    <div id="task-label" className="label">Task</div>
+                    <div id="task-label" className="label">
+                        {props.label == "0" ? "Ungrouped Tasks" : "Group " + props.label}
+                    </div>
                     {taskList}
                     <DropLocation
                         child={
