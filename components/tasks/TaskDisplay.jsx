@@ -15,6 +15,7 @@ function TaskDisplay(props) {
                 <TaskCard
                     label={task}
                     index={index}
+                    columnId={props.label}
                     key={task + index}
                 />
             }
@@ -42,14 +43,9 @@ function TaskDisplay(props) {
 
     }, [])
 
+    
     /** Callback function when a task is dropped on the list. */
-    const handleDrop = useCallback(({ source, location }) => {
-        // checks if new location is a valid drop target
-        const destination = location.current.dropTargets[0];
-        if (!destination) {
-            return;
-        }
-
+    const handleReorder = useCallback(({ source, location, destination }) => {
         // finds the current task location
         const currentTask = source.data.taskName;
         const currentIndex = tasks.findIndex((task) => task == currentTask)
@@ -77,13 +73,58 @@ function TaskDisplay(props) {
             finishIndex: newIndex + positionModifier,
         }))
     }, [tasks])
+    
 
+    const handleMove = useCallback(
+        ({
+            originalIndex,
+            sourceColumnId,
+            destinationColumnId,
+            newIndex,
+        }) => {
+            const sourceColumnData = columnsData[sourceColumnId]
+            const destinationColumnData = columnsData[destinationColumnId];
+            const cardToMove = sourceColumnData.cards[originalIndex]
+            
+            const newSourceColumnData = {
+                ...sourceColumnData,
+                cards: sourceColumnData.cards.filter(
+                    (card) => card.id !== cardToMove.id
+                ),
+            };
+            console.log("DSJFLSDJFKLDSF")
+            console.log(cardToMove)
+            console.log(newSourceColumnData)
+        },
+    [tasks]);
+
+    /** Callback function when a task is dropped on the list. */
+    const handleDrop = useCallback(({ source, location }) => {
+        // checks if new location is a valid drop target
+        const destination = location.current.dropTargets[0];
+        if (!destination) {
+            return;
+        }
+
+        console.log(props.label)
+        const destinationId = destination.data.columnId;
+
+        console.log(destinationId)
+
+        handleReorder({
+            source: source,
+            location: location,
+            destination: destination,
+        })
+
+    }, [tasks, handleReorder, handleMove])
+    
     useEffect(() => {
         return monitorForElements({
-                onDrop: handleDrop,
+            onDrop: handleDrop,
         })
     }, [handleDrop, tasks])
-
+    
     return(
         <>
             <div>

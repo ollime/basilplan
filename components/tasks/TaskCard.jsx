@@ -41,7 +41,8 @@ function TaskCard(props) {
                 getData: ({input, element}) => {
                     const data = {
                         location: location,
-                        taskName: taskName
+                        taskName: taskName,
+                        column: props.columnId,
                     }
                     return attachClosestEdge(data, {
                         input,
