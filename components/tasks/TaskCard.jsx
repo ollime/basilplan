@@ -17,6 +17,7 @@ import {
 function TaskCard(props) {
     const taskName = props.label;
     const task = useRef(null)
+    const column = props.columnId;
     const [dragging, setDragging] = useState(false);
     const [closestEdge, setClosestEdge] = useState(null)
     const dropTargetStyles = {
@@ -32,7 +33,7 @@ function TaskCard(props) {
         return combine(
             draggable({
             element: el,
-            getInitialData: () => ({location, taskName}),
+            getInitialData: () => ({location, taskName, column}),
             onDragStart: () => setDragging(true),
             onDrop: () => setDragging(false)
             }),
@@ -42,8 +43,8 @@ function TaskCard(props) {
                 getData: ({input, element}) => {
                     const data = {
                         location: location,
+                        column: column,
                         taskName: taskName,
-                        column: props.columnId,
                     }
                     return attachClosestEdge(data, {
                         input,

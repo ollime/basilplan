@@ -19,9 +19,9 @@ function TaskDisplay(props) {
         <DropLocation 
             child={
                 <TaskCard
-                    label={task}
+                    label={task.name}
                     columnId={props.label}
-                    key={task + index}
+                    key={task.name + index}
                 />
             }
             key={task + index}
@@ -33,16 +33,19 @@ function TaskDisplay(props) {
 
         /** Unpacks array of task names.
          * @param {object} tasks all task data provided
-         * @returns {Array<string>} array of task names
+         * @returns {Array<string>} array of task names and corresponding column
+         * @example Returns [["taskName", "1"], ["taskName 1", "2"]]
          */
         function formatTasks(tasks) {
             let newTasks = []
             for (let i of tasks) {
-                newTasks.push(i.task_name)
+                newTasks.push({
+                    name: i.task_name,
+                    column: props.label,
+                })
             }
             return newTasks;
         }
-
         setTasks(formatTasks(props.data))
 
         return() => {
@@ -53,22 +56,7 @@ function TaskDisplay(props) {
 
     
     /** Moving a card to the same column. */
-    const handleReorder = useCallback(({ source, location, destination }) => {
-        // finds the current task location
-        const currentTask = source.data.taskName;
-        const currentIndex = tasks.findIndex((task) => task == currentTask)
-        let newIndex;
-
-        if (destination.element.innerHTML) {
-            // finds the new location to drop the task
-            const newTask = destination.element.innerHTML
-            newIndex = tasks.findIndex((task) => task == newTask)
-        } 
-        else {
-            // if empty task, adds to end of the list
-            newIndex = tasks.length;
-        }
-
+    const handleReorder = useCallback(({ currentIndex, newIndex }) => {
         /* account for the fact that the current task
         is a part of the list - index should change based
         on whether it is above or below the new task */
@@ -86,24 +74,22 @@ function TaskDisplay(props) {
     /** Moving a card to a different column. */
     const handleMove = useCallback(
         ({
-            originalIndex,
-            sourceColumnId,
-            destinationColumnId,
+            currentIndex,
             newIndex,
+            destinationColumn,
+            currentTask,
         }) => {
-            const sourceColumnData = columnsData[sourceColumnId]
-            const destinationColumnData = columnsData[destinationColumnId];
-            const cardToMove = sourceColumnData.cards[originalIndex]
-            
-            const newSourceColumnData = {
-                ...sourceColumnData,
-                cards: sourceColumnData.cards.filter(
-                    (card) => card.id !== cardToMove.id
-                ),
-            };
-            console.log("DSJFLSDJFKLDSF")
-            console.log(cardToMove)
-            console.log(newSourceColumnData)
+            // filter out removed task
+            setTasks(tasks.filter((task) => task.name != currentTask))
+
+            // set tasks in new column
+            setTasks((prevTasks) => prevTasks.map(item => {
+                if (item.column == destinationColumn) {
+                    const newTasks = [...tasks, {name: currentTask, column: newIndex}]
+                    setTasks(newTasks)
+                }
+                return item;
+            }))
         },
     [tasks]);
 
@@ -115,16 +101,39 @@ function TaskDisplay(props) {
             return;
         }
 
-        console.log(props.label)
-        const destinationId = destination.data.columnId;
+        // get column ids to compare
+        const originalId = source.data.column;
+        const destinationId = destination.data.column;
 
-        console.log(destinationId)
+        // finds the current task location
+        const currentTask = source.data.taskName;
+        const currentIndex = tasks.findIndex((task) => task.name == currentTask)
+        let newIndex;
 
-        handleReorder({
-            source: source,
-            location: location,
-            destination: destination,
-        })
+        if (destination.element.innerHTML) {
+            // finds the new location to drop the task
+            const newTask = destination.element.innerHTML
+            newIndex = tasks.findIndex((task) => task.name == newTask)
+        } 
+        else {
+            // if empty task, adds to end of the list
+            newIndex = tasks.length;
+        }
+        
+        if (originalId == destinationId) {
+            handleReorder({
+                currentIndex: currentIndex,
+                newIndex: newIndex,
+            })
+        }
+        else {
+            handleMove({
+                currentIndex: currentIndex,
+                newIndex: newIndex,
+                destinationColumn: destinationId,
+                currentTask: currentTask,
+            })
+        }
 
     }, [tasks, handleReorder, handleMove])
     
@@ -147,6 +156,7 @@ function TaskDisplay(props) {
                             <TaskCard
                                 label={""}
                                 index={taskList.length}
+                                columnId={props.label}
                                 key={"taskListEndCard" + taskList.length}
                             />
                         }

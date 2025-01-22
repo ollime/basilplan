@@ -15,7 +15,7 @@ function TaskManager() {
     <TaskDisplay
       data={col[1]}
       label={col[0]}
-      key={"task-col-" + i}
+      key={"task-col-" + col[0]}
     />
   ))
 
