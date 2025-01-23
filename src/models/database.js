@@ -9,7 +9,7 @@ import path from "path"
 /* Gets the database path
 Changing the path provided in dbPath will create a new database if needed */
 const __dirname = import.meta.dirname;
-const dbPath = path.join(__dirname, "/../../databases/test68.sqlite3")
+const dbPath = path.join(__dirname, "/../../databases/test82.sqlite3")
 
 // defines the db variable. creates database if it doesn't already exist
 let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
@@ -90,7 +90,29 @@ function generateTestData() {
         stmt.finalize();
     })
 
-    return "done";
+    db.serialize(() => {
+        let taskNames = ["task name", "task name 1", "task name 2", "task name 3", "task name 4", "task name 5", "task name 6", "task name 7"]
+        let testData = []
+        taskNames.map((task, i) => {
+            testData.push({
+                taskName: task,
+                // i % 3 to get values of 0, 1, or 2
+                list: i % 3,
+                position: i % 3
+            })
+        })
+        const stmt = db.prepare(`
+            INSERT INTO tasks
+            (task_name, list, position)
+            VALUES (?, ?, ?)
+        `)
+
+        testData.forEach((data) => stmt.run(data.taskName, data.list, data.position))
+
+        stmt.finalize();
+    })
+
+    return "TEST DATA GENERATED";
 }
 
 export { db, generateTestData }

@@ -79,13 +79,13 @@ function TaskDisplay(props) {
     /** If any columns are empty, remove them and update indexes of other columns. */
     const checkColumns = useCallback(({updatedTasks, column}) => {        
         // removes empty column
-        if (column == 0) {
-            sendTask("space", 0, 0)
-        }
-        // ensures the first column is never deleted
-        else if (updatedTasks.length == 0) {
+        if (updatedTasks.length == 0) {
+            // ensures the first column is never deleted
+            //if (column != 0) {
+            //}
+            // deletes column
             props.deleteColumn(column)
-        }
+            }
     }, [])
 
     /** Moves a card to a different column.
@@ -196,7 +196,13 @@ function TaskDisplay(props) {
         <>
             <div>
                 <div id="task">
-                    <div id="task-label" className="label">
+                <TaskCard
+                                label={"space"}
+                                index={taskList.length}
+                                columnId={props.label}
+                                key={"taskListEndCard" + taskList.length}
+                            />
+                    <div id={`task-label-${props.label}`} className="label">
                         {props.label == "0" ? "Ungrouped Tasks" : "Group " + props.label}
                     </div>
                     {taskList}
