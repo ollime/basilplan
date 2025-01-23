@@ -3,7 +3,7 @@
 import express from "express"
 import cors from "cors"
 
-import { sendTask, deleteTask, getTaskNames } from "./models/task-data.js";
+import { sendTask, deleteTask, getTasks } from "./models/task-data.js";
 import { sendLogData, getLogData } from "./models/log-data.js";
 import { generateTestData } from "./models/database.js";
 import { listenArrayEvents } from "chart.js/helpers";
@@ -41,8 +41,8 @@ app.get("/api/deleteTask/:task", (req, res) => {
     res.end()
 })
 
-app.get("/api/getTaskNames", async (req, res) => {
-    let tasks = await getTaskNames()
+app.get("/api/getTasks", async (req, res) => {
+    let tasks = await getTasks()
     console.log("Loading all tasks")
     res.send(tasks)
 })

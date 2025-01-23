@@ -9,7 +9,7 @@ import path from "path"
 /* Gets the database path
 Changing the path provided in dbPath will create a new database if needed */
 const __dirname = import.meta.dirname;
-const dbPath = path.join(__dirname, "/../../databases/test66.sqlite3")
+const dbPath = path.join(__dirname, "/../../databases/test68.sqlite3")
 
 // defines the db variable. creates database if it doesn't already exist
 let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {

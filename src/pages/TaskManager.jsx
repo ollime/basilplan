@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 
 import Footer from "../../components/Footer.jsx";
 import TaskDisplay from "../../components/tasks/TaskDisplay.jsx";
-import { getTaskNames } from "../../src/api/task-api.js"
+import { getTasks, sendTask } from "../../src/api/task-api.js"
 
 /** Manages tasks.
  * 
@@ -17,6 +17,7 @@ function TaskManager() {
       label={col[0]}
       key={"task-col-" + col[0]}
       deleteColumn={deleteColumn}
+      updateTasks={updateTasks}
     />
   ))
 
@@ -29,22 +30,23 @@ function TaskManager() {
      * @returns {Array<Array>} Tasks grouped by columnId listed in database.
      */
     function formatTasks(tasks) {
+        // original data formatted as array
         let newTasks = [];
         for (let i of tasks) {
           newTasks.push(i)
         }
+        // sort by numerical order of position data
+        newTasks = newTasks.sort((a, b) => a.position - b.position)
         // grouped by list
-        let groupedTasks = Object.groupBy(newTasks, ({list}) => list)
+        const groupedTasks = Object.groupBy(newTasks, ({list}) => list)
         // format as array
-        let groupedTaskArray = Object.keys(groupedTasks).map((key) => [key, groupedTasks[key]])
-
-        // TODO: reorganize by rowId
+        const groupedTaskArray = Object.keys(groupedTasks).map((key) => [key, groupedTasks[key]])
         return groupedTaskArray;
     }
 
     /** Intital task load. Retrieves task data and updates TaskList tasks. */
     async function getTaskData() {
-        await getTaskNames()
+        await getTasks()
         .then((response) => {
             if (!ignore) {
                 setColumnData(formatTasks(response))
@@ -71,6 +73,15 @@ function TaskManager() {
       task_name: "space"
     }]]
     setColumnData((prevData) => [...prevData, newData])
+  }
+
+  function updateTasks(newTasks) {
+    // TODO: make this better by only sending tasks that need to be updated
+    // i.e. tasks past the new index
+    for (let i in newTasks) {
+      let task = newTasks[i]
+      sendTask(task.name, task.column, i)
+    }
   }
 
   return (

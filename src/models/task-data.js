@@ -25,7 +25,7 @@ function deleteTask(task) {
 }
 
 /** Retrieve all tasks from the database. */
-async function getTaskNames() {
+async function getTasks() {
     return new Promise((resolve) => {
         db.serialize(function() {
             db.all(`SELECT * FROM tasks
@@ -39,4 +39,4 @@ async function getTaskNames() {
     })
 }
 
-export { sendTask, deleteTask, getTaskNames }
+export { sendTask, deleteTask, getTasks }

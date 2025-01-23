@@ -5,13 +5,12 @@ import TaskCard from "./TaskCard.jsx"
 
 import { monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
 import { reorder } from '@atlaskit/pragmatic-drag-and-drop/reorder';
+import { sendTask } from "../../src/api/task-api.js"
 
 /** A column of task cards.
  * 
  * Uses DropLocation to create drop targets for cards to move
- * between and within columns.
- * 
- * @param  */
+ * between and within columns. */
 function TaskDisplay(props) {
     /** List of task labels. @type {Array<string>} */
     const [tasks, setTasks] = useState([]);
@@ -55,33 +54,46 @@ function TaskDisplay(props) {
     }, [])
 
     
-    /** Moving a card to the same column. */
+    /** Moves a card to the same column.
+     * 
+     * @param {string} currentIndex index of current task being dragged
+     * @param {string} newIndex index to place the current task
+     */
     const handleReorder = useCallback(({ currentIndex, newIndex }) => {
         /* account for the fact that the current task
         is a part of the list - index should change based
         on whether it is above or below the new task */
         const positionModifier = newIndex < currentIndex ? 0 : -1
-
-        // reorder the tasks
-        setTasks(reorder({
+        const newTasks = reorder({
             list: tasks,
             startIndex: currentIndex,
             finishIndex: newIndex + positionModifier,
-        }))
+        })
+
+        // reorder the tasks
+        setTasks(newTasks)
+        // TODO: make this run only once on the current task list
+        props.updateTasks(newTasks)
     }, [tasks])
     
     /** If any columns are empty, remove them and update indexes of other columns. */
     const checkColumns = useCallback(({updatedTasks, column}) => {        
-        if (updatedTasks.length == 0) {
-            // removes empty column
+        // removes empty column
+        if (column == 0) {
+            sendTask("space", 0, 0)
+        }
+        // ensures the first column is never deleted
+        else if (updatedTasks.length == 0) {
             props.deleteColumn(column)
         }
     }, [])
 
-    /** Moving a card to a different column.
+    /** Moves a card to a different column.
      * 
-     * @param currentIndex index of the current task
-     * @param 
+     * @param {string} currentIndex index of the current task
+     * @param {string} destinationColumn new column to place the current task
+     * @param {string} newIndex new index to place the current task
+     * @param {string} currentTask the label/task name of the current task being dragged
     */
     const handleMove = useCallback(
         ({
@@ -94,10 +106,11 @@ function TaskDisplay(props) {
             // filter out removed task
             setTasks(filteredList)
             
-            // set tasks in new column
-            setTasks((prevTasks) => prevTasks.map(item => {
+            /* set tasks in new column
+            remember that the argument contains a map, so it runs multiple times,
+            for each of the groups available */
+            setTasks((prevTasks) => prevTasks.map((item, index) => {
                 if (item.column == destinationColumn) {
-                    console.log("DSJFLKDSFJKLDS")
                     // add new task
                     let newTasks = [...tasks, {name: currentTask, column: destinationColumn}]
                     // Reorder tasks in new column if newIndex is provided
@@ -110,10 +123,15 @@ function TaskDisplay(props) {
                     }
                     // update task
                     setTasks(newTasks);
+                    // run api call once
+                    if (index == 0) {
+                        props.updateTasks(newTasks)
+                    }
                 }
                 return item;
             }))
-
+            
+            
             // if removing the task makes an empty column, remove that column
             checkColumns({
                 updatedTasks: filteredList,
@@ -149,6 +167,8 @@ function TaskDisplay(props) {
             newIndex = tasks.length;
         }
         
+        /* Either reorder within the current column or move to another
+        column depending on if the original and destination groups match. */
         if (originalId == destinationId) {
             handleReorder({
                 currentIndex: currentIndex,
