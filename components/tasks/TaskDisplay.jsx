@@ -70,28 +70,57 @@ function TaskDisplay(props) {
         }))
     }, [tasks])
     
+    /** If any columns are empty, remove them and update indexes of other columns. */
+    const checkColumns = useCallback(({updatedTasks, column}) => {        
+        if (updatedTasks.length == 0) {
+            // removes empty column
+            props.deleteColumn(column)
+        }
+    }, [])
 
-    /** Moving a card to a different column. */
+    /** Moving a card to a different column.
+     * 
+     * @param currentIndex index of the current task
+     * @param 
+    */
     const handleMove = useCallback(
         ({
-            currentIndex,
-            newIndex,
+            currentColumn,
             destinationColumn,
+            newIndex,
             currentTask,
         }) => {
+            const filteredList = tasks.filter((task) => task.name != currentTask);
             // filter out removed task
-            setTasks(tasks.filter((task) => task.name != currentTask))
-
+            setTasks(filteredList)
+            
             // set tasks in new column
             setTasks((prevTasks) => prevTasks.map(item => {
                 if (item.column == destinationColumn) {
-                    const newTasks = [...tasks, {name: currentTask, column: newIndex}]
-                    setTasks(newTasks)
+                    console.log("DSJFLKDSFJKLDS")
+                    // add new task
+                    let newTasks = [...tasks, {name: currentTask, column: destinationColumn}]
+                    // Reorder tasks in new column if newIndex is provided
+                    if (newIndex >= 0) {      
+                        newTasks = reorder({
+                            list: newTasks,
+                            startIndex: newTasks.length - 1,
+                            finishIndex: newIndex,
+                        })
+                    }
+                    // update task
+                    setTasks(newTasks);
                 }
                 return item;
             }))
+
+            // if removing the task makes an empty column, remove that column
+            checkColumns({
+                updatedTasks: filteredList,
+                column: currentColumn,
+            });
         },
-    [tasks]);
+    [tasks, checkColumns]);
 
     /** Callback function when a task is dropped on the list. */
     const handleDrop = useCallback(({ source, location }) => {
@@ -110,7 +139,7 @@ function TaskDisplay(props) {
         const currentIndex = tasks.findIndex((task) => task.name == currentTask)
         let newIndex;
 
-        if (destination.element.innerHTML) {
+        if (destination.element) {
             // finds the new location to drop the task
             const newTask = destination.element.innerHTML
             newIndex = tasks.findIndex((task) => task.name == newTask)
@@ -128,7 +157,7 @@ function TaskDisplay(props) {
         }
         else {
             handleMove({
-                currentIndex: currentIndex,
+                currentColumn: originalId,
                 newIndex: newIndex,
                 destinationColumn: destinationId,
                 currentTask: currentTask,

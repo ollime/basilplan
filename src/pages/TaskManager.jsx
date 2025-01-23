@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import Footer from "../../components/Footer.jsx";
 import TaskDisplay from "../../components/tasks/TaskDisplay.jsx";
@@ -16,6 +16,7 @@ function TaskManager() {
       data={col[1]}
       label={col[0]}
       key={"task-col-" + col[0]}
+      deleteColumn={deleteColumn}
     />
   ))
 
@@ -58,8 +59,23 @@ function TaskManager() {
     }
   }, [])
 
+  function deleteColumn(column) {
+    setColumnData((prevData) => prevData.filter((col) => col != columnData[column]))
+  }
+
+  function handleAddColumn() {
+    const colNum = String(columnData.length)
+    const newData = [colNum, [{
+      list: colNum,
+      position: "-1",
+      task_name: "space"
+    }]]
+    setColumnData((prevData) => [...prevData, newData])
+  }
+
   return (
     <>
+        <div onClick={handleAddColumn}>Add new group +</div>
         {taskColumns}
         <Footer />
     </>

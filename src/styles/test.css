@@ -5,3 +5,8 @@
     height: 50px;
     width: 100px;
 }
+
+.remove-height {
+    height: 0px;
+    font-size: 0px;
+}

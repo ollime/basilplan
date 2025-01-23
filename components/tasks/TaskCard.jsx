@@ -82,7 +82,8 @@ function TaskCard(props) {
                 <div
                     id={"drop-target" + taskName}
                     ref={task}
-                    className="task-item">
+                    className={`task-item ${taskName == "space" ? "remove-height" : ""}`}
+                    >
                     {taskName}
                 </div>
 
