@@ -1,6 +1,5 @@
 import { AgGridReact } from 'ag-grid-react';
-import "ag-grid-community/styles/ag-grid.css";
-import "ag-grid-community/styles/ag-theme-quartz.css";
+import { colorSchemeDark, themeQuartz } from 'ag-grid-community';
 
 function DataTable(props) {
     const data = props.data;
@@ -25,6 +24,8 @@ function DataTable(props) {
     const paginationPageSizeSelector = [100, 300, 500, 1000]
     const paginationPageSize = 300;
 
+    const myTheme = themeQuartz.withPart(colorSchemeDark);
+
     return (
         <>
             <div className="ag-theme-quartz table-container" style={{height: 500}}>
@@ -34,6 +35,7 @@ function DataTable(props) {
                 pagination={pagination}
                 paginationPageSize={paginationPageSize}
                 paginationPageSizeSelector={paginationPageSizeSelector}
+                theme={myTheme}
             />
             </div>
         </>
