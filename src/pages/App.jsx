@@ -16,8 +16,10 @@ function App() {
           selectedTask,
           setSelectedTask
         }}>
-        <Clock />
+        <div className="flex md:flex-row gap-5 flex-col-reverse">
         <TaskList />
+        <Clock />
+        </div>
         <GroupDisplay />
         <Footer />
       </AppContext.Provider>
