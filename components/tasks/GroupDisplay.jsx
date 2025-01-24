@@ -56,16 +56,13 @@ function GroupDisplay() {
             ignore = true;
         }
     }, [])
-    
-    /* Handles loading groups onto page. */
-    useEffect(() => {
-        // console.log(tasks)
-    }, [tasks])
 
     return(
         <>
-            Grouped Tasks
-            {groupList}
+            <div>
+                Grouped Tasks
+                {groupList}
+            </div>
         </>
     )
 }

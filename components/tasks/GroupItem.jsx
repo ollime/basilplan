@@ -38,12 +38,14 @@ function GroupItem(props) {
 
     return(
         <>
-            <Accordion 
-                title={"Group " + groupName}
-                content={accordionItems}
-                key={"grouped-task-accordion-" + groupName}
-            />
-            <TaskMarker updateSelectedTask={updateSelectedTask}/>
+            <div>
+                <Accordion 
+                    title={"Group " + groupName}
+                    content={accordionItems}
+                    key={"grouped-task-accordion-" + groupName}
+                />
+                <TaskMarker updateSelectedTask={updateSelectedTask}/>
+            </div>
         </>
     )
 }
