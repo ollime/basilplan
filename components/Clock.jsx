@@ -175,7 +175,7 @@ function Clock() {
                                 <img src={timer ? PauseIcon : StartIcon}></img>
                         </button>
                         <button className="flex grow-1 size-12 items-center justify-center" onClick={handleSkipTimer}>
-                            <img className="" src={SkipIcon}></img>
+                            <img src={SkipIcon}></img>
                         </button>
                     </span>
                 </div>
