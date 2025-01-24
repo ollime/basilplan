@@ -13,7 +13,6 @@ import CancelIcon from "/icons/cancel.svg";
  * @param {number} props.count Current position in the list.
  * @param {function} props.editTask Modify an existing task.
  * @param {function} props.deleteTask Delete an existing task.
- * @param {string} props.currentTask
  */
 function TaskItem(props) {
     /** Determines if the edit panel is currently open. @type {boolean} */

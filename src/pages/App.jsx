@@ -3,6 +3,7 @@ import TaskList from "../../components/tasks/TaskList.jsx";
 import Footer from "../../components/Footer.jsx";
 import Clock from "../../components/Clock.jsx";
 import AppContext from "../../components/AppContext.jsx";
+import GroupDisplay from "../../components/tasks/GroupDisplay.jsx";
 
 /** Main page. Includes timer and task list. */
 function App() {
@@ -17,6 +18,7 @@ function App() {
         }}>
         <Clock />
         <TaskList />
+        <GroupDisplay />
         <Footer />
       </AppContext.Provider>
     </>

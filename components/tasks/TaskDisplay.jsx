@@ -196,12 +196,12 @@ function TaskDisplay(props) {
         <>
             <div>
                 <div id="task">
-                <TaskCard
-                                label={"space"}
-                                index={taskList.length}
-                                columnId={props.label}
-                                key={"taskListEndCard" + taskList.length}
-                            />
+                    <TaskCard
+                        label={"space"}
+                        index={taskList.length}
+                        columnId={props.label}
+                        key={"taskListEndCard" + taskList.length}
+                    />
                     <div id={`task-label-${props.label}`} className="label">
                         {props.label == "0" ? "Ungrouped Tasks" : "Group " + props.label}
                     </div>
