@@ -78,11 +78,12 @@ function TaskCard(props) {
 
     return(
         <>
-            <div style={dropTargetStyles}>
+            <div style={dropTargetStyles} className="w-9/10">
                 <div
                     id={"drop-target" + taskName}
                     ref={task}
-                    className={`task-item ${taskName == "space" ? "remove-height" : ""}`}
+                    hidden={taskName == "space" ? "true" : ""}
+                    className={`h-12 flex items-center justify-center ${taskName == "space" ? "remove-height" : ""}`}
                     >
                     {taskName}
                 </div>

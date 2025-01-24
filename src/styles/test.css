@@ -27,3 +27,7 @@
     fill: #dc3545;
     color: #dc3545;
 }
+
+.remove-height {
+    height: 0px;
+}

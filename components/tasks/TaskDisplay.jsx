@@ -194,30 +194,22 @@ function TaskDisplay(props) {
     
     return(
         <>
-            <div>
-                <div id="task">
-                    <TaskCard
-                        label={"space"}
-                        index={taskList.length}
-                        columnId={props.label}
-                        key={"taskListEndCard" + taskList.length}
-                    />
-                    <div id={`task-label-${props.label}`} className="label">
-                        {props.label == "0" ? "Ungrouped Tasks" : "Group " + props.label}
-                    </div>
-                    {taskList}
-                    <DropLocation
-                        child={
-                            <TaskCard
-                                label={""}
-                                index={taskList.length}
-                                columnId={props.label}
-                                key={"taskListEndCard" + taskList.length}
-                            />
-                        }
-                        key={"taskListEnd" + taskList.length}
-                    />
+            <div className="text-center bg-zinc-800 outline outline-gray-400 grow rounded-lg min-w-50">
+                <div id={`task-label-${props.label}`} className="text-lg py-2 border-b border-gray-400">
+                    {props.label == "0" ? "Ungrouped Tasks" : "Group " + props.label}
                 </div>
+                {taskList}
+                <DropLocation
+                    child={
+                        <TaskCard
+                            label={""}
+                            index={taskList.length}
+                            columnId={props.label}
+                            key={"taskListEndCard" + taskList.length}
+                        />
+                    }
+                    key={"taskListEnd" + taskList.length}
+                />
             </div>
         </>
     )

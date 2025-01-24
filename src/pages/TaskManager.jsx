@@ -86,8 +86,12 @@ function TaskManager() {
 
   return (
     <>
-        <div onClick={handleAddColumn}>Add new group +</div>
-        {taskColumns}
+        <div className="mb-20">
+          <div className="flex flex-row gap-5 flex-wrap my-5">
+            {taskColumns}
+          </div>
+          <div onClick={handleAddColumn} className="bg-teal-800 text-center p-3 outline outline-gray-400 rounded-lg w-2xs">Add new group +</div>
+        </div>
         <Footer />
     </>
   )
