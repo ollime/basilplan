@@ -152,24 +152,33 @@ function Clock() {
 
     return(
         <>
-            <div id="clock">
-                <span>current task: {selectedTask}</span>
-                <span>current timer type: {timerTypes[type].type}</span>
-                <div id="timer" className="flex-center">
-                    <span id="seconds">{convertToTime(seconds)}</span>
+            <div className="w-md flex flex-col gap-2">
+                <div id="clock-info" className="flex flex-row gap-2">
+                    <span className="flex bg-teal-700 p-2 rounded-2xl text-md outline outline-gray-400 grow text-sm">
+                        Selected Task: {selectedTask}
+                    </span>
+                    {/* TODO: change color based on current task */}
+                    <span className="flex bg-teal-700 p-2 rounded-2xl outline outline-gray-400 text-sm">
+                        {timerTypes[type].type}
+                    </span>
                 </div>
-                <span className="timer-btns">
-                    <button className="small-square-btn" onClick={handleRestartTimer}>
-                        <img src={ResetIcon}></img>
-                    </button>
-                    <button className="small-square-btn"
-                        onClick={handleStartTimer}>
-                            <img src={timer ? PauseIcon : StartIcon}></img>
-                    </button>
-                    <button className="small-square-btn" onClick={handleSkipTimer}>
-                        <img src={SkipIcon}></img>
-                    </button>
-                </span>
+                <div id="clock" className="outline outline-gray-400 rounded-xl shadow-lg">
+                    <div id="timer" className="flex-center bg-zinc-800 py-25 text-6xl text-center rounded-t-xl">
+                        <span id="seconds">{convertToTime(seconds)}</span>
+                    </div>
+                    <span className="flex flex-row h-auto bg-zinc-500 rounded-b-xl">
+                        <button className="flex grow-1 size-12 items-center justify-center" onClick={handleRestartTimer}>
+                            <img src={ResetIcon}></img>
+                        </button>
+                        <button className="flex grow-1 size-12 items-center justify-center"
+                            onClick={handleStartTimer}>
+                                <img src={timer ? PauseIcon : StartIcon}></img>
+                        </button>
+                        <button className="flex grow-1 size-12 items-center justify-center" onClick={handleSkipTimer}>
+                            <img className="" src={SkipIcon}></img>
+                        </button>
+                    </span>
+                </div>
             </div>
         </>
     )

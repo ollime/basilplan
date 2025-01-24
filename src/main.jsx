@@ -4,8 +4,9 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
-import "./styles/style.css"
+// import "./styles/style.css"
 import "./styles/test.css"
+import "./styles/theme.css"
 
 import App from './pages/App.jsx'
 import Stats from "./pages/Stats.jsx"

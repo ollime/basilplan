@@ -1,6 +1,6 @@
 /* quick tests for css */
 
-.task-item {
+/* .task-item {
     background-color: white;
     height: 50px;
     width: 100px;
@@ -9,4 +9,21 @@
 .remove-height {
     height: 0px;
     font-size: 0px;
+} */
+
+.unset {
+    fill: white;
+    color: white;
+}
+.success {
+    fill: #28a745;
+    color: #28a745;
+}
+.highlight {
+    fill: #ffc107;
+    color: #ffc107;
+}
+.danger {
+    fill: #dc3545;
+    color: #dc3545;
 }
