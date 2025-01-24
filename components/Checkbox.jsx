@@ -23,9 +23,10 @@ function Checkbox(props) {
 
     return (
         <>
-            <div className="align-center">
+            <div className="flex flex-row items-center w-sm bg-zinc-800 h-14 rounded-lg mb-2 outline outline-gray-500">
                 <input id={props.label} type="checkbox"
-                onChange={handleUpdateStorage} checked={isChecked}/>
+                onChange={handleUpdateStorage} checked={isChecked}
+                className="mx-2 size-5"/>
                 <label htmlFor={props.label}>{props.label}</label>
             </div>
         </>

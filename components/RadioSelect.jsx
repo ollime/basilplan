@@ -28,8 +28,8 @@ function RadioSelect(props) {
 
     return (
         <>
-            <div>
-                <span className="settings-label">{props.label}</span>
+            <div className="h-14 flex flex-row items-center w-sm bg-zinc-800 rounded-lg mb-2 outline outline-gray-500">
+                <span className="ml-2">{props.label}</span>
                 {props.options.map((option) => {
                     return <RadioInput
                                 key={option}
@@ -53,10 +53,11 @@ function RadioInput(props) {
 
     return ( 
         <>
-            <span className="margin-left">
+            <span className="ml-5">
                 <input type="radio" id={props.option} name={props.label}
                     onChange={handleSelection}
-                    defaultChecked={props.option.toLowerCase() == props.selected ? true : undefined}/>
+                    defaultChecked={props.option.toLowerCase() == props.selected ? true : undefined}
+                    className="mr-1 size-5"/>
                 <label htmlFor={props.option}>{props.option}</label>
             </span>
         </>

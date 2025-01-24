@@ -80,14 +80,14 @@ function TaskItem(props) {
                     <div className={`${edit ? "hidden" : "flex"}`}>
                         <button className="w-12">{count}</button>
                         <button className={`grow text-left ml-2`}>{text}</button>
-                        <button className="flex items-center justify-center size-14 border-l border-gray-400 bg-zinc-500" onClick={handleOpenEdit}>
+                        <button className="flex items-center justify-center size-14 border-gray-400 bg-zinc-500" onClick={handleOpenEdit}>
                             <img src={EditIcon}></img>
                         </button>
                     </div>
 
                     <div className={`edit-panel ${edit ? "flex" : "hidden"}`}>
                         <input type="text" id={text + count} className="bg-zinc-300 text-black pl-2 max-w-39" defaultValue={text} ref={textRef} />
-                        <button className="size-14 border-l border-gray-400 flex items-center justify-center bg-teal-600" onClick={handleConfirmTask}>
+                        <button className="size-14 border-gray-400 flex items-center justify-center bg-teal-600" onClick={handleConfirmTask}>
                             <img src={ConfirmIcon}></img>
                         </button>
                         <button className="size-14 flex items-center justify-center bg-teal-600" onClick={handleDeleteTask}>

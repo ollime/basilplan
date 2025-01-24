@@ -7,7 +7,7 @@ import RadioSelect from "../../components/RadioSelect.jsx";
 function Settings() {
     return (
         <>
-            <div id="settings">
+            <div id="settings" className="mb-20 flex flex-col gap-2">
                 <h1 className="text-2xl mb-2">Settings</h1>
                 <h2 className="text-xl">Timer</h2>
                     <TextField label="Main Timer (minutes)" />

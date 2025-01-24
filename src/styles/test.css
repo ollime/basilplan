@@ -12,8 +12,8 @@
 } */
 
 .unset {
-    fill: white;
-    color: white;
+    fill: lightgray;
+    color: lightgray;
 }
 .success {
     fill: #28a745;
