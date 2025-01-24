@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import Accordion from "./../Accordion.jsx";
+import Accordion from "../inputs/Accordion.jsx";
 import TaskMarker from "./TaskMarker.jsx";
 import AppContext from "./../../components/AppContext.jsx"
 

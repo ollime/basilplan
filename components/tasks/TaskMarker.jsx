@@ -56,10 +56,10 @@ function TaskMarker(props) {
     
     return (
         <>
-            <span className="btn-size task-marker flex-center" onClick={handleChangeMarker}>
+            <span className="flex flex-row items-center" onClick={handleChangeMarker}>
                 <FlagMarker width={width} height={height} color={colors[index].color}/>
                 {/* <StarMarker color={colors[index].color}/> */}
-                <span className="task-marker-label">{colors[index].text}</span>
+                <span className="break-normal text-sm truncate">{colors[index].text}</span>
             </span>
         </>
     )

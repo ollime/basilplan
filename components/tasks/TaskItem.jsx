@@ -75,25 +75,25 @@ function TaskItem(props) {
 
     return (
         <>
-            <div className="flex-row">
-                <span className={"list-item flex-center"}>
-                    <div className={`display-panel ${edit ? "hidden" : "flex"}`}>
-                        <button className="small-square-btn">{count}</button>
-                        <button className="item-label">{text}</button>
-                        <button className="edit-btn" onClick={handleOpenEdit}>
+            <div className="flex flex-row items-center">
+                <span className="text-center bg-zinc-800 outline outline-gray-400 w-xs min-w-xs">
+                    <div className={`${edit ? "hidden" : "flex"}`}>
+                        <button className="w-12">{count}</button>
+                        <button className={`grow text-left ml-2`}>{text}</button>
+                        <button className="flex items-center justify-center size-14 border-l border-gray-400 bg-zinc-500" onClick={handleOpenEdit}>
                             <img src={EditIcon}></img>
                         </button>
                     </div>
 
                     <div className={`edit-panel ${edit ? "flex" : "hidden"}`}>
-                        <input type="text" id={text + count} className="item-label" defaultValue={text} ref={textRef} />
-                        <button className="confirm-btn" onClick={handleConfirmTask}>
+                        <input type="text" id={text + count} className="bg-zinc-300 text-black pl-2 max-w-39" defaultValue={text} ref={textRef} />
+                        <button className="size-14 border-l border-gray-400 flex items-center justify-center bg-teal-600" onClick={handleConfirmTask}>
                             <img src={ConfirmIcon}></img>
                         </button>
-                        <button className="delete-btn" onClick={handleDeleteTask}>
+                        <button className="size-14 flex items-center justify-center bg-teal-600" onClick={handleDeleteTask}>
                             <img src={DeleteIcon}></img>
                         </button>
-                        <button className="edit-btn" onClick={handleOpenEdit}>
+                        <button className="size-14 flex items-center justify-center bg-teal-600" onClick={handleOpenEdit}>
                             <img src={CancelIcon}></img>
                         </button>
                     </div>
