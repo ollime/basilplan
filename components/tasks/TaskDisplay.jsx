@@ -194,8 +194,8 @@ function TaskDisplay(props) {
     
     return(
         <>
-            <div className="text-center bg-zinc-800 outline outline-gray-400 grow rounded-lg min-w-50">
-                <div id={`task-label-${props.label}`} className="text-lg py-2 border-b border-gray-400">
+            <div className="text-center bg-zinc-800 outline outline-gray-500 grow rounded-lg min-w-50">
+                <div id={`task-label-${props.label}`} className="text-lg py-2 border-b border-gray-500">
                     {props.label == "0" ? "Ungrouped Tasks" : "Group " + props.label}
                 </div>
                 {taskList}

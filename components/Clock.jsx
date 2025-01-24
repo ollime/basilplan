@@ -154,15 +154,15 @@ function Clock() {
         <>
             <div className="w-md flex flex-col gap-2">
                 <div id="clock-info" className="flex flex-row gap-2">
-                    <span className="flex bg-teal-800 p-2 rounded-2xl text-md outline outline-gray-400 grow text-sm">
+                    <span className="flex bg-teal-800 p-2 rounded-2xl text-md outline outline-gray-500 grow text-sm">
                         Selected Task: {selectedTask}
                     </span>
                     {/* TODO: change color based on current task */}
-                    <span className="flex bg-teal-800 p-2 rounded-2xl outline outline-gray-400 text-sm">
+                    <span className="flex bg-teal-800 p-2 rounded-2xl outline outline-gray-500 text-sm">
                         {timerTypes[type].type}
                     </span>
                 </div>
-                <div id="clock" className="outline outline-gray-400 rounded-xl shadow-lg">
+                <div id="clock" className="outline outline-gray-500 rounded-xl shadow-lg">
                     <div id="timer" className="flex-center bg-zinc-800 py-25 text-6xl text-center rounded-t-xl">
                         <span id="seconds">{convertToTime(seconds)}</span>
                     </div>

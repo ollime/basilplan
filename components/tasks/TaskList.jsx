@@ -106,9 +106,9 @@ function TaskList() {
         <>
             <div>
                 <div id="task" className="flex flex-col w-md">
-                    <div id="task-label" className="flex justify-center items-center text-3xl size-10 bg-zinc-800 w-xs outline outline-gray-400 rounded-t-lg">Task List</div>
+                    <div id="task-label" className="flex justify-center items-center text-3xl size-10 bg-zinc-800 w-xs outline outline-gray-500 rounded-t-lg">Task List</div>
                     {taskList}
-                    <button className="size-10 bg-teal-800 w-xs outline outline-gray-400 rounded-b-lg" onClick={handleAddTask}>Add Task +</button>
+                    <button className="size-10 bg-teal-800 w-xs outline outline-gray-500 rounded-b-lg" onClick={handleAddTask}>Add Task +</button>
                 </div>
             </div>
         </>

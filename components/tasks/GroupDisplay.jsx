@@ -60,7 +60,7 @@ function GroupDisplay() {
     return(
         <>
             <div className="flex flex-col w-md">
-                <span className="flex justify-center items-center text-3xl size-10 bg-zinc-800 w-xs outline outline-gray-400 rounded-t-lg">
+                <span className="flex justify-center items-center text-3xl size-10 bg-zinc-800 w-xs outline outline-gray-500 rounded-t-lg">
                     Grouped Tasks
                 </span>
                 {groupList}

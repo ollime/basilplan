@@ -38,8 +38,8 @@ function GroupItem(props) {
 
     return(
         <>
-            <div className="flex flex-row outline outline-gray-400 w-xs">
-                <span className="bg-zinc-800 outline outline-gray-400 w-xs min-w-xs">
+            <div className="flex flex-row outline outline-gray-500 w-xs">
+                <span className="bg-zinc-800 outline outline-gray-500 w-xs min-w-xs">
                     <Accordion 
                         title={"Group " + groupName}
                         content={accordionItems}
