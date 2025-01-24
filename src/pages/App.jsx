@@ -16,7 +16,7 @@ function App() {
           selectedTask,
           setSelectedTask
         }}>
-        <div className="flex md:flex-row gap-5 flex-col-reverse">
+        <div className="flex md:flex-row gap-5 flex-col-reverse mb-5">
         <TaskList />
         <Clock />
         </div>

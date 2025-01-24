@@ -9,8 +9,12 @@
 function Accordion(props) {
     return (
         <>
-            <details className="accordion">
-                <summary>{props.title}</summary>
+            <details>
+                    <summary className="p-4 h-12">
+                        <span>
+                            {props.title}
+                        </span>
+                    </summary>
                 {props.content}
             </details>
         </>

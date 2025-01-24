@@ -38,12 +38,14 @@ function GroupItem(props) {
 
     return(
         <>
-            <div>
-                <Accordion 
-                    title={"Group " + groupName}
-                    content={accordionItems}
-                    key={"grouped-task-accordion-" + groupName}
-                />
+            <div className="flex flex-row outline outline-gray-400 w-xs">
+                <span className="bg-zinc-800 outline outline-gray-400 w-xs min-w-xs">
+                    <Accordion 
+                        title={"Group " + groupName}
+                        content={accordionItems}
+                        key={"grouped-task-accordion-" + groupName}
+                    />
+                </span>
                 <TaskMarker updateSelectedTask={updateSelectedTask}/>
             </div>
         </>
@@ -53,7 +55,7 @@ function GroupItem(props) {
 function GroupItemCard(props) {
     return(
         <>
-            <div>
+            <div className="m-6">
                 {props.name}
             </div>
         </>
