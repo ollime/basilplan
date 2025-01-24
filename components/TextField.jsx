@@ -49,15 +49,15 @@ function TextField(props) {
 
     return (
         <>
-            <div>
-                <label id={props.label}>{props.label}</label>
-                <input id={props.label + "-text"} type="text" defaultValue={text}
+            <div className="flex flex-row items-center w-sm bg-zinc-800 rounded-lg mb-2 outline outline-gray-500">
+                <label id={props.label} className="grow p-2">{props.label}</label>
+                <input id={props.label + "-text"} className="max-w-20 h-10 m-2 text-center" type="text" defaultValue={text}
                 disabled={editText ? false : true} ref={textInput}/>
-                <button className={`small-square-btn ${editText ? "hidden" : ""}`}
+                <button className={`size-14 rounded-r-lg flex items-center justify-center bg-zinc-500 ${editText ? "hidden" : ""}`}
                     onClick={handleOpenEdit}>
                         <img src={EditIcon}></img>
                 </button>
-                <button className={`small-square-btn ${editText ? "" : "hidden"}`}
+                <button className={`size-14 rounded-r-lg flex items-center justify-center bg-teal-600 ${editText ? "" : "hidden"}`}
                     onClick={handleConfirm}>
                         <img src={ConfirmIcon}></img>
                 </button>
