@@ -10,8 +10,8 @@ export default [
   pluginReact.configs.flat.recommended,
   {
     rules: {
-      "react/react-in-jsx-scope": "off"
-    },
-    extends: ["eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended"]
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off"
+    }
   }
 ];

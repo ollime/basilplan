@@ -50,7 +50,7 @@ function Clock() {
   const [seconds, setSeconds] = useState(timerTypes[type].value);
 
   /** Current selected task. @type {text} */
-  const { selectedTask, setSelectedTask } = useContext(AppContext);
+  const { selectedTask } = useContext(AppContext);
 
   /** Applies timer interval. Updates timer value. */
   useEffect(() => {

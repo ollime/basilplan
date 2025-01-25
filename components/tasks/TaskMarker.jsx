@@ -24,7 +24,7 @@ function TaskMarker(props) {
   ];
 
   /** Current selected task. @type {text} */
-  const { selectedTask, setSelectedTask } = useContext(AppContext);
+  const { selectedTask } = useContext(AppContext);
 
   /** Updates color and text of the task marker when it is pressed on. */
   function handleChangeMarker() {

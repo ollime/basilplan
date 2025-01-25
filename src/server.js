@@ -6,7 +6,6 @@ import cors from "cors";
 import { sendTask, deleteTask, getTasks } from "./models/task-data.js";
 import { sendLogData, getLogData } from "./models/log-data.js";
 import { generateTestData } from "./models/database.js";
-import { listenArrayEvents } from "chart.js/helpers";
 
 const app = express();
 const port = 5000;

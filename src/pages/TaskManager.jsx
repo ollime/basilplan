@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 import Footer from "../../components/Footer.jsx";
 import TaskDisplay from "../../components/tasks/TaskDisplay.jsx";
@@ -11,7 +11,7 @@ import { getTasks, sendTask } from "../../src/api/task-api.js";
  */
 function TaskManager() {
   const [columnData, setColumnData] = useState([]);
-  const taskColumns = columnData.map((col, i) => (
+  const taskColumns = columnData.map((col) => (
     <TaskDisplay
       data={col[1]}
       label={col[0]}

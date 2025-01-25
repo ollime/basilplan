@@ -5,7 +5,6 @@ import TaskCard from "./TaskCard.jsx";
 
 import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import { reorder } from "@atlaskit/pragmatic-drag-and-drop/reorder";
-import { sendTask } from "../../src/api/task-api.js";
 
 /** A column of task cards.
  *
@@ -22,8 +21,6 @@ function TaskDisplay(props) {
   ));
 
   useEffect(() => {
-    let ignore = false;
-
     /** Unpacks array of task names.
      * @param {object} tasks all task data provided
      * @returns {Array<string>} array of task names and corresponding column
@@ -40,10 +37,6 @@ function TaskDisplay(props) {
       return newTasks;
     }
     setTasks(formatTasks(props.data));
-
-    return () => {
-      ignore = true;
-    };
   }, []);
 
   /** Moves a card to the same column.
@@ -75,10 +68,6 @@ function TaskDisplay(props) {
   const checkColumns = useCallback(({ updatedTasks, column }) => {
     // removes empty column
     if (updatedTasks.length == 0) {
-      // ensures the first column is never deleted
-      //if (column != 0) {
-      //}
-      // deletes column
       props.deleteColumn(column);
     }
   }, []);
