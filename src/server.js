@@ -1,11 +1,10 @@
 /** @file Express server for managing app routes. */
-
-import express from "express";
 import cors from "cors";
+import express from "express";
 
-import { sendTask, deleteTask, getTasks } from "./models/task-data.js";
-import { sendLogData, getLogData } from "./models/log-data.js";
 import { generateTestData } from "./models/database.js";
+import { getLogData, sendLogData } from "./models/log-data.js";
+import { deleteTask, getTasks, sendTask } from "./models/task-data.js";
 
 const app = express();
 const port = 5000;

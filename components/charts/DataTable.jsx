@@ -1,5 +1,5 @@
-import { AgGridReact } from "ag-grid-react";
 import { colorSchemeDark, themeQuartz } from "ag-grid-community";
+import { AgGridReact } from "ag-grid-react";
 
 function DataTable(props) {
   const data = props.data;

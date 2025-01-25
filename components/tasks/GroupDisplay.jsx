@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { getTasks } from "../../src/api/task-api.js";
+import { useEffect, useState } from "react";
 
+import { getTasks } from "../../src/api/task-api.js";
 import GroupItem from "./GroupItem.jsx";
 
 function GroupDisplay() {
@@ -28,6 +28,8 @@ function GroupDisplay() {
 
       // sort by numerical order of position data
       newTasks = newTasks.sort((a, b) => a.position - b.position);
+      // removes first column
+      newTasks = newTasks.filter((task) => task.column != 0);
       // grouped by list
       const groupedTasks = Object.groupBy(newTasks, ({ column }) => column);
       // format as array

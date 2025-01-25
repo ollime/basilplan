@@ -2,9 +2,8 @@
  * @module database
  * @description General database creation and management.
  */
-
-import sqlite3 from "sqlite3";
 import path from "path";
+import sqlite3 from "sqlite3";
 
 /* Gets the database path
 Changing the path provided in dbPath will create a new database if needed */

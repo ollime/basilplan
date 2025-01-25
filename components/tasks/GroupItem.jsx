@@ -1,7 +1,8 @@
-import { useEffect, useState, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+
 import Accordion from "../Accordion.jsx";
-import TaskMarker from "./TaskMarker.jsx";
 import AppContext from "./../../components/AppContext.jsx";
+import TaskMarker from "./TaskMarker.jsx";
 
 function GroupItem(props) {
   /** Current selected task. @type {text} */

@@ -1,7 +1,7 @@
-import Footer from "../../components/Footer.jsx";
 import Checkbox from "../../components/Checkbox.jsx";
-import TextField from "../../components/TextField.jsx";
+import Footer from "../../components/Footer.jsx";
 import RadioSelect from "../../components/RadioSelect.jsx";
+import TextField from "../../components/TextField.jsx";
 
 /** Settings page. */
 function Settings() {

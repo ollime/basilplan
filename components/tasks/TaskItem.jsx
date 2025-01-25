@@ -1,11 +1,11 @@
-import { useState, useRef, useContext } from "react";
-import TaskMarker from "./TaskMarker.jsx";
-import AppContext from "./../../components/AppContext.jsx";
+import { useContext, useRef, useState } from "react";
 
-import EditIcon from "/icons/edit.svg";
+import AppContext from "./../../components/AppContext.jsx";
+import TaskMarker from "./TaskMarker.jsx";
+import CancelIcon from "/icons/cancel.svg";
 import ConfirmIcon from "/icons/check.svg";
 import DeleteIcon from "/icons/delete.svg";
-import CancelIcon from "/icons/cancel.svg";
+import EditIcon from "/icons/edit.svg";
 
 /** One task for the task list.
  *

@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import EditIcon from "/icons/edit.svg";
 import ConfirmIcon from "/icons/check.svg";
+import EditIcon from "/icons/edit.svg";
 
 /** Text input on the settings page.
  *

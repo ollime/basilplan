@@ -1,17 +1,21 @@
-import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
-import { useState, useEffect } from "react";
-import { groupByTask, groupByDate, formatDates } from "../../src/api/data-formatting.js";
+import Chart from "chart.js/auto";
+import { useEffect, useState } from "react";
+
+import { formatDates, groupByDate, groupByTask } from "../../src/api/data-formatting.js";
 import { getAllLogData } from "../../src/api/log-api.js";
 import BarChart from "./BarChart.jsx";
-import LineChart from "./LineChart.jsx";
 import DataTable from "./DataTable.jsx";
+import LineChart from "./LineChart.jsx";
 
 Chart.register(CategoryScale);
 
 function ChartApp() {
+  /** Stores data for data table. @type {Object} */
   const [allData, setAllData] = useState(null);
+  /** Stores data grouped by task for bar chart. @type {Object} */
   const [taskData, setTaskData] = useState(null);
+  /** Stores data grouped by daet for line chart. @type {Object} */
   const [dateData, setDateData] = useState(null);
 
   useEffect(() => {
@@ -41,6 +45,11 @@ function ChartApp() {
       setDateData(formatChartData(groupByDate(response)));
     }
 
+    // adjusts colors for contrast on dark mode
+    Chart.defaults.backgroundColor = "#36a2eb";
+    Chart.defaults.borderColor = "rgba(231, 229, 228, 0.2)";
+    Chart.defaults.color = "#b3b2b1";
+
     return () => {
       ignore = true;
     };
@@ -63,7 +72,9 @@ function formatChartData(logData) {
         label: "hours",
         data: logData.map((item) => item.minutes),
         borderWidth: 2,
-        pointStyle: false
+        pointStyle: false,
+        borderColor: "#36a2eb",
+        backgroundColor: "rgba(5, 155, 255, 0.5)"
       }
     ]
   };

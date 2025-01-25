@@ -1,17 +1,15 @@
 /** @file Main react server. */
-
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
+import App from "./pages/App.jsx";
+import Settings from "./pages/Settings.jsx";
+import Stats from "./pages/Stats.jsx";
+import TaskManager from "./pages/TaskManager.jsx";
 // import "./styles/style.css"
 import "./styles/test.css";
 import "./styles/theme.css";
-
-import App from "./pages/App.jsx";
-import Stats from "./pages/Stats.jsx";
-import Settings from "./pages/Settings.jsx";
-import TaskManager from "./pages/TaskManager.jsx";
 
 // removes error message
 const getRidOfConsoleMessages = {

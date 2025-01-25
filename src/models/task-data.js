@@ -2,7 +2,6 @@
  * @module task-data
  * @description Manages data in the task table of the database.
  */
-
 import { db } from "./database.js";
 
 /** Stores a task in the database. */

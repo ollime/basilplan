@@ -1,9 +1,9 @@
-import { useState, useEffect, useContext } from "react";
-import AppContext from "./AppContext.jsx";
-import { sendLogData } from "../src/api/log-api.js";
+import { useContext, useEffect, useState } from "react";
 
-import StartIcon from "/icons/play.svg";
+import { sendLogData } from "../src/api/log-api.js";
+import AppContext from "./AppContext.jsx";
 import PauseIcon from "/icons/pause.svg";
+import StartIcon from "/icons/play.svg";
 import ResetIcon from "/icons/restart.svg";
 import SkipIcon from "/icons/skip.svg";
 

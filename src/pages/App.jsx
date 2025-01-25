@@ -1,9 +1,10 @@
 import { useState } from "react";
-import TaskList from "../../components/tasks/TaskList.jsx";
-import Footer from "../../components/Footer.jsx";
-import Clock from "../../components/Clock.jsx";
+
 import AppContext from "../../components/AppContext.jsx";
+import Clock from "../../components/Clock.jsx";
+import Footer from "../../components/Footer.jsx";
 import GroupDisplay from "../../components/tasks/GroupDisplay.jsx";
+import TaskList from "../../components/tasks/TaskList.jsx";
 
 /** Main page. Includes timer and task list. */
 function App() {

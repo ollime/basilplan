@@ -1,10 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
+import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
+import { reorder } from "@atlaskit/pragmatic-drag-and-drop/reorder";
+import { useCallback, useEffect, useState } from "react";
 
 import DropLocation from "./DropLocation.jsx";
 import TaskCard from "./TaskCard.jsx";
-
-import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
-import { reorder } from "@atlaskit/pragmatic-drag-and-drop/reorder";
 
 /** A column of task cards.
  *

@@ -2,7 +2,6 @@
  * @module log-data
  * @description Manages data in the log table of the database.
  */
-
 import { db } from "./database.js";
 
 /** Stores data from the timer to the database. */

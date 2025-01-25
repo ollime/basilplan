@@ -1,6 +1,6 @@
-import { useRef, useState, useEffect } from "react";
-import invariant from "tiny-invariant";
 import { dropTargetForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
+import { useEffect, useRef, useState } from "react";
+import invariant from "tiny-invariant";
 
 /** Area of the page that allows for tasks to be dragged and dropped to.
  *

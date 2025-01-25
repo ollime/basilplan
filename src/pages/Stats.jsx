@@ -5,8 +5,10 @@ import ChartApp from "../../components/charts/ChartApp.jsx";
 function Stats() {
   return (
     <>
-      <ChartApp />
-      <Footer />
+      <div className="lg:m-20">
+        <ChartApp />
+        <Footer />
+      </div>
     </>
   );
 }
