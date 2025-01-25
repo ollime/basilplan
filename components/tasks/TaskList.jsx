@@ -1,3 +1,4 @@
+/** @file List of all tasks. */
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -87,7 +88,10 @@ function TaskList() {
     while (tasks.includes(taskName)) {
       let lastChar = taskName.split(" ").slice(-1);
       if (!isNaN(lastChar)) {
-        let originalText = taskName.slice(0, taskName.length - lastChar[0].length);
+        let originalText = taskName.slice(
+          0,
+          taskName.length - lastChar[0].length
+        );
         taskName = originalText + (parseInt(lastChar) + 1);
       } else {
         taskName += " 1";

@@ -1,3 +1,4 @@
+/** @file Text field input. */
 import { useEffect, useRef, useState } from "react";
 
 import ConfirmIcon from "/icons/check.svg";

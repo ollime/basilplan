@@ -1,11 +1,17 @@
+/** @file Grouped task display and data formatting. */
 import { useEffect, useState } from "react";
 
 import { getTasks } from "../../src/api/task-api.js";
 import GroupItem from "./GroupItem.jsx";
 
+/** Grouped task display.
+ *
+ * Prepares and formats data for displaying grouped tasks. */
 function GroupDisplay() {
   const [tasks, setTasks] = useState([]);
-  const groupList = tasks.map((task) => <GroupItem list={task} key={"grouped-tasks-" + task[0]} />);
+  const groupList = tasks.map((task) => (
+    <GroupItem list={task} key={"grouped-tasks-" + task[0]} />
+  ));
 
   // TODO: move initial task load for both GroupDisplay and TaskList to App.jsx
   // initial task load
@@ -33,7 +39,10 @@ function GroupDisplay() {
       // grouped by list
       const groupedTasks = Object.groupBy(newTasks, ({ column }) => column);
       // format as array
-      const groupedTaskArray = Object.keys(groupedTasks).map((key) => [key, groupedTasks[key]]);
+      const groupedTaskArray = Object.keys(groupedTasks).map((key) => [
+        key,
+        groupedTasks[key]
+      ]);
       return groupedTaskArray;
     }
 

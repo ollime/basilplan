@@ -1,3 +1,4 @@
+/** @file An item to display and modify a task. */
 import { useContext, useRef, useState } from "react";
 
 import AppContext from "./../../components/AppContext.jsx";

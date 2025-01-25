@@ -1,6 +1,12 @@
+/** @file Bar chart ordered by tasks. */
 import { Bar } from "react-chartjs-2";
 
+/** Displays a bar chart.
+ *
+ * @chartData Time data grouped by task.
+ */
 function BarChart({ chartData }) {
+  // defines bar chart settings
   const options = {
     plugins: {
       title: {

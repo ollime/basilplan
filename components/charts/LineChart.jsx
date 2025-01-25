@@ -1,5 +1,9 @@
 import { Line } from "react-chartjs-2";
 
+/** Line chart.
+ *
+ * @param {Object} chartData
+ */
 function LineChart({ chartData }) {
   const options = {
     plugins: {

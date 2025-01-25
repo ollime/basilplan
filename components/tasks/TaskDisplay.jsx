@@ -1,3 +1,4 @@
+/** @file A column of task cards. */
 import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import { reorder } from "@atlaskit/pragmatic-drag-and-drop/reorder";
 import { useCallback, useEffect, useState } from "react";
@@ -14,7 +15,13 @@ function TaskDisplay(props) {
   const [tasks, setTasks] = useState([]);
   const taskList = tasks.map((task, index) => (
     <DropLocation
-      child={<TaskCard label={task.name} columnId={props.label} key={task.name + index} />}
+      child={
+        <TaskCard
+          label={task.name}
+          columnId={props.label}
+          key={task.name + index}
+        />
+      }
       key={task + index}
     />
   ));
@@ -45,10 +52,12 @@ function TaskDisplay(props) {
    */
   const handleReorder = useCallback(
     ({ currentIndex, newIndex }) => {
-      /* account for the fact that the current task
+      /** Accounts for how the current task
         is a part of the list - index should change based
-        on whether it is above or below the new task */
+        on whether it is above or below the new task @type {number} */
       const positionModifier = newIndex < currentIndex ? 0 : -1;
+
+      /** Reordered task list, with the positions of two specified task cards swapped. @type {Object} */
       const newTasks = reorder({
         list: tasks,
         startIndex: currentIndex,
@@ -91,7 +100,10 @@ function TaskDisplay(props) {
         prevTasks.map((item, index) => {
           if (item.column == destinationColumn) {
             // add new task
-            let newTasks = [...tasks, { name: currentTask, column: destinationColumn }];
+            let newTasks = [
+              ...tasks,
+              { name: currentTask, column: destinationColumn }
+            ];
             // Reorder tasks in new column if newIndex is provided
             if (newIndex >= 0) {
               newTasks = reorder({
@@ -175,7 +187,10 @@ function TaskDisplay(props) {
   return (
     <>
       <div className="min-w-50 grow rounded-lg bg-zinc-800 text-center outline outline-gray-500">
-        <div id={`task-label-${props.label}`} className="border-b border-gray-500 py-2 text-lg">
+        <div
+          id={`task-label-${props.label}`}
+          className="border-b border-gray-500 py-2 text-lg"
+        >
           {props.label == "0" ? "Ungrouped Tasks" : "Group " + props.label}
         </div>
         {taskList}

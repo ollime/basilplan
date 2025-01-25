@@ -1,3 +1,4 @@
+/** @file Main page. Includes timer and task list. */
 import { useState } from "react";
 
 import AppContext from "../../components/AppContext.jsx";
@@ -6,7 +7,6 @@ import Footer from "../../components/Footer.jsx";
 import GroupDisplay from "../../components/tasks/GroupDisplay.jsx";
 import TaskList from "../../components/tasks/TaskList.jsx";
 
-/** Main page. Includes timer and task list. */
 function App() {
   const [selectedTask, setSelectedTask] = useState(null);
 

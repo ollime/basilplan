@@ -7,8 +7,7 @@ import App from "./pages/App.jsx";
 import Settings from "./pages/Settings.jsx";
 import Stats from "./pages/Stats.jsx";
 import TaskManager from "./pages/TaskManager.jsx";
-// import "./styles/style.css"
-import "./styles/test.css";
+import "./styles/style.css";
 import "./styles/theme.css";
 
 // removes error message

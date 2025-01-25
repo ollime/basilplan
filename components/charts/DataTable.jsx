@@ -1,8 +1,15 @@
+/** @file Displays log data in a table. */
 import { colorSchemeDark, themeQuartz } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 
+/** Displays log data in a table.
+ *
+ * @param {Object} props.data log data
+ */
 function DataTable(props) {
   const data = props.data;
+
+  // table column definition
   const colDefs = [
     {
       field: "date",
@@ -20,10 +27,13 @@ function DataTable(props) {
       flex: 1
     }
   ];
+
+  // settings for pages at the bottom of the table
   const pagination = true;
   const paginationPageSizeSelector = [100, 300, 500, 1000];
   const paginationPageSize = 300;
 
+  // dark mode
   const myTheme = themeQuartz.withPart(colorSchemeDark);
 
   return (

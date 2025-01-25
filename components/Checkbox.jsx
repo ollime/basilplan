@@ -1,3 +1,4 @@
+/** @file Checkbox input component. */
 import { useEffect, useState } from "react";
 
 /** Checkbox input component. */

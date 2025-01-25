@@ -18,8 +18,6 @@ app.get("/api", (req, res) => {
 
 // console.log(generateTestData())
 
-// note to self: make sure you're actually sending responses
-
 app.get("/api/sendTask/:task/:list/:position", (req, res) => {
   let task = req.params.task;
   let list = req.params.list;

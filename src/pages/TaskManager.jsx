@@ -1,3 +1,4 @@
+/** @file Page to manage task grouping. */
 import { useEffect, useState } from "react";
 
 import Footer from "../../components/Footer.jsx";
@@ -40,7 +41,10 @@ function TaskManager() {
       // grouped by list
       const groupedTasks = Object.groupBy(newTasks, ({ list }) => list);
       // format as array
-      const groupedTaskArray = Object.keys(groupedTasks).map((key) => [key, groupedTasks[key]]);
+      const groupedTaskArray = Object.keys(groupedTasks).map((key) => [
+        key,
+        groupedTasks[key]
+      ]);
       return groupedTaskArray;
     }
 
@@ -61,7 +65,9 @@ function TaskManager() {
   }, []);
 
   function deleteColumn(column) {
-    setColumnData((prevData) => prevData.filter((col) => col != columnData[column]));
+    setColumnData((prevData) =>
+      prevData.filter((col) => col != columnData[column])
+    );
   }
 
   function handleAddColumn() {

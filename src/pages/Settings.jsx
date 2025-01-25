@@ -1,9 +1,9 @@
+/** @file Settings page. */
 import Checkbox from "../../components/Checkbox.jsx";
 import Footer from "../../components/Footer.jsx";
 import RadioSelect from "../../components/RadioSelect.jsx";
 import TextField from "../../components/TextField.jsx";
 
-/** Settings page. */
 function Settings() {
   return (
     <>

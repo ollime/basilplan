@@ -1,14 +1,19 @@
+/** @file An item to display a task group. */
 import { useContext, useEffect, useState } from "react";
 
 import Accordion from "../Accordion.jsx";
 import AppContext from "./../../components/AppContext.jsx";
 import TaskMarker from "./TaskMarker.jsx";
 
+/** Displays a column of tasks for the task manager. */
 function GroupItem(props) {
   /** Current selected task. @type {text} */
   const { selectedTask, setSelectedTask } = useContext(AppContext);
 
+  /** Label for the column. @type {number} */
   const groupName = props.list[0];
+
+  /** Tasks for the column. @type {Object} */
   const [taskData, setTaskData] = useState([]);
   const accordionItems = taskData.map((task) => (
     <GroupItemCard name={task.name} key={"group-item-" + task.name} />
@@ -46,6 +51,7 @@ function GroupItem(props) {
   );
 }
 
+/** Displays a card for a grouped task. */
 function GroupItemCard(props) {
   return (
     <>

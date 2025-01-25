@@ -1,3 +1,4 @@
+/** @file A card to display a task. */
 import {
   attachClosestEdge,
   extractClosestEdge
@@ -17,11 +18,18 @@ import invariant from "tiny-invariant";
  * @param {number} props.columnId Index of the column the task is currently in.
  */
 function TaskCard(props) {
-  const taskName = props.label;
+  /** Ref for current task card. @type {ref} */
   const task = useRef(null);
+  /** Name value of the current task card. @type {string} */
+  const taskName = props.label;
+  /** Column of the current task card. @type {number} */
   const column = props.columnId;
+
+  // used for drag and drop features
   const [dragging, setDragging] = useState(false);
   const [closestEdge, setClosestEdge] = useState(null);
+
+  /** Styles that ensure the drop indicator displays correctly. @type {Object} */
   const dropTargetStyles = {
     position: "relative",
     display: "inline-block"
@@ -32,14 +40,16 @@ function TaskCard(props) {
     const el = task.current;
     invariant(el);
 
+    // drag and drop logic
     return combine(
+      // makes current task card draggable to other drop locations
       draggable({
         element: el,
         getInitialData: () => ({ location, taskName, column }),
         onDragStart: () => setDragging(true),
         onDrop: () => setDragging(false)
       }),
-      // adds a drop target to allow other cards to drop here
+      // adds a drop target on current task card to allow other cards to drop here
       dropTargetForElements({
         element: el,
         getData: ({ input, element }) => {

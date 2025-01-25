@@ -1,3 +1,4 @@
+/** @file Timer for the main page. */
 import { useContext, useEffect, useState } from "react";
 
 import { sendLogData } from "../src/api/log-api.js";
@@ -159,7 +160,10 @@ function Clock() {
             {timerTypes[type].type}
           </span>
         </div>
-        <div id="clock" className="rounded-xl shadow-lg outline outline-gray-500">
+        <div
+          id="clock"
+          className="rounded-xl shadow-lg outline outline-gray-500"
+        >
           <div
             id="timer"
             className="flex-center rounded-t-xl bg-zinc-800 py-25 text-center text-6xl"

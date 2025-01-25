@@ -1,3 +1,4 @@
+/** @file Radio input to select between enumerated values. */
 import { useEffect, useState } from "react";
 
 /**
@@ -10,10 +11,9 @@ import { useEffect, useState } from "react";
  *      Example: {label: "option1", change: "primaryColor", newVal: "#000000"}
  *
  * @param {string} props.label Radio id and label
- *
- * @returns {JSX} React component for radio buttons
  */
 function RadioSelect(props) {
+  /** Currently selected option. @type {string} */
   const [selected, setSelected] = useState("");
 
   useEffect(() => {
@@ -32,7 +32,12 @@ function RadioSelect(props) {
         <span className="ml-2">{props.label}</span>
         {props.options.map((option) => {
           return (
-            <RadioInput key={option} option={option} label={props.label} selected={selected} />
+            <RadioInput
+              key={option}
+              option={option}
+              label={props.label}
+              selected={selected}
+            />
           );
         })}
       </div>
@@ -56,7 +61,9 @@ function RadioInput(props) {
           id={props.option}
           name={props.label}
           onChange={handleSelection}
-          defaultChecked={props.option.toLowerCase() == props.selected ? true : undefined}
+          defaultChecked={
+            props.option.toLowerCase() == props.selected ? true : undefined
+          }
           className="mr-1 size-5"
         />
         <label htmlFor={props.option}>{props.option}</label>

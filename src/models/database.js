@@ -8,7 +8,7 @@ import sqlite3 from "sqlite3";
 /* Gets the database path
 Changing the path provided in dbPath will create a new database if needed */
 const __dirname = import.meta.dirname;
-const dbPath = path.join(__dirname, "/../../databases/test87.sqlite3");
+const dbPath = path.join(__dirname, "/../../databases/test91.sqlite3");
 
 // defines the db variable. creates database if it doesn't already exist
 let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
@@ -22,11 +22,15 @@ let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
 
 /** Creates database file. */
 function createDatabase() {
-  db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
-    if (err) {
-      console.log(err);
+  db = new sqlite3.Database(
+    dbPath,
+    sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE,
+    (err) => {
+      if (err) {
+        console.log(err);
+      }
     }
-  });
+  );
   createTables();
   return db;
 }
@@ -67,13 +71,25 @@ function generateTestData() {
 
   const testData = [];
   for (let i = 0; i < 15; i++) {
-    testData.push({ date: getRandomDate(), task_name: getRandomTask(), minutes: 5 });
+    testData.push({
+      date: getRandomDate(),
+      task_name: getRandomTask(),
+      minutes: 5
+    });
   }
   for (let i = 0; i < 30; i++) {
-    testData.push({ date: getRandomDate(), task_name: getRandomTask(), minutes: 15 });
+    testData.push({
+      date: getRandomDate(),
+      task_name: getRandomTask(),
+      minutes: 15
+    });
   }
   for (let i = 0; i < 30; i++) {
-    testData.push({ date: getRandomDate(), task_name: getRandomTask(), minutes: 25 });
+    testData.push({
+      date: getRandomDate(),
+      task_name: getRandomTask(),
+      minutes: 25
+    });
   }
 
   db.serialize(() => {
@@ -83,7 +99,9 @@ function generateTestData() {
             VALUES (?, ?, ?)
         `);
 
-    testData.forEach((data) => stmt.run(data.date, data.task_name, data.minutes));
+    testData.forEach((data) =>
+      stmt.run(data.date, data.task_name, data.minutes)
+    );
 
     stmt.finalize();
   });
@@ -114,7 +132,9 @@ function generateTestData() {
             VALUES (?, ?, ?)
         `);
 
-    testData.forEach((data) => stmt.run(data.taskName, data.list, data.position));
+    testData.forEach((data) =>
+      stmt.run(data.taskName, data.list, data.position)
+    );
 
     stmt.finalize();
   });

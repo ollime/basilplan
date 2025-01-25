@@ -1,15 +1,19 @@
+/** @file Retrieves and formats data for all charts and data tables. */
 import { CategoryScale } from "chart.js";
 import Chart from "chart.js/auto";
 import { useEffect, useState } from "react";
 
-import { formatDates, groupByDate, groupByTask } from "../../src/api/data-formatting.js";
+import {
+  formatDates,
+  groupByDate,
+  groupByTask
+} from "../../src/api/data-formatting.js";
 import { getAllLogData } from "../../src/api/log-api.js";
 import BarChart from "./BarChart.jsx";
 import DataTable from "./DataTable.jsx";
 import LineChart from "./LineChart.jsx";
 
-Chart.register(CategoryScale);
-
+/** Manages data for all charts. */
 function ChartApp() {
   /** Stores data for data table. @type {Object} */
   const [allData, setAllData] = useState(null);
@@ -21,6 +25,7 @@ function ChartApp() {
   useEffect(() => {
     let ignore = false;
 
+    /** Retrieves all logged data and reformats for charts. */
     async function getData() {
       await getAllLogData()
         .then((response) => {
@@ -37,23 +42,47 @@ function ChartApp() {
 
     getData();
 
-    async function formatTaskData(response) {
-      setTaskData(formatChartData(groupByTask(response)));
+    /** Groups log data by task. */
+    async function formatTaskData(data) {
+      setTaskData(formatChartData(groupByTask(data)));
     }
 
-    async function formatDateData(response) {
-      setDateData(formatChartData(groupByDate(response)));
+    /** Groups log data by task. */
+    async function formatDateData(data) {
+      setDateData(formatChartData(groupByDate(data)));
     }
 
     // adjusts colors for contrast on dark mode
     Chart.defaults.backgroundColor = "#36a2eb";
     Chart.defaults.borderColor = "rgba(231, 229, 228, 0.2)";
     Chart.defaults.color = "#b3b2b1";
+    Chart.register(CategoryScale);
 
     return () => {
       ignore = true;
     };
   }, []);
+
+  /** Sets chart options.
+   *
+   * @param {Object} logData Data in the exact format to display. The value should be set as "hours"
+   */
+  function formatChartData(logData) {
+    const data = {
+      labels: logData.map((item) => item.task_name),
+      datasets: [
+        {
+          label: "hours",
+          data: logData.map((item) => item.minutes),
+          borderWidth: 2,
+          pointStyle: false,
+          borderColor: "#36a2eb",
+          backgroundColor: "rgba(5, 155, 255, 0.4)"
+        }
+      ]
+    };
+    return data;
+  }
 
   return (
     <div className="App">
@@ -62,23 +91,6 @@ function ChartApp() {
       {allData ? <DataTable data={allData} /> : null}
     </div>
   );
-}
-
-function formatChartData(logData) {
-  const data = {
-    labels: logData.map((item) => item.task_name),
-    datasets: [
-      {
-        label: "hours",
-        data: logData.map((item) => item.minutes),
-        borderWidth: 2,
-        pointStyle: false,
-        borderColor: "#36a2eb",
-        backgroundColor: "rgba(5, 155, 255, 0.5)"
-      }
-    ]
-  };
-  return data;
 }
 
 export default ChartApp;

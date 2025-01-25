@@ -1,3 +1,4 @@
+/** @file Displays indicator on the side of a task. */
 import { useContext, useState } from "react";
 
 import AppContext from "../AppContext.jsx";
@@ -7,7 +8,7 @@ import AppContext from "../AppContext.jsx";
  * The purpose of this marker is to highlight the current task,
  * as well as visually marking any other important tasks.
  *
- * @param {function} updateSelectedTask
+ * @param {function} props.updateSelectedTask
  */
 function TaskMarker(props) {
   /** Task marker width. Should be > 50 @type {number} */
@@ -56,7 +57,9 @@ function TaskMarker(props) {
       <span className="flex flex-row items-center" onClick={handleChangeMarker}>
         <FlagMarker width={width} height={height} color={colors[index].color} />
         {/* <StarMarker color={colors[index].color}/> */}
-        <span className="truncate text-sm break-normal">{colors[index].text}</span>
+        <span className="truncate text-sm break-normal">
+          {colors[index].text}
+        </span>
       </span>
     </>
   );
