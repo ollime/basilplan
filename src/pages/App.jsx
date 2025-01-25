@@ -7,7 +7,7 @@ import GroupDisplay from "../../components/tasks/GroupDisplay.jsx";
 
 /** Main page. Includes timer and task list. */
 function App() {
-  const [selectedTask, setSelectedTask] = useState(null)
+  const [selectedTask, setSelectedTask] = useState(null);
 
   return (
     <>
@@ -15,16 +15,17 @@ function App() {
         value={{
           selectedTask,
           setSelectedTask
-        }}>
-        <div className="flex md:flex-row gap-5 flex-col-reverse mb-5">
-        <TaskList />
-        <Clock />
+        }}
+      >
+        <div className="mb-5 flex flex-col-reverse gap-5 md:flex-row">
+          <TaskList />
+          <Clock />
         </div>
         <GroupDisplay />
         <Footer />
       </AppContext.Provider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

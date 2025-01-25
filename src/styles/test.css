@@ -12,22 +12,22 @@
 } */
 
 .unset {
-    fill: lightgray;
-    color: lightgray;
+  fill: lightgray;
+  color: lightgray;
 }
 .success {
-    fill: #28a745;
-    color: #28a745;
+  fill: #28a745;
+  color: #28a745;
 }
 .highlight {
-    fill: #ffc107;
-    color: #ffc107;
+  fill: #ffc107;
+  color: #ffc107;
 }
 .danger {
-    fill: #dc3545;
-    color: #dc3545;
+  fill: #dc3545;
+  color: #dc3545;
 }
 
 .remove-height {
-    height: 0px;
+  height: 0px;
 }
